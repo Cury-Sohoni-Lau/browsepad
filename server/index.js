@@ -1,55 +1,31 @@
-"use strict";
-
-const Hapi = require("@hapi/hapi");
-const knex = require("knex")(require("../knexfile"));
+require("dotenv").config();
 const path = require("path");
+const express = require("express");
+const cors = require("cors");
+const knex = require("knex")(require("../knexfile"));
 
-const init = async () => {
-  const server = Hapi.server({
-    port: process.env.PORT || 5000,
-    host: process.env.HOST || "localhost",
-  });
+const app = express();
+const PORT = process.env.PORT || 4000;
 
-  await server.register(require("@hapi/inert"));
+app.use(cors());
+app.use(express.json());
 
-  server.route({
-    method: "GET",
-    path: "/{param*}",
-    handler: {
-      directory: {
-        path: path.resolve(__dirname, "../build"),
-      },
-    },
-  });
+app.use(express.static(path.resolve(__dirname, "../build")));
 
-  server.route({
-    method: "GET",
-    path: "/notes",
-    handler: (request, h) => {
-      const notes = knex("notes").select();
-      return notes;
-    },
-  });
-
-  server.route({
-    method: "GET",
-    path: "/users",
-    handler: (request, h) => {
-      const users = knex("users").select();
-      return users;
-    },
-  });
-
-  console.log("Running migrations...");
-  await knex.migrate.latest();
-
-  await server.start();
-  console.log("Server running on %s", server.info.uri);
-};
-
-process.on("unhandledRejection", (err) => {
-  console.log(err);
-  process.exit(1);
+app.get("/notes", async (req, res) => {
+  const result = await knex("notes").select();
+  res.send(result);
 });
 
-init();
+const startServer = async () => {
+  console.log("Running migrations");
+  await knex.migrate.latest();
+
+  console.log("Starting express");
+
+  app.listen(PORT, () => {
+    console.log(`Server listening at http://localhost:${PORT}`);
+  });
+};
+
+startServer();
