@@ -2,6 +2,7 @@
 
 const Hapi = require("@hapi/hapi");
 const knex = require("knex")(require("../knexfile"));
+const path = require("path");
 
 const init = async () => {
   const server = Hapi.server({
@@ -9,11 +10,15 @@ const init = async () => {
     host: "localhost",
   });
 
+  await server.register(require("@hapi/inert"));
+
   server.route({
     method: "GET",
-    path: "/",
-    handler: (request, h) => {
-      return "Hello World";
+    path: "/{param*}",
+    handler: {
+      directory: {
+        path: path.resolve(__dirname, "../build"),
+      },
     },
   });
 
