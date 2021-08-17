@@ -35,7 +35,7 @@ const init = async () => {
     },
   });
 
-  // Run migrations
+  console.log("Running migrations...");
   await knex.migrate.latest();
 
   await server.start();
