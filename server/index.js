@@ -35,6 +35,9 @@ const init = async () => {
     },
   });
 
+  // Run migrations
+  await knex.migrate.latest();
+
   await server.start();
   console.log("Server running on %s", server.info.uri);
 };
