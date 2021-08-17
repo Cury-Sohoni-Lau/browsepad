@@ -5,7 +5,7 @@ const cors = require("cors");
 const knex = require("knex")(require("../knexfile"));
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = 3000;
 
 app.use(cors());
 app.use(express.json());
