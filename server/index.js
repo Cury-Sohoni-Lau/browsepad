@@ -56,7 +56,7 @@ app.post("/api/register", async (req, res) => {
       "id"
     );
 
-    const jwtToken = jwtGenerator(userID);
+    const jwtToken = jwtGenerator(userID[0]);
 
     return res.json({ jwtToken });
   } catch (err) {

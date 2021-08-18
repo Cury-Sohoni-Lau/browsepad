@@ -1,19 +1,45 @@
-import { useEffect } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import HomePage from "./views/HomePage";
+import LoginPage from "./components/LoginForm";
+import RegisterPage from "./components/RegisterForm";
 import "./App.css";
-import axios from "axios";
 
 function App() {
-  const showNotes = async () => {
-    const notes = await axios.get("/notes");
-    console.log(notes.data);
-    return notes;
+  const paths = {
+    homePage: "/",
+    loginPage: "/login",
+    registerPage: "/register",
   };
+  const routes = [
+    {
+      path: paths.homePage,
+      exact: true,
+      render: () => <HomePage />,
+    },
+    {
+      path: paths.loginPage,
+      render: () => <LoginPage />,
+    },
+    {
+      path: paths.registerPage,
+      render: () => <RegisterPage />,
+    },
+  ];
 
-  useEffect(() => {
-    showNotes();
-  }, []);
-
-  return <div className="App"></div>;
+  return (
+    <BrowserRouter>
+      <Switch>
+        {routes.map((r) => (
+          <Route
+            path={r.path}
+            exact={Boolean(r.exact)}
+            render={r.render}
+            key={r.path}
+          />
+        ))}
+      </Switch>
+    </BrowserRouter>
+  );
 }
 
 export default App;
