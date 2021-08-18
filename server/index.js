@@ -3,6 +3,8 @@ const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const knex = require("knex")(require("../knexfile"));
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const app = express();
 const PORT = 3000;
@@ -12,8 +14,84 @@ app.use(express.json());
 
 app.use(express.static(path.resolve(__dirname, "../build")));
 
-app.get("/api/notes", async (req, res) => {
-  const result = await knex("notes").select();
+/// JWT auth
+
+function checkAuth(req, res, next) {
+  const token = req.header("jwt_token");
+  if (!token) {
+    return res.sendStatus(403);
+  }
+  try {
+    const verify = jwt.verify(token, process.env.JWT_ACCESS_TOKEN);
+    req.user = verify.user;
+    next();
+  } catch (err) {
+    res.sendStatus(401);
+  }
+}
+
+function jwtGenerator(userID) {
+  const payload = {
+    user: {
+      id: userID,
+    },
+  };
+  return jwt.sign(payload, process.env.JWT_ACCESS_TOKEN, { expiresIn: "1h" });
+}
+
+app.post("/api/register", async (req, res) => {
+  const { email, name, password } = req.body;
+  try {
+    const user = await knex("users").first().where({ email });
+
+    if (user) {
+      return res.sendStatus(418);
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    const userID = await knex("users").insert(
+      { email: email, name: name, password: hashedPassword },
+      "id"
+    );
+
+    const jwtToken = jwtGenerator(userID);
+
+    return res.json({ jwtToken });
+  } catch (err) {
+    console.error(err.message);
+    res.sendStatus(500);
+  }
+});
+
+app.post("/api/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await knex("users").first().where({ email });
+
+    if (!user) {
+      return res.sendStatus(401);
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return res.sendStatus(401);
+    }
+    const jwtToken = jwtGenerator(user.id);
+    return res.json({ jwtToken });
+  } catch (err) {
+    console.error(err.message);
+    res.sendStatus(500);
+  }
+});
+
+/////////
+
+app.get("/api/notes", checkAuth, async (req, res) => {
+  const result = await knex("notes").select().where({ user_id: req.user.id });
   res.send(result);
 });
 

@@ -1,11 +1,11 @@
 BEGIN;
 
 INSERT INTO
-    users (username)
+    users (name, email, password)
 VALUES
-    ('michelle'),
-    ('rituraj'),
-    ('felipe');
+    ('michelle', 'mlau@gmail.com', '$2b$10$9k6n5rCVzeamqcOynN5L7OW9sUUvYLSdZn038kqnTROjIjkrHm.2.'),
+    ('rituraj', 'r@gmail.com', '$2b$10$MgfxZUIkCoxn4iv8iie/5OKInY.xawR6vqTvKgbagaOaYhL2ySA5m'),
+    ('felipe', 'flp@gmail.com', '$2b$10$kJAc0a5AfajkF3EifZP2heNlMLXaFA0Te0DLhpW8LOnNZGSUMjkxK');
 
 INSERT INTO 
     notes (title, content, user_id)
