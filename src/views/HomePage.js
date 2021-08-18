@@ -1,11 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 export default function HomePage() {
   return (
     <div>
-      <Link to="/register">Sign up!</Link>
-      <Link to="/login">Login</Link>
+      <Navbar />
     </div>
   );
 }

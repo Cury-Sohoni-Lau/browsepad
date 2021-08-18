@@ -1,15 +1,26 @@
+import { useContext, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import HomePage from "./views/HomePage";
-import LoginPage from "./components/LoginForm";
-import RegisterPage from "./components/RegisterForm";
-import "./App.css";
+import LoginPage from "./views/LoginPage";
+import RegisterPage from "./views/RegisterPage";
+import NotesPage from "./views/NotesPage";
+import { storeUserAndToken } from "./utils";
+import { Context } from "./Store";
 
 function App() {
+  const [, dispatch] = useContext(Context);
+
+  useEffect(() => {
+    storeUserAndToken(dispatch);
+  }, [dispatch]);
+
   const paths = {
     homePage: "/",
     loginPage: "/login",
     registerPage: "/register",
+    notesPage: "/notes",
   };
+
   const routes = [
     {
       path: paths.homePage,
@@ -23,6 +34,10 @@ function App() {
     {
       path: paths.registerPage,
       render: () => <RegisterPage />,
+    },
+    {
+      path: paths.notesPage,
+      render: () => <NotesPage />,
     },
   ];
 

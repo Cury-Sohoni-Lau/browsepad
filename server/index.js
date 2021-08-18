@@ -88,6 +88,11 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
+app.get("/api/getuser", checkAuth, async (req, res) => {
+  const user = await knex("users").first().where({ id: req.user.id });
+  res.send(user);
+});
+
 /////////
 
 app.get("/api/notes", checkAuth, async (req, res) => {

@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
+import { storeUserAndToken } from "../utils";
+import { Context } from "../Store";
 
 export default function LoginForm() {
+  const [, dispatch] = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -12,6 +15,7 @@ export default function LoginForm() {
       password,
     });
     localStorage.setItem("jwt_token", response.data.jwtToken);
+    storeUserAndToken(dispatch);
   };
 
   return (
