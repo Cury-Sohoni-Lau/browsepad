@@ -9,6 +9,7 @@ exports.up = function (knex) {
       .references("id")
       .inTable("users")
       .onDelete("CASCADE");
+    table.string("url");
   });
 };
 

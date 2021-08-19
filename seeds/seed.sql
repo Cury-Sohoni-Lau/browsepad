@@ -8,10 +8,10 @@ VALUES
     ('felipe', 'flp@gmail.com', '$2b$10$kJAc0a5AfajkF3EifZP2heNlMLXaFA0Te0DLhpW8LOnNZGSUMjkxK');
 
 INSERT INTO 
-    notes (title, content, user_id)
+    notes (title, content, user_id, url)
 VALUES
-    ('Applied on 8/16', 'Looks interesting', 2),
-    ('Cats are ok', 'Cute apartment', 1),
-    ('Counterfeit mobile battery', 'Do not bother buying!', 3);
+    ('Applied on 8/16', 'Looks interesting', 2, 'https://github.com/Cury-Sohoni-Lau/browsepad-extension'),
+    ('Cats are ok', 'Cute apartment', 1, 'https://github.com/Cury-Sohoni-Lau/browsepad'),
+    ('Counterfeit mobile battery', 'Do not bother buying!', 3, 'https://www.youtube.com/');
 
 COMMIT;
