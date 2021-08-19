@@ -10,7 +10,7 @@ const Reducer = (state, action) => {
         ...state,
         token: action.payload,
       };
-    case "LOGOUT":
+    case "UNSET_USER_AND_TOKEN":
       return {
         ...state,
         token: "",

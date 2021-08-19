@@ -2,11 +2,13 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { storeUserAndToken } from "../utils";
 import { Context } from "../Store";
+import { useHistory } from "react-router-dom";
 
 export default function LoginForm() {
   const [, dispatch] = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,6 +18,7 @@ export default function LoginForm() {
     });
     localStorage.setItem("jwt_token", response.data.jwtToken);
     storeUserAndToken(dispatch);
+    history.push("/notes");
   };
 
   return (

@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import HomePage from "./views/HomePage";
 import LoginPage from "./views/LoginPage";
 import RegisterPage from "./views/RegisterPage";
@@ -43,6 +44,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Navbar />
       <Switch>
         {routes.map((r) => (
           <Route
