@@ -5,7 +5,7 @@ export async function storeUserAndToken(dispatch) {
   if (!token) return;
   dispatch({ type: "SET_JWT_TOKEN", payload: token });
   const response = await axios.get("/api/getuser", {
-    headers: { jwt_token: token },
+    headers: { Authorization: `Bearer ${token}` },
   });
   dispatch({ type: "SET_USER", payload: response.data });
 }

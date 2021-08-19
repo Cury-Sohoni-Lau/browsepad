@@ -8,7 +8,7 @@ export default function Notes() {
   const [notes, setNotes] = useState([]);
   const showNotes = async () => {
     const response = await axios.get("/api/notes", {
-      headers: { jwt_token: state.token },
+      headers: { Authorization: `Bearer ${state.token}` },
     });
     setNotes(response.data);
   };
@@ -17,7 +17,7 @@ export default function Notes() {
     if (state.token) {
       showNotes();
     }
-  });
+  }, [state.token]);
 
   return (
     <div>
