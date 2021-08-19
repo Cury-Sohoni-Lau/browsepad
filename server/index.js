@@ -101,7 +101,7 @@ app.get("/api/notes", checkAuth, async (req, res) => {
   res.send(result);
 });
 
-app.get("/api/notes/url", async (req, res) => {
+app.post("/api/notes/url", async (req, res) => {
   const result = await knex("notes").select().where({ url: req.body.url });
   res.send(result);
 });
