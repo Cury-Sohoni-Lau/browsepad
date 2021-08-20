@@ -22,7 +22,6 @@ export default function AddNoteForm() {
       {
         title: title,
         content: content,
-        user_id: state.user.id,
         url: url,
       },
       { headers: { Authorization: `Bearer ${state.token}` } }
