@@ -97,18 +97,32 @@ app.get("/api/getuser", checkAuth, async (req, res) => {
 /////////
 
 app.get("/api/notes", checkAuth, async (req, res) => {
-  const result = await knex("notes").select().where({ user_id: req.user.id });
-  res.send(result);
+  try {
+    const result = await knex("notes").select().where({ user_id: req.user.id });
+    res.send(result);
+  } catch (err) {
+    return res.sendStatus(400)
+  }
 });
 
-app.post("/api/notes/url", async (req, res) => {
-  const result = await knex("notes").select().where({ url: req.body.url });
-  res.send(result);
+// FOR EXTENSION (it's actually a "GET")
+app.post("/api/notes/url", checkAuth, async (req, res) => {
+  try {
+    const result = await knex("notes").select().where({ user_id: req.user.id, url: req.body.url });
+    res.send(result);
+  } catch (err) {
+    return res.sendStatus(400)
+  }
 });
 
-app.post("/api/notes", async (req, res) => {
-  const content = req.body;
-  await knex("notes").insert(content);
+// BOTH WEB APP AND EXTENSION
+app.post("/api/notes", checkAuth, async (req, res) => {
+  const body = req.body;
+  try {
+    await knex("notes").insert({title: body.title, content: body.content, user_id: req.user.id, url: body.url});
+  } catch (err) {
+    return res.sendStatus(400) 
+  }
   res.sendStatus(201);
 });
 

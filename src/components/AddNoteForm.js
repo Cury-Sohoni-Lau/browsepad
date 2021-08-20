@@ -20,7 +20,6 @@ export default function AddNoteForm() {
     const response = await axios.post("http://localhost:3000/api/notes", {
       title: title,
       content: content,
-      user_id: state.user.id,
       url: url
 
     })
@@ -30,9 +29,10 @@ export default function AddNoteForm() {
   return (
     <>
   <Button>
-  <FaPlus onClick={handleShow}/>
+    <FaPlus onClick={handleShow}/>
   </Button>
   
+
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
