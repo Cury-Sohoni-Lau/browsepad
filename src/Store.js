@@ -4,6 +4,8 @@ import Reducer from "./reducers/Reducer";
 const initialState = {
   user: {},
   token: "",
+  selectedNote: {},
+  showEditForm: false,
 };
 
 const Store = ({ children }) => {
