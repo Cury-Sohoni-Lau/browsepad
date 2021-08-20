@@ -16,6 +16,16 @@ const Reducer = (state, action) => {
         token: "",
         user: {},
       };
+    case "SET_SELECTED_NOTE":
+      return {
+        ...state,
+        selectedNote: action.payload,
+      };
+    case "TOGGLE_SHOW_EDIT_FORM":
+      return {
+        ...state,
+        showEditForm: !state.showEditForm,
+      };
     default:
       return state;
   }
