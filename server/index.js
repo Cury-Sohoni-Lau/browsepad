@@ -147,11 +147,18 @@ app.patch("/api/notes/:id", checkAuth, async (req, res) => {
   try {
     const id = req.params.id;
     const changedContent = req.body;
-    await knex("notes").where({ id: id, user_id: req.user.id }).update(changedContent);
+    await knex("notes")
+      .where({ id: id, user_id: req.user.id })
+      .update(changedContent);
     res.sendStatus(204);
   } catch (err) {
-    res.sendStatus(400)
+    res.sendStatus(400);
   }
+});
+
+// Serve index.html for all other routes
+app.use((_, res) => {
+  res.sendFile(path.resolve(__dirname, "../build/index.html"));
 });
 
 const startServer = async () => {
