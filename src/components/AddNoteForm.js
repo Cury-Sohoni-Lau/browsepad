@@ -35,7 +35,6 @@ export default function AddNoteForm() {
       <Button>
         <FaPlus onClick={handleShow} />
       </Button>
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
