@@ -18,7 +18,7 @@ export default function AddNoteForm() {
 
   const handleSubmit = async () => {
     await axios.post(
-      "http://localhost:3000/api/notes",
+      "/api/notes",
       {
         title: title,
         content: content,

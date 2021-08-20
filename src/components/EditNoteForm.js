@@ -17,7 +17,7 @@ export default function EditNoteForm() {
   const handleSubmit = async (e) => {
     const id = state.selectedNote.id;
     await axios.patch(
-      `http://localhost:3000/api/notes/${id}`,
+      `/api/notes/${id}`,
       {
         title: title,
         content: content,
