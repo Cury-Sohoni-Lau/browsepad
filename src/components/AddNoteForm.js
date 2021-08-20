@@ -1,12 +1,12 @@
 import { useState, useContext } from "react";
-import { Context } from "../Store"
-import axios from "axios"
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button'
+import { Context } from "../Store";
+import axios from "axios";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 import { FaPlus } from "react-icons/fa";
 
 export default function AddNoteForm() {
-  const [state] = useContext(Context)
+  const [state] = useContext(Context);
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
@@ -17,24 +17,24 @@ export default function AddNoteForm() {
   const handleShow = () => setShow(true);
 
   const handleSubmit = async () => {
-    const response = await axios.post(
+    await axios.post(
       "http://localhost:3000/api/notes",
       {
         title: title,
         content: content,
         user_id: state.user.id,
-        url: url
+        url: url,
       },
-      { headers: {Authorization: `Bearer ${state.token}` }})
+      { headers: { Authorization: `Bearer ${state.token}` } }
+    );
     setShow(false);
-  }
+  };
 
   return (
     <>
-  <Button>
-  <FaPlus onClick={handleShow}/>
-  </Button>
-  
+      <Button>
+        <FaPlus onClick={handleShow} />
+      </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -42,11 +42,23 @@ export default function AddNoteForm() {
         </Modal.Header>
         <Modal.Body>
           <h3>Title</h3>
-          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}></input>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          ></input>
           <p>Content</p>
-          <input type="text" value={content} onChange={(e) => setContent(e.target.value)}></input>
+          <input
+            type="text"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          ></input>
           <p>URL</p>
-          <input type="text" value={url} onChange={(e) => setUrl(e.target.value)}></input>
+          <input
+            type="text"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+          ></input>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -58,6 +70,5 @@ export default function AddNoteForm() {
         </Modal.Footer>
       </Modal>
     </>
-
-  )
+  );
 }
