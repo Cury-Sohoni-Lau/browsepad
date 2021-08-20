@@ -49,7 +49,7 @@ export default function LoginForm() {
             <Link to="/register" style={{ textDecoration: 'none' }}> Create an account</Link>
           </p>
         </Form>
-    </Card.Body>
-  </Card>
+      </Card.Body>
+    </Card>
   );
 }
