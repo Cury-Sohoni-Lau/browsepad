@@ -22,7 +22,8 @@ export default function EditNoteForm() {
         content: content,
         user_id: state.user.id,
         url: url
-      })
+      },
+      { headers: {Authorization: `Bearer ${state.token}` }})
       dispatch({type: "TOGGLE_SHOW_EDIT_FORM"});
     }
 

@@ -14,7 +14,7 @@ export default function Note({ note }) {
 
   const handleDelete = async (e) => {
     const id = note.id;
-    const response = axios.delete(`http://localhost:3000/api/notes/${id}`);
+    const response = axios.delete(`http://localhost:3000/api/notes/${id}`, { headers: {Authorization: `Bearer ${state.token}`}});
   }
 
   return (

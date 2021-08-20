@@ -17,12 +17,15 @@ export default function AddNoteForm() {
   const handleShow = () => setShow(true);
 
   const handleSubmit = async () => {
-    const response = await axios.post("http://localhost:3000/api/notes", {
-      title: title,
-      content: content,
-      url: url
-
-    })
+    const response = await axios.post(
+      "http://localhost:3000/api/notes",
+      {
+        title: title,
+        content: content,
+        user_id: state.user.id,
+        url: url
+      },
+      { headers: {Authorization: `Bearer ${state.token}` }})
     setShow(false);
   }
 
