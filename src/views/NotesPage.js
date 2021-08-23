@@ -7,8 +7,7 @@ export default function NotesPage() {
 
   return (
     <div>
-      {state.user && state.user.name ? <p>Hello, {state.user.name}</p> : ""}
-      <Notes />
+      {state.user && state.user.name ? <><p>Hello, {state.user.name}</p><Notes /></> : ""}
     </div>
   );
 }

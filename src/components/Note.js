@@ -13,9 +13,10 @@ export default function Note({ note }) {
 
   const handleDelete = async (e) => {
     const id = note.id;
-    axios.delete(`/api/notes/${id}`, {
+    await axios.delete(`/api/notes/${id}`, {
       headers: { Authorization: `Bearer ${state.token}` },
     });
+    window.location.reload();
   };
 
   return (

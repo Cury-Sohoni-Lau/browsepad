@@ -27,6 +27,7 @@ export default function AddNoteForm() {
       { headers: { Authorization: `Bearer ${state.token}` } }
     );
     setShow(false);
+    window.location.reload();
   };
 
   return (
@@ -46,11 +47,10 @@ export default function AddNoteForm() {
             onChange={(e) => setTitle(e.target.value)}
           ></input>
           <p>Content</p>
-          <input
-            type="text"
+          <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
-          ></input>
+          ></textarea>
           <p>URL</p>
           <input
             type="text"
