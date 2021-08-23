@@ -27,6 +27,7 @@ export default function EditNoteForm() {
       { headers: { Authorization: `Bearer ${state.token}` } }
     );
     dispatch({ type: "TOGGLE_SHOW_EDIT_FORM" });
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -48,11 +49,10 @@ export default function EditNoteForm() {
           onChange={(e) => setTitle(e.target.value)}
         ></input>
         <p>Content</p>
-        <input
-          type="text"
+        <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
-        ></input>
+        ></textarea>
         <p>URL</p>
         <input
           type="text"
