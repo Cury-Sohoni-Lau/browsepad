@@ -147,6 +147,7 @@ app.patch("/api/notes/:id", checkAuth, async (req, res) => {
   try {
     const id = req.params.id;
     const changedContent = req.body;
+    changedContent.modified_at = new Date().toISOString();
     await knex("notes")
       .where({ id: id, user_id: req.user.id })
       .update(changedContent);

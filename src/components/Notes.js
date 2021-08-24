@@ -29,7 +29,7 @@ export default function Notes() {
       };
       setNotes();
     }
-  }, [state.token]);
+  }, [state.token, dispatch]);
 
   return (
     <div>
