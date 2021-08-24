@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Context } from "../Store"
 import Button from "react-bootstrap/Button";
-import { ButtonGroup, Dropdown, DropdownButton } from "react-bootstrap";
 import { includesAll } from "../utils"
 
 export default function NotesSidebar() {
@@ -45,11 +44,6 @@ export default function NotesSidebar() {
       case '4':
         filteredNotes.sort((a,b) => (new Date(a.modified_at)) - (new Date(b.modified_at)) )
         break;
-      case "":
-        break;
-
-      default:
-        console.log("no dropdown selected");
     }
     dispatch({ type: "SET_FILTERED_NOTES", payload: filteredNotes })
   }, [selectedDropdown])
@@ -74,6 +68,7 @@ export default function NotesSidebar() {
   }
 
   const dropdownOptions = {
+    0: "None",
     1: "Created (newest to oldest)",
     2: "Created (oldest to newest)",
     3: "Modified (newest to oldest)",
@@ -83,13 +78,13 @@ export default function NotesSidebar() {
   return (
     <div id="notes-sidebar">
       <p>Sort:</p>
-      <DropdownButton as={ButtonGroup} title={dropdownOptions[selectedDropdown] || "Sort By"} id="bg-nested-dropdown" onSelect={(e) => setSelectedDropdown(e)}>
-        <Dropdown.Item eventKey="">None</Dropdown.Item>
-        <Dropdown.Item eventKey="1">{dropdownOptions[1]}</Dropdown.Item>
-        <Dropdown.Item eventKey="2">{dropdownOptions[2]}</Dropdown.Item>
-        <Dropdown.Item eventKey="3">{dropdownOptions[3]}</Dropdown.Item>
-        <Dropdown.Item eventKey="4">{dropdownOptions[4]}</Dropdown.Item>
-      </DropdownButton>
+      <select name="dropdown-sort" id="dropdown-sort" value={selectedDropdown} onChange={(e) => setSelectedDropdown(e.target.value)}>
+        <option value="0">None</option>
+        <option value="1">{dropdownOptions[1]}</option>
+        <option value="2">{dropdownOptions[2]}</option>
+        <option value="3">{dropdownOptions[3]}</option>
+        <option value="4">{dropdownOptions[4]}</option>
+      </select>
       <p>Search:</p>
       <input type="text" value={searchText} onChange={handleChange}></input>
       {/* DISPLAY HASHTAGS HERE YO */}
