@@ -10,6 +10,8 @@ exports.up = function (knex) {
       .inTable("users")
       .onDelete("CASCADE");
     table.string("url");
+    table.timestamp("created_at").defaultTo(knex.fn.now());
+    table.timestamp("modified_at").defaultTo(knex.fn.now());
   });
 };
 
