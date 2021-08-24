@@ -26,6 +26,17 @@ const Reducer = (state, action) => {
         ...state,
         showEditForm: !state.showEditForm,
       };
+    case "SET_NOTES":
+      return {
+        ...state,
+        notes: action.payload,
+        filteredNotes: action.payload,
+      };
+    case "SET_FILTERED_NOTES":
+      return {
+        ...state,
+        filteredNotes: action.payload,
+      };
     default:
       return state;
   }

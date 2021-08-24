@@ -4,6 +4,8 @@ import Reducer from "./reducers/Reducer";
 const initialState = {
   user: {},
   token: "",
+  notes: [],
+  filteredNotes: [],
   selectedNote: {},
   showEditForm: false,
 };
