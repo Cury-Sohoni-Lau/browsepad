@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { Context } from "../Store";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import { FaTrash, FaPencilAlt } from "react-icons/fa";
 
 export default function Note({ note }) {
   const [state, dispatch] = useContext(Context);
@@ -20,16 +22,22 @@ export default function Note({ note }) {
   };
 
   return (
-    <div>
-      <h3>{note.title}</h3>
-      <p>{note.content}</p>
-      <p>URL: {note.url}</p>
-      <Button variant="danger" onClick={handleDelete}>
-        Delete
-      </Button>
-      <Button variant="primary" onClick={handleShow}>
-        Edit Note
-      </Button>
-    </div>
+    <Card>
+      <Card.Body>
+        <Card.Title>{note.title}</Card.Title>
+        <Card.Text>
+          {note.content}
+        </Card.Text>
+        <Card.Link href={note.url}>{note.url}</Card.Link>
+        <div className="note-buttons">
+          <Button variant="danger" onClick={handleDelete}>
+            <FaTrash />
+          </Button>
+          <Button variant="primary" onClick={handleShow}>
+            <FaPencilAlt />
+          </Button>
+        </div>
+      </Card.Body>
+    </Card>
   );
 }
