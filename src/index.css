@@ -31,3 +31,13 @@ code {
   min-width: 60vw;
   width: 60vw;
 }
+
+#invalid-password {
+  border: 3px solid red;
+  padding: 1rem;
+  color: red;
+}
+
+.hidden {
+  display: none;
+}
