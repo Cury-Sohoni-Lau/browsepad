@@ -4,8 +4,9 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { FaTrash, FaPencilAlt } from "react-icons/fa";
-import moment from "moment"
-import 'bootstrap/dist/css/bootstrap.min.css';
+import moment from "moment";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { LinkPreview } from "@dhaiwat10/react-link-preview";
 
 export default function Note({ note }) {
   const [state, dispatch] = useContext(Context);
@@ -27,16 +28,15 @@ export default function Note({ note }) {
     <Card>
       <Card.Body>
         <Card.Title>{note.title}</Card.Title>
-        <Card.Text>
-          {note.content}
-        </Card.Text>
+        <Card.Text>{note.content}</Card.Text>
         <Card.Subtitle className="mb-2 text-muted">
           {"Created: " + moment(note.created_at).fromNow()}
         </Card.Subtitle>
         <Card.Subtitle className="mb-2 text-muted">
           {"Modified: " + moment(note.modified_at).fromNow()}
         </Card.Subtitle>
-        <Card.Link href={note.url}>{note.url}</Card.Link>
+        {/* <Card.Link href={note.url}>{note.url}</Card.Link> */}
+        <LinkPreview url={note.url} width="55vw" />
         <div className="note-buttons">
           <Button variant="danger" onClick={handleDelete}>
             <FaTrash />
