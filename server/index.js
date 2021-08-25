@@ -5,6 +5,7 @@ const cors = require("cors");
 const knex = require("knex")(require("../knexfile"));
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const { isPasswordValid } = require("./utils.js");
 
 const app = express();
 const PORT = 3000;
@@ -46,7 +47,11 @@ app.post("/api/register", async (req, res) => {
     const user = await knex("users").first().where({ email });
 
     if (user) {
-      return res.sendStatus(418);
+      return res.sendStatus(400);
+    }
+
+    if (!isPasswordValid(password)) {
+      return res.sendStatus(400);
     }
 
     const salt = await bcrypt.genSalt(10);

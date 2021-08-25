@@ -5,17 +5,23 @@ import { storeUserAndToken } from "../utils";
 import { Context } from "../Store";
 import { useHistory, Link } from "react-router-dom";
 import { Card, Form, Button } from "react-bootstrap";
+import { isPasswordValid } from "../utils";
 
 export default function RegisterForm() {
   const [, dispatch] = useContext(Context);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [hidden, setHidden] = useState(true);
   const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!isPasswordValid(password)) {
+      setHidden(false);
+      return;
+    }
     const response = await axios.post(`/api/register`, {
       name,
       email,
@@ -54,6 +60,11 @@ export default function RegisterForm() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            <div id="invalid-password" className={hidden ? "hidden" : ""}>
+              Password must contain a minimum of eight characters, at least one
+              uppercase letter, one lowercase letter, one number and one special
+              character
+            </div>
           </Form.Group>
           <Button type="submit" className="mx-auto my-2">
             Submit
