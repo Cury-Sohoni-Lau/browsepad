@@ -26,6 +26,10 @@ function checkAuth(req, res, next) {
   try {
     const verify = jwt.verify(token, process.env.JWT_ACCESS_TOKEN);
     req.user = verify.user;
+    // CHECK THE ISSUED AT DATE/TIME. IF THE USER USES IT WITHIN A WEEK, GENERATE A NEW JWT SO NOT LOGGED OUT
+    if ((Date.now() / 1000) - (24*60*60) > verify.iat) {
+      req.new_token = jwtGenerator(verify.user.id);
+    }
     next();
   } catch (err) {
     res.sendStatus(401);
@@ -38,7 +42,7 @@ function jwtGenerator(userID) {
       id: userID,
     },
   };
-  return jwt.sign(payload, process.env.JWT_ACCESS_TOKEN, { expiresIn: "1h" });
+  return jwt.sign(payload, process.env.JWT_ACCESS_TOKEN, { expiresIn: "7d" });
 }
 
 app.post("/api/register", async (req, res) => {
@@ -96,6 +100,9 @@ app.post("/api/login", async (req, res) => {
 
 app.get("/api/getuser", checkAuth, async (req, res) => {
   const user = await knex("users").first().where({ id: req.user.id });
+  if (req.new_token) {
+    user.new_token = req.new_token
+  }
   res.send(user);
 });
 
