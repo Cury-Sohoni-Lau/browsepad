@@ -13,7 +13,7 @@ export default function Notes() {
   useEffect(() => {
     if (state.token) {
       const setNotes = async () => {
-        const response = await axios.get("/api/notes", {
+        let response = await axios.get("/api/notes", {
           headers: { Authorization: `Bearer ${state.token}` },
         });
 
@@ -26,6 +26,19 @@ export default function Notes() {
         })
         console.log("NOTES: ", notes)
         dispatch({ type: "SET_NOTES", payload: notes })
+
+        response = await axios.get(`/api/notes/shared`, {
+          headers: { Authorization: `Bearer ${state.token}` },
+        });
+        let sharedNotes = response.data
+        sharedNotes = sharedNotes.map((note) => {
+          return {
+            ...note,
+            hashtags: extractHashtags(note) || []
+          }
+        })
+        dispatch({type: "SET_SHARED_NOTES", payload: sharedNotes})
+
       };
       setNotes();
     }

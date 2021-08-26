@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../Store";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
@@ -10,11 +10,25 @@ import { LinkPreview } from "@dhaiwat10/react-link-preview";
 
 export default function Note({ note }) {
   const [state, dispatch] = useContext(Context);
+  const [recipient, setRecipient] = useState("");
 
   const handleShow = () => {
     dispatch({ type: "SET_SELECTED_NOTE", payload: note });
     dispatch({ type: "TOGGLE_SHOW_EDIT_FORM" });
   };
+
+  const handleShare = async (e) => {
+    try {
+      await axios.post(
+        `/api/notes/${note.id}/share`,
+        { email: recipient },
+        { headers: { Authorization: `Bearer ${state.token}` }}
+      )
+    } catch {
+      //TODO - show red box with error text
+      console.log("User does not exist.")
+    }
+  }
 
   const handleDelete = async (e) => {
     const id = note.id;
@@ -43,6 +57,10 @@ export default function Note({ note }) {
           </Button>
           <Button variant="primary" onClick={handleShow}>
             <FaPencilAlt />
+          </Button>
+          <input type="text" onChange={(e) => setRecipient(e.target.value)}/>
+          <Button onClick={handleShare}>
+            Share note
           </Button>
         </div>
       </Card.Body>

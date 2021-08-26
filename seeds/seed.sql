@@ -14,4 +14,9 @@ VALUES
     ('Cats are ok', 'Cute apartment', 1, 'https://github.com/Cury-Sohoni-Lau/browsepad'),
     ('Counterfeit mobile battery', 'Do not bother buying!', 3, 'https://www.youtube.com/');
 
+INSERT INTO
+    editors (user_id, note_id)
+VALUES
+    (1, 1);
+
 COMMIT;
