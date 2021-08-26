@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { Context } from "../Store"
 import Button from "react-bootstrap/Button";
 import { includesAll } from "../utils"
+import { FaFolderOpen } from "react-icons/fa"
 
 export default function NotesSidebar() {
   const [state, dispatch] = useContext(Context)
@@ -67,6 +68,10 @@ export default function NotesSidebar() {
     }
   }
 
+  const showSharedNotes = () => {
+    dispatch({type: "SET_FILTERED_NOTES", payload: state.sharedNotes})
+  }
+
   const dropdownOptions = {
     0: "None",
     1: "Created (newest to oldest)",
@@ -77,6 +82,9 @@ export default function NotesSidebar() {
 
   return (
     <div id="notes-sidebar">
+      <Button onClick={showSharedNotes}>
+        <FaFolderOpen/>{" "}Shared with me
+      </Button>
       <p>Sort:</p>
       <select name="dropdown-sort" id="dropdown-sort" value={selectedDropdown} onChange={(e) => setSelectedDropdown(e.target.value)}>
         <option value="0">None</option>

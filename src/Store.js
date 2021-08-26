@@ -6,6 +6,7 @@ const initialState = {
   token: "",
   notes: [],
   filteredNotes: [],
+  sharedNotes: [],
   selectedNote: {},
   showEditForm: false,
 };

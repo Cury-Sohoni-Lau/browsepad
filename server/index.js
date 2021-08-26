@@ -108,12 +108,53 @@ app.get("/api/getuser", checkAuth, async (req, res) => {
 
 /////////
 
+app.get("/api/user/:email", async (req, res) => {
+  try {
+    const email = req.params.email;
+    const user = await knex("users").first().where({ email });
+    console.log("Got the email and user", user)
+    res.send(user);
+  } catch (err) {
+    res.send(418)
+  }
+});
+
 app.get("/api/notes", checkAuth, async (req, res) => {
   try {
     const result = await knex("notes").select().where({ user_id: req.user.id });
     res.send(result);
   } catch (err) {
     res.sendStatus(400);
+  }
+});
+
+app.get("/api/notes/shared", checkAuth, async (req, res) => {
+  try {
+    // FIRST SEND OVER YOUR OWN USER ID
+    const userID = req.user.id
+
+    // PULL ALL OF THE IDS OF THE NOTES THAT HAVE YOUR USER ID IN THE EDITORS TABLE
+    const entries = await knex("editors").select().where({user_id: userID});
+    const noteIDs = entries.map(entry => entry.note_id)
+
+    // GATHER ALL OF THE NOTES BASED ON THE NOTE IDS THAT ARE IN THE ARRAY
+    const notes = await knex("notes").select().whereIn("id", noteIDs);
+    res.send(notes);
+  } catch (err) {
+    res.sendStatus(400);
+  }
+});
+
+app.post("/api/notes/:noteID/share", checkAuth, async (req, res) => {
+  try {
+    const note = await knex("notes").first().where({id: req.params.noteID, user_id: req.user.id});
+    if (!note) throw new Error("Note was not found")
+    const recipient = await knex("users").first().where({ email: req.body.email })
+    if (!recipient) throw new Error("No user with this email")
+    await knex("editors").insert({note_id: req.params.noteID, user_id: recipient.id})
+    res.sendStatus(200);
+  } catch {
+    res.sendStatus(400)
   }
 });
 
