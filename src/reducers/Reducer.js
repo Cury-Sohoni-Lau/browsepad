@@ -37,6 +37,11 @@ const Reducer = (state, action) => {
         ...state,
         filteredNotes: action.payload,
       };
+    case "SET_MY_NOTES":
+      return {
+        ...state,
+        myNotes: action.payload,
+      }
     case "SET_SHARED_NOTES":
       return {
         ...state,

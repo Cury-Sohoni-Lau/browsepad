@@ -5,8 +5,9 @@ const initialState = {
   user: {},
   token: "",
   notes: [],
-  filteredNotes: [],
+  myNotes: [],
   sharedNotes: [],
+  filteredNotes: [],
   selectedNote: {},
   showEditForm: false,
 };

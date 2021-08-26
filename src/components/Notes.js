@@ -17,15 +17,15 @@ export default function Notes() {
           headers: { Authorization: `Bearer ${state.token}` },
         });
 
-        let notes = response.data;
-        notes = notes.map((note) => {
+        let myNotes = response.data;
+        myNotes = myNotes.map((note) => {
           return {
             ...note,
             hashtags: extractHashtags(note) || []
           }
         })
-        console.log("NOTES: ", notes)
-        dispatch({ type: "SET_NOTES", payload: notes })
+        dispatch({type: "SET_MY_NOTES", payload: myNotes})
+        dispatch({ type: "SET_NOTES", payload: myNotes })
 
         response = await axios.get(`/api/notes/shared`, {
           headers: { Authorization: `Bearer ${state.token}` },
@@ -38,7 +38,6 @@ export default function Notes() {
           }
         })
         dispatch({type: "SET_SHARED_NOTES", payload: sharedNotes})
-
       };
       setNotes();
     }
