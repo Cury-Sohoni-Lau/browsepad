@@ -5,6 +5,7 @@ import {Context} from "../Store";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
+
 export default function ShareModal( {note, setShowShareSuccess} ) {
   const [state] = useContext(Context)
   const [recipient, setRecipient] = useState("");
@@ -23,6 +24,21 @@ export default function ShareModal( {note, setShowShareSuccess} ) {
       setShowShareModal(false)
   }
 
+  const generateShareableLink = async () => {
+      try {
+        const response = await axios.post(
+          `/api/notes/share/${note.id}`, 
+          { public: true },
+          { headers: { Authorization: `Bearer ${state.token}` }});
+
+
+        setShowShareModal(false)
+      } catch (error) {
+        //TODO - show red box with error text
+        console.log("COULDNT SHARE.")
+      }
+  }
+
   const handleShare = async (user) => {
     const email = user ? user.email : recipient;
     try {
@@ -39,6 +55,7 @@ export default function ShareModal( {note, setShowShareSuccess} ) {
     }
   }
 
+  
 
   return (
     <>
@@ -50,13 +67,14 @@ export default function ShareModal( {note, setShowShareSuccess} ) {
       <Modal.Body>
       <div id="share-modal">
         <input type="text" onChange={(e) => setRecipient(e.target.value)}/>
+          <Button onClick={() => handleShare()}>
+            Share with email
+          </Button>
+          <Button onClick={generateShareableLink}>Get shareable link</Button>
         {suggestedUsers.map(user => <SuggestedUser user={user} handleShare={handleShare} />)}
       </div>
       </Modal.Body>
       <Modal.Footer>
-          <Button onClick={() => handleShare()}>
-            Share note
-          </Button>
       </Modal.Footer>
     </Modal>
     </>

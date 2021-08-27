@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { LinkPreview } from "@dhaiwat10/react-link-preview";
 import ShareModal from "./ShareModal";
 
-export default function Note({ note, setShowShareSuccess }) {
+export default function Note({ note, setShowShareSuccess, isPublicLink }) {
   const [state, dispatch] = useContext(Context);
 
   const handleShow = () => {
@@ -38,7 +38,7 @@ export default function Note({ note, setShowShareSuccess }) {
         </Card.Subtitle>
         {/* <Card.Link href={note.url}>{note.url}</Card.Link> */}
         <LinkPreview url={note.url} width="55vw" />
-        { !(state.showingSharedNotes) && 
+        { (!(state.showingSharedNotes) || isPublicLink) && 
         <div className="note-buttons">
           <Button variant="danger" onClick={handleDelete}>
             <FaTrash />
