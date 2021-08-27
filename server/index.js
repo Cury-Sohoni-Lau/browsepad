@@ -219,6 +219,28 @@ app.delete("/api/notes/:noteID", checkAuth, async (req, res) => {
   }
 });
 
+app.get("/api/notes/shared/:noteID", async (req, res) => {
+  const noteID = req.params.noteID;
+  const note = await knex("notes").first().where({id: noteID, public: true});
+  if (!note) {
+    return res.sendStatus(400);
+  }
+  res.send(note);
+})
+
+// SHARE VIEW ONLY LINK 
+app.post("/api/notes/share/:noteID", checkAuth, async (req, res) => {
+  const noteID = req.params.noteID;
+  const note = await knex("notes").first().where({id: noteID, user_id: req.user.id});
+  if (!note) {
+    return res.sendStatus(400);
+  }
+  const public = req.body.public;
+  await knex("notes").where({id: noteID, user_id: req.user.id}).update({public: public});
+  res.sendStatus(204);
+
+})
+
 app.patch("/api/notes/:id", checkAuth, async (req, res) => {
   try {
     const id = req.params.id;

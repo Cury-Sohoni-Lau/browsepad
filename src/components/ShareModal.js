@@ -5,7 +5,8 @@ import {Context} from "../Store";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-export default function ShareModal( {note} ) {
+
+export default function ShareModal( {note, setShowShareSuccess} ) {
   const [state] = useContext(Context)
   const [recipient, setRecipient] = useState("");
   const [suggestedUsers, setSuggestedUsers] = useState([]);
@@ -23,6 +24,21 @@ export default function ShareModal( {note} ) {
       setShowShareModal(false)
   }
 
+  const generateShareableLink = async () => {
+      try {
+        const response = await axios.post(
+          `/api/notes/share/${note.id}`, 
+          { public: true },
+          { headers: { Authorization: `Bearer ${state.token}` }});
+
+
+        setShowShareModal(false)
+      } catch (error) {
+        //TODO - show red box with error text
+        console.log("COULDNT SHARE.")
+      }
+  }
+
   const handleShare = async (user) => {
     const email = user ? user.email : recipient;
     try {
@@ -31,12 +47,15 @@ export default function ShareModal( {note} ) {
         { email },
         { headers: { Authorization: `Bearer ${state.token}` }})
         setShowShareModal(false)
+        setShowShareSuccess(true)
+        setTimeout(() => setShowShareSuccess(false), 3000);
     } catch {
       //TODO - show red box with error text
       console.log("User does not exist.")
     }
   }
 
+  
 
   return (
     <>
@@ -46,13 +65,16 @@ export default function ShareModal( {note} ) {
         <Modal.Title>Share</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      <input type="text" onChange={(e) => setRecipient(e.target.value)}/>
-      {suggestedUsers.map(user => <SuggestedUser user={user} handleShare={handleShare}/>)}
+      <div id="share-modal">
+        <input type="text" onChange={(e) => setRecipient(e.target.value)}/>
+          <Button onClick={() => handleShare()}>
+            Share with email
+          </Button>
+          <Button onClick={generateShareableLink}>Get shareable link</Button>
+        {suggestedUsers.map(user => <SuggestedUser user={user} handleShare={handleShare} />)}
+      </div>
       </Modal.Body>
       <Modal.Footer>
-          <Button onClick={() => handleShare()}>
-            Share note
-          </Button>
       </Modal.Footer>
     </Modal>
     </>
