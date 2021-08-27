@@ -133,8 +133,8 @@ app.get("/api/notes/shared", checkAuth, async (req, res) => {
     // FIRST SEND OVER YOUR OWN USER ID
     const userID = req.user.id
 
-    // PULL ALL OF THE IDS OF THE NOTES THAT HAVE YOUR USER ID IN THE EDITORS TABLE
-    const entries = await knex("editors").select().where({user_id: userID});
+    // PULL ALL OF THE IDS OF THE NOTES THAT HAVE YOUR USER ID IN THE accesscontrol TABLE
+    const entries = await knex("accesscontrol").select().where({user_id: userID});
     const noteIDs = entries.map(entry => entry.note_id)
 
     // GATHER ALL OF THE NOTES BASED ON THE NOTE IDS THAT ARE IN THE ARRAY
@@ -145,18 +145,41 @@ app.get("/api/notes/shared", checkAuth, async (req, res) => {
   }
 });
 
+// GET ALL ROWS THAT HAVE THE GIVEN NOTE ID 
+// EACH ROW WILL HAVE A USER WHO CAN EDIT THE NOTE
+// CHECK AGAINST WHO THE USER HAS ALREADY SHARED WITH 
+
+
+app.get("/api/users/shared", checkAuth, async (req, res) => {
+  try {
+    const userID = req.user.id;
+    const entries = await knex("accesscontrol").select().where({owner_id: userID});
+    const userIDs = entries.map(entry => entry.user_id);
+    const users = await knex("users").select().whereIn("id", userIDs);
+    res.send(users.map(user => {
+      return {
+        name: user.name,
+        email: user.email,
+      }
+    }));
+  } catch {
+    res.send(400);
+  }
+})
+
 app.post("/api/notes/:noteID/share", checkAuth, async (req, res) => {
   try {
     const note = await knex("notes").first().where({id: req.params.noteID, user_id: req.user.id});
     if (!note) throw new Error("Note was not found")
     const recipient = await knex("users").first().where({ email: req.body.email })
     if (!recipient) throw new Error("No user with this email")
-    await knex("editors").insert({note_id: req.params.noteID, user_id: recipient.id})
+    await knex("accesscontrol").insert({note_id: req.params.noteID, user_id: recipient.id, owner_id: req.user.id})
     res.sendStatus(200);
   } catch {
     res.sendStatus(400)
   }
 });
+
 
 // FOR EXTENSION (it's actually a "GET")
 app.post("/api/notes/url", checkAuth, async (req, res) => {

@@ -7,28 +7,15 @@ import { FaTrash, FaPencilAlt } from "react-icons/fa";
 import moment from "moment";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { LinkPreview } from "@dhaiwat10/react-link-preview";
+import ShareModal from "./ShareModal";
 
 export default function Note({ note }) {
   const [state, dispatch] = useContext(Context);
-  const [recipient, setRecipient] = useState("");
 
   const handleShow = () => {
     dispatch({ type: "SET_SELECTED_NOTE", payload: note });
     dispatch({ type: "TOGGLE_SHOW_EDIT_FORM" });
   };
-
-  const handleShare = async (e) => {
-    try {
-      await axios.post(
-        `/api/notes/${note.id}/share`,
-        { email: recipient },
-        { headers: { Authorization: `Bearer ${state.token}` }}
-      )
-    } catch {
-      //TODO - show red box with error text
-      console.log("User does not exist.")
-    }
-  }
 
   const handleDelete = async (e) => {
     const id = note.id;
@@ -51,6 +38,7 @@ export default function Note({ note }) {
         </Card.Subtitle>
         {/* <Card.Link href={note.url}>{note.url}</Card.Link> */}
         <LinkPreview url={note.url} width="55vw" />
+        { !(state.showingSharedNotes) && 
         <div className="note-buttons">
           <Button variant="danger" onClick={handleDelete}>
             <FaTrash />
@@ -58,11 +46,9 @@ export default function Note({ note }) {
           <Button variant="primary" onClick={handleShow}>
             <FaPencilAlt />
           </Button>
-          <input type="text" onChange={(e) => setRecipient(e.target.value)}/>
-          <Button onClick={handleShare}>
-            Share note
-          </Button>
+          <ShareModal note={note} />
         </div>
+}
       </Card.Body>
     </Card>
   );

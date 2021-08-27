@@ -15,8 +15,8 @@ VALUES
     ('Counterfeit mobile battery', 'Do not bother buying!', 3, 'https://www.youtube.com/');
 
 INSERT INTO
-    editors (user_id, note_id)
+    accesscontrol (note_id, owner_id, user_id)
 VALUES
-    (1, 1);
+    (1, 2, 1);
 
 COMMIT;
