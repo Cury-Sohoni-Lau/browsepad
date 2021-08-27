@@ -9,6 +9,7 @@ import { extractHashtags } from "../utils";
 
 export default function Notes() {
   const [state, dispatch] = useContext(Context);
+  const [showShareSuccess, setShowShareSuccess] = useState(false)
 
   useEffect(() => {
     if (state.token) {
@@ -51,9 +52,10 @@ export default function Notes() {
         <NotesSidebar />
         <div id="notes-wrapper">
           {state.filteredNotes.map((note) => (
-            <Note key={note.id} note={note} />
+            <Note key={note.id} note={note} setShowShareSuccess={setShowShareSuccess} />
           ))}
         </div>
+        <div id="share-success" className={showShareSuccess ? "" : "hidden"}>YOU SHARED A NOTE!!!!</div>
       </div>
     </div>
   );

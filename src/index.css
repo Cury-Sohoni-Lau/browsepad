@@ -45,3 +45,14 @@ code {
 .suggested-user {
   border: 1px solid black;
 }
+
+#share-modal {
+  display: flex;
+  flex-direction: column;
+}
+
+#share-success {
+  position: fixed;
+  top: 10px;
+  right: 50vw;
+}

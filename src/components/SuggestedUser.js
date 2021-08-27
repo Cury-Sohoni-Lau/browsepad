@@ -1,10 +1,10 @@
 import React from 'react'
+import Button from "react-bootstrap/Button"
 
-export default function SuggestedUser({user, handleShare}) {
+export default function SuggestedUser({ user, handleShare }) {
   return (
-    <div class="suggested-user" onClick={() => handleShare(user)}>
-      <p>{user.name}</p>
-      <p>{user.email}</p>
-    </div>
+    <Button className="button-user" onClick={() => handleShare(user)}>
+      <p>{user.name} - {user.email}</p>
+    </Button>
   )
 }

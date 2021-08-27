@@ -5,7 +5,7 @@ import {Context} from "../Store";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-export default function ShareModal( {note} ) {
+export default function ShareModal( {note, setShowShareSuccess} ) {
   const [state] = useContext(Context)
   const [recipient, setRecipient] = useState("");
   const [suggestedUsers, setSuggestedUsers] = useState([]);
@@ -31,6 +31,8 @@ export default function ShareModal( {note} ) {
         { email },
         { headers: { Authorization: `Bearer ${state.token}` }})
         setShowShareModal(false)
+        setShowShareSuccess(true)
+        setTimeout(() => setShowShareSuccess(false), 3000);
     } catch {
       //TODO - show red box with error text
       console.log("User does not exist.")
@@ -46,8 +48,10 @@ export default function ShareModal( {note} ) {
         <Modal.Title>Share</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      <input type="text" onChange={(e) => setRecipient(e.target.value)}/>
-      {suggestedUsers.map(user => <SuggestedUser user={user} handleShare={handleShare}/>)}
+      <div id="share-modal">
+        <input type="text" onChange={(e) => setRecipient(e.target.value)}/>
+        {suggestedUsers.map(user => <SuggestedUser user={user} handleShare={handleShare} />)}
+      </div>
       </Modal.Body>
       <Modal.Footer>
           <Button onClick={() => handleShare()}>
