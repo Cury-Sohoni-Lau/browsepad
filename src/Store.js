@@ -7,6 +7,7 @@ const initialState = {
   notes: [],
   myNotes: [],
   sharedNotes: [],
+  showingSharedNotes: false,
   filteredNotes: [],
   selectedNote: {},
   showEditForm: false,

@@ -10,7 +10,7 @@ export default function NotesSidebar() {
   const [hashtagWords, setHashtagWords] = useState([])
   const [selectedHashtags, setSelectedHashtags] = useState([])
   const [selectedDropdown, setSelectedDropdown] = useState("")
-  const [showingSharedNotes, setShowingSharedNotes] = useState(false)
+
   const handleChange = (e) => {
     setSearchText(e.target.value);
   }
@@ -70,12 +70,12 @@ export default function NotesSidebar() {
   }
 
   const toggleSharedNotes = () => {
-    if (showingSharedNotes) {
+    if (state.showingSharedNotes) {
       dispatch({type: "SET_NOTES", payload: state.myNotes})
-      setShowingSharedNotes(false)
+      dispatch({type: "SET_SHOWING_SHARED_NOTES", payload: false});
     } else {
       dispatch({type: "SET_NOTES", payload: state.sharedNotes})
-      setShowingSharedNotes(true)
+      dispatch({type: "SET_SHOWING_SHARED_NOTES", payload: true});
     }
   }
 
@@ -91,7 +91,7 @@ export default function NotesSidebar() {
     <div id="notes-sidebar">
       <Button onClick={toggleSharedNotes}>
       <FaFolderOpen/>{" "}
-        {showingSharedNotes ? "My Notes" : "Shared with me"}
+        {state.showingSharedNotes ? "My Notes" : "Shared with me"}
       </Button>
       <p>Sort:</p>
       <select name="dropdown-sort" id="dropdown-sort" value={selectedDropdown} onChange={(e) => setSelectedDropdown(e.target.value)}>

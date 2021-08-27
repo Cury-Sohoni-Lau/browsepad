@@ -47,6 +47,11 @@ const Reducer = (state, action) => {
         ...state,
         sharedNotes: action.payload,
       }
+    case "SET_SHOWING_SHARED_NOTES":
+      return {
+        ...state,
+        showingSharedNotes: action.payload,
+      }
     default:
       return state;
   }
