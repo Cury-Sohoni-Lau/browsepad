@@ -11,6 +11,7 @@ export default function ShareModal({ note, setShowShareSuccess }) {
   const [suggestedUsers, setSuggestedUsers] = useState([]);
   const [showShareModal, setShowShareModal] = useState(false);
   const [generatedLink, setGeneratedLink] = useState("");
+  const [showShareFailure, setShowShareFailure] = useState(false);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -25,6 +26,7 @@ export default function ShareModal({ note, setShowShareSuccess }) {
   const handleClose = () => {
     setShowShareModal(false);
     setGeneratedLink("");
+    setShowShareFailure(false);
   };
 
   const generateShareableLink = async () => {
@@ -53,7 +55,9 @@ export default function ShareModal({ note, setShowShareSuccess }) {
       setShowShareSuccess(true);
       setTimeout(() => setShowShareSuccess(false), 3000);
     } catch {
-      //TODO - show red box with error text
+      // TODO - show red box with error text
+      // DISPLAY TEXT ABOVE THE EMAIL INPUT BOX
+      setShowShareFailure(true);
       console.log("User does not exist.");
     }
   };
@@ -72,6 +76,7 @@ export default function ShareModal({ note, setShowShareSuccess }) {
             </p>
           ) : (
             <div id="share-modal">
+              {showShareFailure ? <p>Unable to share with that account</p> : ""}
               <input
                 type="text"
                 onChange={(e) => setRecipient(e.target.value)}
