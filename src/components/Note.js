@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../Store";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
@@ -9,8 +9,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { LinkPreview } from "@dhaiwat10/react-link-preview";
 import ShareModal from "./ShareModal";
 
-export default function Note({ note, setShowShareSuccess, isPublicLink }) {
+export default function Note({
+  passedNote,
+  noteID,
+  setShowShareSuccess,
+  isPublicLink,
+}) {
   const [state, dispatch] = useContext(Context);
+  const [note, setNote] = useState([]);
 
   const handleShow = () => {
     dispatch({ type: "SET_SELECTED_NOTE", payload: note });
@@ -25,6 +31,32 @@ export default function Note({ note, setShowShareSuccess, isPublicLink }) {
     window.location.reload();
   };
 
+  const getPublicNote = async (noteID) => {
+    const response = await axios.get(`/api/notes/shared/${noteID}`);
+    console.log("retrieved note:", response.data);
+    return response.data;
+  };
+
+  useEffect(() => {
+    const getNote = async () => {
+      if (!passedNote && noteID) {
+        try {
+          const retrievedNote = await getPublicNote(noteID);
+          setNote(retrievedNote);
+        } catch {
+          setNote({
+            title: "Note Not Found",
+            content:
+              "This note does not exist or it is not being shared publicly.",
+          });
+        }
+      } else {
+        setNote(passedNote);
+      }
+    };
+    getNote();
+  }, [noteID]);
+
   return (
     <Card>
       <Card.Body>
@@ -38,17 +70,17 @@ export default function Note({ note, setShowShareSuccess, isPublicLink }) {
         </Card.Subtitle>
         {/* <Card.Link href={note.url}>{note.url}</Card.Link> */}
         <LinkPreview url={note.url} width="55vw" />
-        { (!(state.showingSharedNotes) || isPublicLink) && 
-        <div className="note-buttons">
-          <Button variant="danger" onClick={handleDelete}>
-            <FaTrash />
-          </Button>
-          <Button variant="primary" onClick={handleShow}>
-            <FaPencilAlt />
-          </Button>
-          <ShareModal note={note} setShowShareSuccess={setShowShareSuccess}/>
-        </div>
-}
+        {!state.showingSharedNotes && !isPublicLink && (
+          <div className="note-buttons">
+            <Button variant="danger" onClick={handleDelete}>
+              <FaTrash />
+            </Button>
+            <Button variant="primary" onClick={handleShow}>
+              <FaPencilAlt />
+            </Button>
+            <ShareModal note={note} setShowShareSuccess={setShowShareSuccess} />
+          </div>
+        )}
       </Card.Body>
     </Card>
   );
