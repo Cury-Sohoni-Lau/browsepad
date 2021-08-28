@@ -10,11 +10,11 @@ export async function storeUserAndToken(dispatch) {
     const user = response.data;
     if (user.new_token) {
       token = user.new_token;
-      localStorage.setItem("jwt_token", token)
+      localStorage.setItem("jwt_token", token);
     }
     dispatch({ type: "SET_JWT_TOKEN", payload: token });
     dispatch({ type: "SET_USER", payload: response.data });
-  } catch(err) {
+  } catch (err) {
     // USER LOGGED IN, BUT TOKEN EXPIRED - REMOVE TOKEN FROM LOCAL STORAGE
     localStorage.setItem("jwt_token", "");
   }
@@ -22,8 +22,8 @@ export async function storeUserAndToken(dispatch) {
 
 export function extractHashtags(note) {
   const hashtags = note.content
-    .split(" ")
-    .filter((word) => word[0] === "#")
+    .split(/[ \n]+/)
+    .filter((word) => word[0] === "#" && word.length > 1 && word[1] !== "#")
     .map((h) => h.toLowerCase());
   return hashtags;
 }
