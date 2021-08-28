@@ -8,6 +8,7 @@ import moment from "moment";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { LinkPreview } from "@dhaiwat10/react-link-preview";
 import ShareModal from "./ShareModal";
+import ReactMarkdown from "react-markdown";
 
 export default function Note({
   passedNote,
@@ -16,7 +17,9 @@ export default function Note({
   isPublicLink,
 }) {
   const [state, dispatch] = useContext(Context);
-  const [note, setNote] = useState([]);
+  const [note, setNote] = useState({
+    content: "",
+  });
 
   const handleShow = () => {
     dispatch({ type: "SET_SELECTED_NOTE", payload: note });
@@ -61,7 +64,7 @@ export default function Note({
     <Card>
       <Card.Body>
         <Card.Title>{note.title}</Card.Title>
-        <Card.Text>{note.content}</Card.Text>
+        <ReactMarkdown>{note.content}</ReactMarkdown>
         <Card.Subtitle className="mb-2 text-muted">
           {"Created: " + moment(note.created_at).fromNow()}
         </Card.Subtitle>

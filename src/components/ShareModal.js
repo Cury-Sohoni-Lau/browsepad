@@ -24,6 +24,7 @@ export default function ShareModal({ note, setShowShareSuccess }) {
 
   const handleClose = () => {
     setShowShareModal(false);
+    setGeneratedLink("");
   };
 
   const generateShareableLink = async () => {
