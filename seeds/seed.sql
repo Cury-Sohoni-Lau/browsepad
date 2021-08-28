@@ -8,15 +8,10 @@ VALUES
     ('felipe', 'flp@gmail.com', '$2b$10$kJAc0a5AfajkF3EifZP2heNlMLXaFA0Te0DLhpW8LOnNZGSUMjkxK');
 
 INSERT INTO 
-    notes (title, content, user_id, url)
+    notes (title, content, user_id, public, url)
 VALUES
-    ('Applied on 8/16', 'Looks interesting', 2, 'https://github.com/Cury-Sohoni-Lau/browsepad-extension'),
-    ('Cats are ok', 'Cute apartment', 1, 'https://github.com/Cury-Sohoni-Lau/browsepad'),
-    ('Counterfeit mobile battery', 'Do not bother buying!', 3, 'https://www.youtube.com/');
-
-INSERT INTO
-    accesscontrol (note_id, owner_id, user_id)
-VALUES
-    (1, 2, 1);
+    ('Applied on 8/16', 'Looks interesting', 2, false, 'https://github.com/Cury-Sohoni-Lau/browsepad-extension'),
+    ('Cats are ok', 'Cute apartment', 1, false, 'https://github.com/Cury-Sohoni-Lau/browsepad'),
+    ('Counterfeit mobile battery', 'Do not bother buying!', 3, false, 'https://www.youtube.com/'); 
 
 COMMIT;
