@@ -39,7 +39,7 @@ export default function EditNoteForm() {
   return (
     <Modal show={state.showEditForm} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
+        <Modal.Title>Edit note</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <h3>Title</h3>
