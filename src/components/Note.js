@@ -59,7 +59,7 @@ export default function Note({
       }
     };
     getNote();
-  }, [passedNote, noteID, note]);
+  }, [passedNote, noteID]);
 
   return (
     <Card>
