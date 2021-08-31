@@ -107,6 +107,15 @@ app.get("/api/getuser", checkAuth, async (req, res) => {
 });
 
 /////////
+app.patch("/api/users", checkAuth, async (req, res) => {
+  const image = req.body.image;
+  try {
+    const response = await knex("users").update({ image }).where({id: req.user.id});
+    res.sendStatus(204);
+  } catch(err) {
+    res.sendStatus(400);
+  }
+});
 
 app.get("/api/user/:email", async (req, res) => {
   try {

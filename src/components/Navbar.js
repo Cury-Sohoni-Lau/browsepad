@@ -15,12 +15,15 @@ export default function Navbar() {
     <div>
       {state.user.id ? (
         <>
-          <Link to="/notes">Go to notes</Link>
+          <Link to="/notes">Notes</Link>
+          {" "}
+          <Link to="/profile">Profile</Link>
           <button onClick={logout}>Log out</button>
         </>
       ) : (
         <>
           <Link to="/register">Sign up!</Link>
+          {" "}
           <Link to="/login">Login</Link>
         </>
       )}

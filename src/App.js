@@ -7,6 +7,7 @@ import RegisterPage from "./views/RegisterPage";
 import NotesPage from "./views/NotesPage";
 import { storeUserAndToken } from "./utils";
 import { Context } from "./Store";
+import ProfilePage from "./views/ProfilePage";
 
 function App() {
   const [, dispatch] = useContext(Context);
@@ -20,6 +21,7 @@ function App() {
     loginPage: "/login",
     registerPage: "/register",
     notesPage: "/notes",
+    profilePage: "/profile"
   };
 
   const routes = [
@@ -40,6 +42,10 @@ function App() {
       path: paths.notesPage,
       render: () => <NotesPage />,
     },
+    {
+      path: paths.profilePage,
+      render: () => <ProfilePage />
+    }
   ];
 
   return (
