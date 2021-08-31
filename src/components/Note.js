@@ -67,7 +67,7 @@ export default function Note({
         <Card.Title>{note.title}</Card.Title>
         {typeof note.image != "undefined" && (
           <div
-            className="circle-pic"
+            className="circle-pic profile-pic-small"
             style={{
               backgroundImage: `url(${note.image || "../profile-default.png"})`,
             }}
