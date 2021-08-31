@@ -20,6 +20,7 @@ export default function Note({
   const [note, setNote] = useState({
     content: "",
   });
+  const [showUserName, setShowUserName] = useState(false);
 
   const handleShow = () => {
     dispatch({ type: "SET_SELECTED_NOTE", payload: note });
@@ -58,12 +59,33 @@ export default function Note({
       }
     };
     getNote();
-  }, [passedNote, noteID]);
+  }, [passedNote, noteID, note]);
 
   return (
     <Card>
       <Card.Body>
         <Card.Title>{note.title}</Card.Title>
+        {typeof note.image != "undefined" && (
+          <div
+            className="circle-pic"
+            style={{
+              backgroundImage: `url(${note.image || "../profile-default.png"})`,
+            }}
+            onMouseEnter={() => setShowUserName(true)}
+            onMouseLeave={() => setShowUserName(false)}
+          ></div>
+        )}
+        {showUserName && (
+          <p
+            style={{
+              position: "absolute",
+              backgroundColor: "pink",
+            }}
+          >
+            {note.name}
+          </p>
+        )}
+
         <ReactMarkdown>{note.content}</ReactMarkdown>
         <Card.Subtitle className="mb-2 text-muted">
           {"Created: " + moment(note.created_at).fromNow()}

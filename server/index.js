@@ -110,9 +110,11 @@ app.get("/api/getuser", checkAuth, async (req, res) => {
 app.patch("/api/users", checkAuth, async (req, res) => {
   const image = req.body.image;
   try {
-    const response = await knex("users").update({ image }).where({id: req.user.id});
+    const response = await knex("users")
+      .update({ image })
+      .where({ id: req.user.id });
     res.sendStatus(204);
-  } catch(err) {
+  } catch (err) {
     res.sendStatus(400);
   }
 });
@@ -149,7 +151,22 @@ app.get("/api/notes/shared", checkAuth, async (req, res) => {
     const noteIDs = entries.map((entry) => entry.note_id);
 
     // GATHER ALL OF THE NOTES BASED ON THE NOTE IDS THAT ARE IN THE ARRAY
-    const notes = await knex("notes").select().whereIn("id", noteIDs);
+    const notes = await knex("notes")
+      .join("users", "users.id", "notes.user_id")
+      .select(
+        "notes.id",
+        "notes.title",
+        "notes.content",
+        "notes.user_id",
+        "notes.url",
+        "notes.public",
+        "notes.created_at",
+        "notes.modified_at",
+        "users.image",
+        "users.name"
+      )
+      .whereIn("notes.id", noteIDs);
+
     res.send(notes);
   } catch (err) {
     res.sendStatus(400);

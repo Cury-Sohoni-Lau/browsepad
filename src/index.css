@@ -54,10 +54,29 @@ code {
 #share-success {
   position: fixed;
   top: 10px;
-  right: 50vw;  
+  right: 50vw;
 }
 
 #profile-pic {
   min-width: 10vw;
   width: 10vw;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.profile-pic-small {
+  width: 2rem;
+}
+
+.circle-pic {
+  display: block;
+  width: 40px;
+  height: 40px;
+  background: #e6e7ed;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  background-size: cover;
 }
