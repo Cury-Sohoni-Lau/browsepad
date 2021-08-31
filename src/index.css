@@ -57,23 +57,18 @@ code {
   right: 50vw;
 }
 
-#profile-pic {
-  min-width: 10vw;
-  width: 10vw;
-}
-
-.circle {
-  border-radius: 50%;
-}
-
 .profile-pic-small {
-  width: 2rem;
+  width: 40px;
+  height: 40px;
+}
+
+.profile-pic-big {
+  width: 10vw;
+  height: 10vw;
 }
 
 .circle-pic {
   display: block;
-  width: 40px;
-  height: 40px;
   background: #e6e7ed;
   background-position: 50% 50%;
   background-repeat: no-repeat;
