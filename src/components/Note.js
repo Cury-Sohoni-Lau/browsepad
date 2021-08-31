@@ -58,7 +58,7 @@ export default function Note({
       }
     };
     getNote();
-  }, [noteID]);
+  }, [passedNote, noteID]);
 
   return (
     <Card>
