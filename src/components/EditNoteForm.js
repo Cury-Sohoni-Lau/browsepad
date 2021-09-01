@@ -1,19 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
 import { Context } from "../Store";
+import { FaPencilAlt } from "react-icons/fa";
 import { host } from "../utils";
+import NoteModal from "./ui/NoteModal";
 
-export default function EditNoteForm() {
+export default function EditNoteForm({ handleOpen }) {
   const [state, dispatch] = useContext(Context);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [content, setContent] = useState("");
-
-  const handleClose = () => {
-    dispatch({ type: "TOGGLE_SHOW_EDIT_FORM" });
-  };
+  const [open, setOpen] = useState(false);
 
   const handleSubmit = async (e) => {
     const id = state.selectedNote.id;
@@ -27,8 +24,6 @@ export default function EditNoteForm() {
       },
       { headers: { Authorization: `Bearer ${state.token}` } }
     );
-    dispatch({ type: "TOGGLE_SHOW_EDIT_FORM" });
-    window.location.reload();
   };
 
   useEffect(() => {
@@ -38,11 +33,15 @@ export default function EditNoteForm() {
   }, [state.selectedNote]);
 
   return (
-    <Modal show={state.showEditForm} onHide={handleClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>Edit note</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
+    <NoteModal
+      open={open}
+      setOpen={setOpen}
+      openModalButtonText={<FaPencilAlt />}
+      submitFormButtonText="Save Changes"
+      handleOpen={handleOpen}
+      handleSubmit={handleSubmit}
+    >
+      <>
         <h3>Title</h3>
         <input
           type="text"
@@ -60,15 +59,7 @@ export default function EditNoteForm() {
           value={url}
           onChange={(e) => setUrl(e.target.value)}
         ></input>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
-        <Button variant="primary" onClick={handleSubmit}>
-          Save Changes
-        </Button>
-      </Modal.Footer>
-    </Modal>
+      </>
+    </NoteModal>
   );
 }

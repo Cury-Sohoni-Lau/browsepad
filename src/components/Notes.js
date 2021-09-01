@@ -3,7 +3,6 @@ import { Context } from "../Store";
 import axios from "axios";
 import Note from "./Note";
 import AddNoteForm from "./AddNoteForm";
-import EditNoteForm from "./EditNoteForm";
 import NotesSidebar from "./NotesSidebar";
 import { extractHashtags, host } from "../utils";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
@@ -57,7 +56,6 @@ export default function Notes() {
       <Route path={parentMatch.url}>
         <div>
           <AddNoteForm />
-          <EditNoteForm />
           <div id="notes-main">
             <NotesSidebar />
             <div id="notes-wrapper">

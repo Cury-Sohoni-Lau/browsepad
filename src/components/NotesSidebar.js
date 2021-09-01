@@ -1,8 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../Store";
-import Button from "react-bootstrap/Button";
+import Button from "@material-ui/core/Button";
 import { includesAll } from "../utils";
 import { FaFolderOpen } from "react-icons/fa";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import AppBar from "@material-ui/core/AppBar";
+import TabPanel from "@restart/ui/esm/TabPanel";
+import TabButtons from "./ui/TabButtons";
 
 export default function NotesSidebar() {
   const [state, dispatch] = useContext(Context);
@@ -134,7 +139,6 @@ export default function NotesSidebar() {
       {hashtagWords.map((hashtag) => (
         <Button
           key={hashtag}
-          variant="outline-primary"
           className={selectedHashtags.includes(hashtag) ? "active" : ""}
           onClick={(e) => toggleHashtag(hashtag)}
         >

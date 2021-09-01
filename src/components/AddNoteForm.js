@@ -10,6 +10,7 @@ export default function AddNoteForm() {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
+  const [open, setOpen] = useState(false);
 
   const handleSubmit = async () => {
     await axios.post(
@@ -25,6 +26,8 @@ export default function AddNoteForm() {
 
   return (
     <NoteModal
+      open={open}
+      setOpen={setOpen}
       openModalButtonText={<FaPlus />}
       submitFormButtonText="Save Changes"
       handleSubmit={handleSubmit}

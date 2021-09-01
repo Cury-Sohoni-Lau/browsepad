@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../Store";
 import axios from "axios";
-import Button from "react-bootstrap/Button";
+import Button from "@material-ui/core/Button";
 import Card from "react-bootstrap/Card";
 import { FaTrash, FaPencilAlt } from "react-icons/fa";
 import moment from "moment";
@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { LinkPreview } from "@dhaiwat10/react-link-preview";
 import ShareModal from "./ShareModal";
 import ReactMarkdown from "react-markdown";
+import EditNoteForm from "./EditNoteForm";
 import { host } from "../utils";
 
 export default function Note({
@@ -25,7 +26,6 @@ export default function Note({
 
   const handleShow = () => {
     dispatch({ type: "SET_SELECTED_NOTE", payload: note });
-    dispatch({ type: "TOGGLE_SHOW_EDIT_FORM" });
   };
 
   const handleDelete = async (e) => {
@@ -98,12 +98,10 @@ export default function Note({
         {note.url && <LinkPreview url={note.url} width="55vw" />}
         {!state.showingSharedNotes && !isPublicLink && (
           <div className="note-buttons">
-            <Button variant="danger" onClick={handleDelete}>
+            <Button onClick={handleDelete}>
               <FaTrash />
             </Button>
-            <Button variant="primary" onClick={handleShow}>
-              <FaPencilAlt />
-            </Button>
+            <EditNoteForm handleOpen={handleShow} />
             <ShareModal note={note} setShowShareSuccess={setShowShareSuccess} />
           </div>
         )}
