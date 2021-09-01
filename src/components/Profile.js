@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import { Context } from "../Store";
 import { toBase64, host } from "../utils";
 import axios from "axios";
