@@ -1,6 +1,10 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../Store";
+import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
 
 export default function Navbar() {
   const [state, dispatch] = useContext(Context);
@@ -12,21 +16,19 @@ export default function Navbar() {
   };
 
   return (
-    <div>
-      {state.user.id ? (
-        <>
-          <Link to="/notes">Notes</Link>
-          {" "}
-          <Link to="/profile">Profile</Link>
-          <button onClick={logout}>Log out</button>
-        </>
-      ) : (
-        <>
-          <Link to="/register">Sign up!</Link>
-          {" "}
-          <Link to="/login">Login</Link>
-        </>
-      )}
-    </div>
+    <AppBar position="static">
+      <Toolbar>
+        {state.user.id ? (
+          <>
+            <Link to="/notes">Notes</Link> <Link to="/profile">Profile</Link>
+            <Button onClick={logout}>Log out</Button>
+          </>
+        ) : (
+          <>
+            <Link to="/register">Sign up!</Link> <Link to="/login">Login</Link>
+          </>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 }
