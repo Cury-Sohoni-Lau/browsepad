@@ -1,21 +1,15 @@
 import { useState, useContext } from "react";
 import { Context } from "../Store";
 import axios from "axios";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
 import { FaPlus } from "react-icons/fa";
 import { host } from "../utils";
+import NoteModal from "./ui/NoteModal";
 
 export default function AddNoteForm() {
-  const [state] = useContext(Context);
+  const [state, dispatch] = useContext(Context);
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
-
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const handleSubmit = async () => {
     await axios.post(
@@ -27,47 +21,33 @@ export default function AddNoteForm() {
       },
       { headers: { Authorization: `Bearer ${state.token}` } }
     );
-    setShow(false);
-    window.location.reload();
   };
 
   return (
-    <>
-      <Button onClick={handleShow}>
-        <FaPlus />
-      </Button>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add note</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <h3>Title</h3>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          ></input>
-          <p>Content</p>
-          <textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          ></textarea>
-          <p>URL</p>
-          <input
-            type="text"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-          ></input>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleSubmit}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
+    <NoteModal
+      openModalButtonText={<FaPlus />}
+      submitFormButtonText="Save Changes"
+      handleSubmit={handleSubmit}
+    >
+      <>
+        <h3>Title</h3>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        ></input>
+        <p>Content</p>
+        <textarea
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        ></textarea>
+        <p>URL</p>
+        <input
+          type="text"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+        ></input>
+      </>
+    </NoteModal>
   );
 }
