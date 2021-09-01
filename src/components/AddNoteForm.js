@@ -4,6 +4,7 @@ import axios from "axios";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { FaPlus } from "react-icons/fa";
+import { host } from "../utils";
 
 export default function AddNoteForm() {
   const [state] = useContext(Context);
@@ -18,7 +19,7 @@ export default function AddNoteForm() {
 
   const handleSubmit = async () => {
     await axios.post(
-      "/api/notes",
+      `${host}/api/notes`,
       {
         title: title,
         content: content,

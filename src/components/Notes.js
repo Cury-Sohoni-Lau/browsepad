@@ -5,7 +5,7 @@ import Note from "./Note";
 import AddNoteForm from "./AddNoteForm";
 import EditNoteForm from "./EditNoteForm";
 import NotesSidebar from "./NotesSidebar";
-import { extractHashtags } from "../utils";
+import { extractHashtags, host } from "../utils";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 
 export default function Notes() {
@@ -16,7 +16,7 @@ export default function Notes() {
   useEffect(() => {
     if (state.token) {
       const setNotes = async () => {
-        let response = await axios.get("/api/notes", {
+        let response = await axios.get(`${host}/api/notes`, {
           headers: { Authorization: `Bearer ${state.token}` },
         });
 
@@ -30,7 +30,7 @@ export default function Notes() {
         dispatch({ type: "SET_MY_NOTES", payload: myNotes });
         dispatch({ type: "SET_NOTES", payload: myNotes });
 
-        response = await axios.get(`/api/notes/shared`, {
+        response = await axios.get(`${host}/api/notes/shared`, {
           headers: { Authorization: `Bearer ${state.token}` },
         });
         let sharedNotes = response.data;

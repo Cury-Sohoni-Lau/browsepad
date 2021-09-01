@@ -4,6 +4,7 @@ import axios from "axios";
 import { Context } from "../Store";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { host } from "../utils";
 
 export default function ShareModal({ note, setShowShareSuccess }) {
   const [state] = useContext(Context);
@@ -15,7 +16,7 @@ export default function ShareModal({ note, setShowShareSuccess }) {
 
   useEffect(() => {
     const getUsers = async () => {
-      const response = await axios(`/api/users/shared`, {
+      const response = await axios(`${host}/api/users/shared`, {
         headers: { Authorization: `Bearer ${state.token}` },
       });
       setSuggestedUsers(response.data);
@@ -32,7 +33,7 @@ export default function ShareModal({ note, setShowShareSuccess }) {
   const generateShareableLink = async () => {
     try {
       const response = await axios.post(
-        `/api/notes/share/${note.id}`,
+        `${host}/api/notes/share/${note.id}`,
         { public: true },
         { headers: { Authorization: `Bearer ${state.token}` } }
       );
@@ -47,7 +48,7 @@ export default function ShareModal({ note, setShowShareSuccess }) {
     const email = user ? user.email : recipient;
     try {
       await axios.post(
-        `/api/notes/${note.id}/share`,
+        `${host}/api/notes/${note.id}/share`,
         { email },
         { headers: { Authorization: `Bearer ${state.token}` } }
       );

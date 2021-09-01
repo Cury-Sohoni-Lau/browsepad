@@ -1,10 +1,13 @@
 import axios from "axios";
+require("dotenv").config();
+
+export const host = process.env.REACT_APP_APPHOST;
 
 export async function storeUserAndToken(dispatch) {
   let token = localStorage.getItem("jwt_token");
   if (!token) return;
   try {
-    const response = await axios.get("/api/getuser", {
+    const response = await axios.get(`${host}/api/getuser`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const user = response.data;
@@ -53,6 +56,6 @@ export function toBase64(file) {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
+    reader.onerror = (error) => reject(error);
   });
 }
