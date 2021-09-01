@@ -22,13 +22,16 @@ export default function NoteModal({
   submitFormButtonText,
   handleOpen,
   handleSubmit,
+  open,
+  setOpen,
   children,
 }) {
   const [, dispatch] = useContext(Context);
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
   const handleModalOpen = () => {
-    handleOpen();
+    if (handleOpen) {
+      handleOpen();
+    }
     setOpen(true);
   };
   const handleModalClose = () => setOpen(false);
@@ -46,7 +49,9 @@ export default function NoteModal({
         <div className={classes.modal}>
           {children}
           <Button onClick={handleModalClose}>Close</Button>
-          <Button onClick={handleModalSubmit}>{submitFormButtonText}</Button>
+          {submitFormButtonText && (
+            <Button onClick={handleModalSubmit}>{submitFormButtonText}</Button>
+          )}
         </div>
       </Modal>
     </>

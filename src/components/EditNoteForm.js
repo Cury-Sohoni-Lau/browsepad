@@ -10,6 +10,7 @@ export default function EditNoteForm({ handleOpen }) {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [content, setContent] = useState("");
+  const [open, setOpen] = useState(false);
 
   const handleSubmit = async (e) => {
     const id = state.selectedNote.id;
@@ -33,6 +34,8 @@ export default function EditNoteForm({ handleOpen }) {
 
   return (
     <NoteModal
+      open={open}
+      setOpen={setOpen}
       openModalButtonText={<FaPencilAlt />}
       submitFormButtonText="Save Changes"
       handleOpen={handleOpen}

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../Store";
 import axios from "axios";
-import Button from "react-bootstrap/Button";
+import Button from "@material-ui/core/Button";
 import Card from "react-bootstrap/Card";
 import { FaTrash, FaPencilAlt } from "react-icons/fa";
 import moment from "moment";
@@ -98,7 +98,7 @@ export default function Note({
         {note.url && <LinkPreview url={note.url} width="55vw" />}
         {!state.showingSharedNotes && !isPublicLink && (
           <div className="note-buttons">
-            <Button variant="danger" onClick={handleDelete}>
+            <Button onClick={handleDelete}>
               <FaTrash />
             </Button>
             <EditNoteForm handleOpen={handleShow} />
