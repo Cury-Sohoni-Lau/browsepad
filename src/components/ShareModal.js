@@ -22,7 +22,7 @@ export default function ShareModal({ note, setShowShareSuccess }) {
       setSuggestedUsers(response.data);
     };
     getUsers();
-  }, []);
+  }, [state.token]);
 
   const handleClose = () => {
     setShowShareModal(false);
@@ -32,7 +32,7 @@ export default function ShareModal({ note, setShowShareSuccess }) {
 
   const generateShareableLink = async () => {
     try {
-      const response = await axios.post(
+      await axios.post(
         `${host}/api/notes/share/${note.id}`,
         { public: true },
         { headers: { Authorization: `Bearer ${state.token}` } }

@@ -1,8 +1,24 @@
+/* font-family: 'Inter', sans-serif;
+font-family: 'Rubik', sans-serif; */
+/*
+const DARK_BLUE = #5680e9
+const SKY_BLUE = #84ceeb
+const CYAN = #5ab9ea
+const PERIWINKLE = #c1c8e4
+const PURPLE = #8860d0
+*/
+
+* {
+  font-family: "Inter", sans-serif;
+}
+
 body {
+  background-color: #c1c8e4;
+  opacity: 0.8;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+    sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -74,4 +90,11 @@ code {
   background-repeat: no-repeat;
   border-radius: 50%;
   background-size: cover;
+}
+
+#test {
+  text-transform: capitalize;
+}
+
+#login-box {
 }
