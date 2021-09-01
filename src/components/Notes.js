@@ -44,7 +44,7 @@ export default function Notes() {
       };
       setNotes();
     }
-  }, [state.token, dispatch]);
+  }, [state.token, dispatch, state.refresh]);
 
   return (
     <Switch>

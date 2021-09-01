@@ -1,5 +1,10 @@
 const Reducer = (state, action) => {
   switch (action.type) {
+    case "REFRESH":
+      return {
+        ...state,
+        refresh: state.refresh + 1,
+      };
     case "SET_USER":
       return {
         ...state,
@@ -41,17 +46,17 @@ const Reducer = (state, action) => {
       return {
         ...state,
         myNotes: action.payload,
-      }
+      };
     case "SET_SHARED_NOTES":
       return {
         ...state,
         sharedNotes: action.payload,
-      }
+      };
     case "SET_SHOWING_SHARED_NOTES":
       return {
         ...state,
         showingSharedNotes: action.payload,
-      }
+      };
     default:
       return state;
   }
