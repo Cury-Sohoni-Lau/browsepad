@@ -20,28 +20,32 @@ const useStyles = makeStyles((theme) => ({
 export default function NoteModal({
   openModalButtonText,
   submitFormButtonText,
+  handleOpen,
   handleSubmit,
   children,
 }) {
   const [, dispatch] = useContext(Context);
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleModalOpen = () => {
+    handleOpen();
+    setOpen(true);
+  };
+  const handleModalClose = () => setOpen(false);
 
   const handleModalSubmit = async () => {
     await handleSubmit();
-    handleClose();
+    handleModalClose();
     dispatch({ type: "REFRESH" });
   };
 
   return (
     <>
-      <Button onClick={handleOpen}>{openModalButtonText}</Button>
-      <Modal open={open} onClose={handleClose}>
+      <Button onClick={handleModalOpen}>{openModalButtonText}</Button>
+      <Modal open={open} onClose={handleModalClose}>
         <div className={classes.modal}>
           {children}
-          <Button onClick={handleClose}>Close</Button>
+          <Button onClick={handleModalClose}>Close</Button>
           <Button onClick={handleModalSubmit}>{submitFormButtonText}</Button>
         </div>
       </Modal>
