@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
-import { storeUserAndToken } from "../utils";
+import { storeUserAndToken, host } from "../utils";
 import { Context } from "../Store";
 import { useHistory, Link } from "react-router-dom";
 import { Card, Button, Form } from "react-bootstrap";
@@ -14,7 +14,7 @@ export default function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post("/api/login", {
+    const response = await axios.post(`${host}/api/login`, {
       email,
       password,
     });

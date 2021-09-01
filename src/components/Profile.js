@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext, useState, useEffect } from "react";
 import { Context } from "../Store";
-import { toBase64 } from "../utils";
+import { toBase64, host } from "../utils";
 import axios from "axios";
 
 export default function Profile() {
@@ -17,7 +17,7 @@ export default function Profile() {
     const imageB64 = await toBase64(e.target.files[0]);
     try {
       await axios.patch(
-        "/api/users",
+        `${host}/api/users`,
         { image: imageB64 },
         { headers: { Authorization: `Bearer ${state.token}` } }
       );

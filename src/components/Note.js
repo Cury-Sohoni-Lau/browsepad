@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { LinkPreview } from "@dhaiwat10/react-link-preview";
 import ShareModal from "./ShareModal";
 import ReactMarkdown from "react-markdown";
+import { host } from "../utils";
 
 export default function Note({
   passedNote,
@@ -29,14 +30,14 @@ export default function Note({
 
   const handleDelete = async (e) => {
     const id = note.id;
-    await axios.delete(`/api/notes/${id}`, {
+    await axios.delete(`${host}/api/notes/${id}`, {
       headers: { Authorization: `Bearer ${state.token}` },
     });
     window.location.reload();
   };
 
   const getPublicNote = async (noteID) => {
-    const response = await axios.get(`/api/notes/shared/${noteID}`);
+    const response = await axios.get(`${host}/api/notes/shared/${noteID}`);
     console.log("retrieved note:", response.data);
     return response.data;
   };
@@ -94,7 +95,7 @@ export default function Note({
           {"Modified: " + moment(note.modified_at).fromNow()}
         </Card.Subtitle>
         {/* <Card.Link href={note.url}>{note.url}</Card.Link> */}
-        <LinkPreview url={note.url} width="55vw" />
+        {note.url && <LinkPreview url={note.url} width="55vw" />}
         {!state.showingSharedNotes && !isPublicLink && (
           <div className="note-buttons">
             <Button variant="danger" onClick={handleDelete}>

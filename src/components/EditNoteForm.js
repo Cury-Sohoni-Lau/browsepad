@@ -3,6 +3,7 @@ import axios from "axios";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { Context } from "../Store";
+import { host } from "../utils";
 
 export default function EditNoteForm() {
   const [state, dispatch] = useContext(Context);
@@ -17,7 +18,7 @@ export default function EditNoteForm() {
   const handleSubmit = async (e) => {
     const id = state.selectedNote.id;
     await axios.patch(
-      `/api/notes/${id}`,
+      `${host}/api/notes/${id}`,
       {
         title: title,
         content: content,

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useState } from "react";
 import axios from "axios";
-import { storeUserAndToken } from "../utils";
+import { storeUserAndToken, host } from "../utils";
 import { Context } from "../Store";
 import { useHistory, Link } from "react-router-dom";
 import { Card, Form, Button } from "react-bootstrap";
@@ -22,7 +22,7 @@ export default function RegisterForm() {
       setHidden(false);
       return;
     }
-    const response = await axios.post(`/api/register`, {
+    const response = await axios.post(`${host}/api/register`, {
       name,
       email,
       password,
