@@ -5,6 +5,7 @@ import HomePage from "./views/HomePage";
 import LoginPage from "./views/LoginPage";
 import RegisterPage from "./views/RegisterPage";
 import NotesPage from "./views/NotesPage";
+import PublicNotePage from "./views/PublicNotePage";
 import { storeUserAndToken } from "./utils";
 import { Context } from "./Store";
 import ProfilePage from "./views/ProfilePage";
@@ -21,7 +22,8 @@ function App() {
     loginPage: "/login",
     registerPage: "/register",
     notesPage: "/notes",
-    profilePage: "/profile"
+    profilePage: "/profile",
+    publicNotePage: "/note",
   };
 
   const routes = [
@@ -44,8 +46,12 @@ function App() {
     },
     {
       path: paths.profilePage,
-      render: () => <ProfilePage />
-    }
+      render: () => <ProfilePage />,
+    },
+    {
+      path: paths.publicNotePage,
+      render: () => <PublicNotePage />,
+    },
   ];
 
   return (

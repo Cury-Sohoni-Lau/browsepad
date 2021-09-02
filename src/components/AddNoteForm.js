@@ -4,8 +4,9 @@ import axios from "axios";
 import { FaPlus } from "react-icons/fa";
 import { host } from "../utils";
 import NoteModal from "./ui/NoteModal";
+import AddBoxIcon from "@material-ui/icons/AddBox";
 
-export default function AddNoteForm() {
+export default function AddNoteForm({ className }) {
   const [state, dispatch] = useContext(Context);
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
@@ -28,9 +29,10 @@ export default function AddNoteForm() {
     <NoteModal
       open={open}
       setOpen={setOpen}
-      openModalButtonText={<FaPlus />}
+      openModalButtonText={<AddBoxIcon />}
       submitFormButtonText="Save Changes"
       handleSubmit={handleSubmit}
+      className={className}
     >
       <>
         <h3>Title</h3>

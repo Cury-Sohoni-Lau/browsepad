@@ -7,9 +7,11 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import ToggleSharedNotesButton from "./ToggleSharedNotesButton";
 import TabButtons from "./ui/TabButtons";
+import useStyles from "../styles";
 
 export default function Navbar() {
   const [state, dispatch] = useContext(Context);
+  const classes = useStyles();
 
   const logout = () => {
     localStorage.setItem("jwt_token", "");
@@ -18,12 +20,22 @@ export default function Navbar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" className={classes.navbar}>
       <Toolbar>
         {state.user.id ? (
           <>
             <Link to="/notes">Notes</Link> <Link to="/profile">Profile</Link>
-            <Button onClick={logout}>Log out</Button>
+            <Button onClick={logout} className={classes.button}>
+              Logout
+            </Button>
+            <div
+              className="circle-pic profile-pic-small"
+              style={{
+                backgroundImage: `url(${
+                  state.user.image || "../profile-default.png"
+                })`,
+              }}
+            ></div>
           </>
         ) : (
           <>

@@ -7,8 +7,10 @@ import NotesSidebar from "./NotesSidebar";
 import { extractHashtags, host } from "../utils";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import ToggleSharedNotesButton from "./ToggleSharedNotesButton";
+import useStyles from "../styles";
 
 export default function Notes() {
+  const classes = useStyles();
   let parentMatch = useRouteMatch();
   const [state, dispatch] = useContext(Context);
   const [showShareSuccess, setShowShareSuccess] = useState(false);
@@ -47,37 +49,25 @@ export default function Notes() {
   }, [state.token, dispatch, state.refresh]);
 
   return (
-    <Switch>
-      <Route
-        path={`${parentMatch.url}/:noteID`}
-        render={({ match }) => (
-          <Note noteID={match.params.noteID} isPublicLink={true} />
-        )}
-      />
-      <Route path={parentMatch.url}>
-        <div>
-          <AddNoteForm />
-          <div id="notes-main">
-            <NotesSidebar />
-            <div id="notes-wrapper">
-        <ToggleSharedNotesButton /> 
-              {state.filteredNotes.map((note) => (
-                <Note
-                  key={note.id}
-                  passedNote={note}
-                  setShowShareSuccess={setShowShareSuccess}
-                />
-              ))}
-            </div>
-            <div
-              id="share-success"
-              className={showShareSuccess ? "" : "hidden"}
-            >
-              YOU SHARED A NOTE!!!!
-            </div>
+    <div>
+      <div id="notes-main">
+        <NotesSidebar />
+        <div id="notes-wrapper">
+          <ToggleSharedNotesButton />
+          <div>
+            {state.filteredNotes.map((note) => (
+              <Note
+                key={note.id}
+                passedNote={note}
+                setShowShareSuccess={setShowShareSuccess}
+              />
+            ))}
           </div>
         </div>
-      </Route>
-    </Switch>
+        <div id="share-success" className={showShareSuccess ? "" : "hidden"}>
+          YOU SHARED A NOTE!!!!
+        </div>
+      </div>
+    </div>
   );
 }

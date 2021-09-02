@@ -24,6 +24,9 @@ export default function NoteModal({
   handleSubmit,
   open,
   setOpen,
+  variant,
+  color,
+  className,
   children,
 }) {
   const [, dispatch] = useContext(Context);
@@ -44,7 +47,14 @@ export default function NoteModal({
 
   return (
     <>
-      <Button onClick={handleModalOpen}>{openModalButtonText}</Button>
+      <Button
+        className={className || ""}
+        variant={variant}
+        color={color}
+        onClick={handleModalOpen}
+      >
+        {openModalButtonText}
+      </Button>
       <Modal open={open} onClose={handleModalClose}>
         <div className={classes.modal}>
           {children}
