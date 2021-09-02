@@ -6,8 +6,11 @@ import { useHistory, Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
+import useStyles from "../styles";
 
 export default function LoginForm() {
+  const classes = useStyles();
   const [, dispatch] = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,18 +28,16 @@ export default function LoginForm() {
   };
 
   return (
-    <Grid
-      container
-      spacing={0}
-      direction="column"
-      alignItems="center"
-      justify="center"
-      style={{ minHeight: "100vh" }}
+    <Container
+      maxWidth="sm"
+      className={`${classes.authForm} ${classes.shadowStrong}`}
+      style={{ marginTop: "3rem" }}
     >
       <form onSubmit={handleSubmit}>
-        <Grid item xs>
+        <Container className={classes.flexColumnContainer}>
           <TextField
-            style={{ minWidth: "50vw" }}
+            style={{ marginTop: "2rem" }}
+            className={classes.authFormField}
             label="Email"
             variant="filled"
             type="email"
@@ -45,10 +46,9 @@ export default function LoginForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-        </Grid>
-        <Grid item xs>
           <TextField
-            style={{ minWidth: "50vw" }}
+            style={{ marginBottom: "0.5rem" }}
+            className={classes.authFormField}
             label="Password"
             variant="filled"
             type="password"
@@ -56,20 +56,42 @@ export default function LoginForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </Grid>
-        <Grid item xs>
-          <Button type="submit" onClick={handleSubmit}>
+          <Button
+            className={`${classes.button} ${classes.shadowWeak}`}
+            style={{ marginTop: "0.5rem" }}
+            type="submit"
+            onClick={handleSubmit}
+          >
             Login
           </Button>
-        </Grid>
+          <p>
+            New user?{" "}
+            <Link to="/register" style={{ textDecoration: "none" }}>
+              Create an account
+            </Link>
+          </p>
+        </Container>
       </form>
-      <p>
-        New user?
-        <Link to="/register" style={{ textDecoration: "none" }}>
-          {" "}
-          Create an account
-        </Link>
-      </p>
-    </Grid>
+    </Container>
+
+    // <Grid
+    //   container
+    //   spacing={0}
+    //   direction="column"
+    //   alignItems="center"
+    //   justify="center"
+    //   style={{ minHeight: "100vh" }}
+    // >
+    //   <form onSubmit={handleSubmit}>
+    //     <Grid item xs>
+
+    //     </Grid>
+    //     <Grid item xs>
+
+    //     </Grid>
+
+    //   </form>
+
+    // </Grid>
   );
 }

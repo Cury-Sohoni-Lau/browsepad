@@ -5,7 +5,6 @@ import Button from "@material-ui/core/Button";
 import Card from "react-bootstrap/Card";
 import { FaTrash, FaPencilAlt } from "react-icons/fa";
 import moment from "moment";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { LinkPreview } from "@dhaiwat10/react-link-preview";
 import ShareModal from "./ShareModal";
 import ReactMarkdown from "react-markdown";
