@@ -30,7 +30,7 @@ export default function LoginForm() {
   return (
     <Container
       maxWidth="sm"
-      className={`${classes.authForm} ${classes.shadowStrong}`}
+      className={`${classes.authForm} ${classes.shadowWeak}`}
       style={{ marginTop: "3rem" }}
     >
       <form onSubmit={handleSubmit}>
@@ -57,7 +57,7 @@ export default function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button
-            className={`${classes.button} ${classes.shadowWeak}`}
+            className={`${classes.button} ${classes.buttonPurple} ${classes.shadowWeak}`}
             style={{ marginTop: "0.5rem" }}
             type="submit"
             onClick={handleSubmit}

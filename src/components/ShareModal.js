@@ -5,6 +5,7 @@ import { Context } from "../Store";
 import Button from "@material-ui/core/Button";
 import { host } from "../utils";
 import NoteModal from "./ui/NoteModal";
+import ShareIcon from "@material-ui/icons/Share";
 
 export default function ShareModal({ note, setShowShareSuccess }) {
   const [state] = useContext(Context);
@@ -38,7 +39,7 @@ export default function ShareModal({ note, setShowShareSuccess }) {
         { public: true },
         { headers: { Authorization: `Bearer ${state.token}` } }
       );
-      setGeneratedLink(`${window.location.href}/${note.id}`);
+      setGeneratedLink(`${host}/note/${note.id}`);
     } catch (error) {
       //TODO - show red box with error text
       console.log("COULDNT SHARE.");
@@ -68,7 +69,7 @@ export default function ShareModal({ note, setShowShareSuccess }) {
     <NoteModal
       open={open}
       setOpen={setOpen}
-      openModalButtonText="Share"
+      openModalButtonText={<ShareIcon />}
       handleSubmit={handleShare}
     >
       {generatedLink ? (

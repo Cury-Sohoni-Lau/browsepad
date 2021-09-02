@@ -5,7 +5,7 @@ import { FaPencilAlt } from "react-icons/fa";
 import { host } from "../utils";
 import NoteModal from "./ui/NoteModal";
 
-export default function EditNoteForm({ handleOpen }) {
+export default function EditNoteForm({ handleOpen, variant, color }) {
   const [state, dispatch] = useContext(Context);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
@@ -40,6 +40,8 @@ export default function EditNoteForm({ handleOpen }) {
       submitFormButtonText="Save Changes"
       handleOpen={handleOpen}
       handleSubmit={handleSubmit}
+      variant={variant}
+      color={color}
     >
       <>
         <h3>Title</h3>

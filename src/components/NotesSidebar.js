@@ -3,13 +3,29 @@ import { Context } from "../Store";
 import Button from "@material-ui/core/Button";
 import { includesAll } from "../utils";
 import { FaFolderOpen } from "react-icons/fa";
+import useStyles from "../styles";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
 
 export default function NotesSidebar() {
+  const classes = useStyles();
   const [state, dispatch] = useContext(Context);
   const [searchText, setSearchText] = useState("");
   const [hashtagWords, setHashtagWords] = useState([]);
   const [selectedHashtags, setSelectedHashtags] = useState([]);
   const [selectedDropdown, setSelectedDropdown] = useState("");
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   const handleChange = (e) => {
     setSearchText(e.target.value);
@@ -89,8 +105,6 @@ export default function NotesSidebar() {
     }
   };
 
-
-
   const dropdownOptions = {
     0: "None",
     1: "Created (newest to oldest)",
@@ -99,10 +113,41 @@ export default function NotesSidebar() {
     4: "Modified (oldest to newest)",
   };
 
+  // const [anchorEl, setAnchorEl] = useState(null);
+
+  // const handleClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
+
   return (
-    <div id="notes-sidebar">
-      <p>Sort:</p>
-      <select
+    <div
+      id="notes-sidebar"
+      className={`${classes.frosty} ${classes.shadowWeak}`}
+    >
+      <FormControl>
+        <Select
+          displayEmpty
+          open={open}
+          onClose={handleClose}
+          onOpen={handleOpen}
+          value={selectedDropdown}
+          onChange={(e) => setSelectedDropdown(e.target.value)}
+        >
+          <MenuItem value="">
+            <p>Filter by date</p>
+          </MenuItem>
+          <MenuItem value="1">{dropdownOptions[1]}</MenuItem>
+          <MenuItem value="2">{dropdownOptions[2]}</MenuItem>
+          <MenuItem value="3">{dropdownOptions[3]}</MenuItem>
+          <MenuItem value="4">{dropdownOptions[4]}</MenuItem>
+        </Select>
+      </FormControl>
+
+      {/* <select
         name="dropdown-sort"
         id="dropdown-sort"
         value={selectedDropdown}
@@ -113,7 +158,7 @@ export default function NotesSidebar() {
         <option value="2">{dropdownOptions[2]}</option>
         <option value="3">{dropdownOptions[3]}</option>
         <option value="4">{dropdownOptions[4]}</option>
-      </select>
+      </select> */}
       <p>Search:</p>
       <input type="text" value={searchText} onChange={handleChange}></input>
       {/* DISPLAY HASHTAGS HERE YO */}
@@ -122,7 +167,13 @@ export default function NotesSidebar() {
       {hashtagWords.map((hashtag) => (
         <Button
           key={hashtag}
-          className={selectedHashtags.includes(hashtag) ? "active" : ""}
+          className={
+            classes.button +
+            " " +
+            classes.buttonPurple +
+            " " +
+            (selectedHashtags.includes(hashtag) ? "active" : "")
+          }
           onClick={(e) => toggleHashtag(hashtag)}
         >
           {hashtag}
