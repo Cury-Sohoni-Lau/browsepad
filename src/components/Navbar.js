@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
+import ToggleSharedNotesButton from "./ToggleSharedNotesButton";
 
 export default function Navbar() {
   const [state, dispatch] = useContext(Context);
@@ -22,6 +23,7 @@ export default function Navbar() {
           <>
             <Link to="/notes">Notes</Link> <Link to="/profile">Profile</Link>
             <Button onClick={logout}>Log out</Button>
+            <ToggleSharedNotesButton /> 
           </>
         ) : (
           <>

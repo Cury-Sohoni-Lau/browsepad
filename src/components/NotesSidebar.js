@@ -9,6 +9,7 @@ import AppBar from "@material-ui/core/AppBar";
 import TabPanel from "@restart/ui/esm/TabPanel";
 import TabButtons from "./ui/TabButtons";
 
+
 export default function NotesSidebar() {
   const [state, dispatch] = useContext(Context);
   const [searchText, setSearchText] = useState("");
@@ -94,15 +95,7 @@ export default function NotesSidebar() {
     }
   };
 
-  const toggleSharedNotes = () => {
-    if (state.showingSharedNotes) {
-      dispatch({ type: "SET_NOTES", payload: state.myNotes });
-      dispatch({ type: "SET_SHOWING_SHARED_NOTES", payload: false });
-    } else {
-      dispatch({ type: "SET_NOTES", payload: state.sharedNotes });
-      dispatch({ type: "SET_SHOWING_SHARED_NOTES", payload: true });
-    }
-  };
+
 
   const dropdownOptions = {
     0: "None",
@@ -114,10 +107,6 @@ export default function NotesSidebar() {
 
   return (
     <div id="notes-sidebar">
-      <Button onClick={toggleSharedNotes}>
-        <FaFolderOpen />{" "}
-        {state.showingSharedNotes ? "My Notes" : "Shared with me"}
-      </Button>
       <p>Sort:</p>
       <select
         name="dropdown-sort"
