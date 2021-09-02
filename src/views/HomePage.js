@@ -11,7 +11,7 @@ export default function HomePage() {
     }
   }, [state, history]);
   return (
-    <div>
+    <div id="home">
       <p>Welcome! Please sign in or sign up.</p>
     </div>
   );

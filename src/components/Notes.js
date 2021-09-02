@@ -6,6 +6,7 @@ import AddNoteForm from "./AddNoteForm";
 import NotesSidebar from "./NotesSidebar";
 import { extractHashtags, host } from "../utils";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
+import ToggleSharedNotesButton from "./ToggleSharedNotesButton";
 
 export default function Notes() {
   let parentMatch = useRouteMatch();
@@ -59,6 +60,7 @@ export default function Notes() {
           <div id="notes-main">
             <NotesSidebar />
             <div id="notes-wrapper">
+        <ToggleSharedNotesButton /> 
               {state.filteredNotes.map((note) => (
                 <Note
                   key={note.id}

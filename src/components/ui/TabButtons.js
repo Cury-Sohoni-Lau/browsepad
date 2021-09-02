@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { Context } from "../../Store";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
@@ -10,9 +11,23 @@ const useStyles = makeStyles({
   },
 });
 
+
+
 export default function TabButtons() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [state, dispatch] = useContext(Context);
+
+  const toggleSharedNotes = () => {
+    if (state.showingSharedNotes) {
+      dispatch({ type: "SET_NOTES", payload: state.myNotes });
+      dispatch({ type: "SET_SHOWING_SHARED_NOTES", payload: false });
+    } else {
+      dispatch({ type: "SET_NOTES", payload: state.sharedNotes });
+      dispatch({ type: "SET_SHOWING_SHARED_NOTES", payload: true });
+    }
+    handleChange();
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -22,7 +37,7 @@ export default function TabButtons() {
     <Paper className={classes.root}>
       <Tabs
         value={value}
-        onChange={handleChange}
+        onChange={toggleSharedNotes}
         indicatorColor="primary"
         textColor="primary"
         centered
