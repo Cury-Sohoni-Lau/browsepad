@@ -24,13 +24,20 @@ export default function Navbar() {
       <Toolbar>
         {state.user.id ? (
           <>
-            <Link to="/notes">Notes</Link> <Link to="/profile">Profile</Link>
+            <Button className={classes.button}>
+              <Link to="/notes" style={{textDecoration: 'none', color: 'black'}}>Notes</Link>{" "}
+            </Button>
+            <Button className={classes.button}>
+              <Link to="/profile" style={{textDecoration: 'none', color: 'black'}}>Profile</Link>
+            </Button>
             <Button onClick={logout} className={classes.button}>
               Logout
             </Button>
             <div
               className="circle-pic profile-pic-small"
               style={{
+                position:"absolute",
+                right: "1rem",
                 backgroundImage: `url(${
                   state.user.image || "../profile-default.png"
                 })`,

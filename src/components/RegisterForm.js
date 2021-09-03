@@ -56,6 +56,7 @@ export default function RegisterForm() {
             onChange={(e) => setName(e.target.value)}
           />
           <TextField
+            style={{ marginTop: "0.5rem" }}
             className={classes.authFormField}
             label="Email"
             variant="filled"
@@ -66,7 +67,7 @@ export default function RegisterForm() {
             onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
-            style={{ marginBottom: "0.5rem" }}
+            style={{ marginTop: "0.5rem" }}
             className={classes.authFormField}
             label="Password"
             variant="filled"
@@ -77,7 +78,7 @@ export default function RegisterForm() {
           />
           <Button
             className={`${classes.button} ${classes.buttonPurple} ${classes.shadowWeak}`}
-            style={{ marginTop: "0.5rem" }}
+            style={{ marginTop: "1rem", marginBottom: "1rem"}}
             type="submit"
             onClick={handleSubmit}
           >
