@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   formInput: {
     width: "50vw"
+
   },
   authForm: {
     backgroundColor: "rgba(255,250,250, 0.20)",
@@ -69,6 +70,40 @@ const useStyles = makeStyles((theme) => ({
   hashtagButtons: {
     marginTop: "1vw",
     marginRight: "0.5vw",
+  },
+  homeBanner: {
+    position: 'absolute',
+    marginTop: "10vw",
+    minHeight: '20vh',
+    width: "100vw",
+    backgroundColor: '	rgba(249,249,249, 0.5)',
+    marginBottom: theme.spacing(4),
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+  },
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    // backgroundColor: '	rgba(249,249,249, 0.9)',
+  },
+  title: {
+    textAlign: "center",
+    fontFamily: "Rubik",
+    margin: "auto",
+    alignItems: "center",
+    color: "white",
+    textShadow: "0px 0px 10px #fff, 0px 0px 15px #000",
+  },
+  typewriter: {
+    fontFamily: "Inter", 
+    textAlign: "center",
+    alignItems: "center",
+    color: "white",
+    textShadow: "0px 0px 10px #fff, 0px 0px 15px #000",
   },
 }));
 
