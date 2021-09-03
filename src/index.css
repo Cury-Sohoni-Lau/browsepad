@@ -81,15 +81,10 @@ code {
 }
 
 #notes-wrapper {
-  margin: auto;
-  min-width: 60vw;
-  width: 60vw;
-  min-height: 10vh;
-}
-
-#notes-sidebar {
   margin: 0 2vw;
-  flex-basis: 30vw;
+  flex-basis: 60vw;
+  min-height: 10vh;
+  flex-grow: 9999;
 }
 
 .card {

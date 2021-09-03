@@ -9,10 +9,18 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
-import TextField from '@material-ui/core/TextField';
+import TextField from "@material-ui/core/TextField";
+import ArrowBack from "@material-ui/icons/ArrowBackIos";
+import ArrowForward from "@material-ui/icons/ArrowForwardIos";
 
+const DARK_BLUE = "#5680e9";
+const SKY_BLUE = "#84ceeb";
+const CYAN = "#5ab9ea";
+const PERIWINKLE = "#c1c8e4";
+const PURPLE = "#8860d0";
 
 export default function NotesSidebar() {
+  const [showSidebar, setShowSidebar] = useState(true);
   const classes = useStyles();
   const [state, dispatch] = useContext(Context);
   const [searchText, setSearchText] = useState("");
@@ -126,50 +134,75 @@ export default function NotesSidebar() {
   // };
 
   return (
-    <div
-      id="notes-sidebar"
-      className={`${classes.frosty} ${classes.shadowWeak} ${classes.sidebar}`}
-    >
-      <FormControl>
-        <Select
-          displayEmpty
-          open={open}
-          onClose={handleClose}
-          onOpen={handleOpen}
-          value={selectedDropdown}
-          onChange={(e) => setSelectedDropdown(e.target.value)}
-        >
-          <MenuItem value="">
-            <p>Filter by date</p>
-          </MenuItem>
-          <MenuItem value="1">{dropdownOptions[1]}</MenuItem>
-          <MenuItem value="2">{dropdownOptions[2]}</MenuItem>
-          <MenuItem value="3">{dropdownOptions[3]}</MenuItem>
-          <MenuItem value="4">{dropdownOptions[4]}</MenuItem>
-        </Select>
-      </FormControl>
-      <p style={{marginTop: "2rem"}}></p>
-      {/* <input type="text" value={searchText} onChange={handleChange}></input> */}
-      <TextField id="outlined-search" label="Search field" type="search" value={searchText} onChange={handleChange}/>
-      <p style={{marginTop: "2rem"}}></p>
-      <p>Hashtags:</p>
-      {hashtagWords.map((hashtag) => (
-        <Button
-          key={hashtag}
-          className={
-            classes.hashtagButtons + 
-            " " +
-            classes.button +
-            " " +
-            classes.buttonPurple +
-            " " +
-            (selectedHashtags.includes(hashtag) ? "active" : "")
-          }
-          onClick={(e) => toggleHashtag(hashtag)}
-        >
-          {hashtag}
-        </Button>
-      ))}
-    </div>
+    <>
+      <div
+        id="notes-sidebar"
+        className={
+          `${classes.frosty} ${classes.shadowWeak}` +
+          " " +
+          (showSidebar ? classes.sidebar : classes.hiddenSidebar)
+        }
+      >
+        {showSidebar && (
+          <>
+            <FormControl>
+              <Select
+                displayEmpty
+                open={open}
+                onClose={handleClose}
+                onOpen={handleOpen}
+                value={selectedDropdown}
+                onChange={(e) => setSelectedDropdown(e.target.value)}
+              >
+                <MenuItem value="">
+                  <p>Filter by date</p>
+                </MenuItem>
+                <MenuItem value="1">{dropdownOptions[1]}</MenuItem>
+                <MenuItem value="2">{dropdownOptions[2]}</MenuItem>
+                <MenuItem value="3">{dropdownOptions[3]}</MenuItem>
+                <MenuItem value="4">{dropdownOptions[4]}</MenuItem>
+              </Select>
+            </FormControl>
+            <p style={{ marginTop: "2rem" }}></p>
+            {/* <input type="text" value={searchText} onChange={handleChange}></input> */}
+            <TextField
+              id="outlined-search"
+              label="Search field"
+              type="search"
+              value={searchText}
+              onChange={handleChange}
+            />
+            <p style={{ marginTop: "2rem" }}></p>
+            <p>Hashtags:</p>
+            <div style={{ minHeight: "10rem" }}>
+              {hashtagWords.map((hashtag) => (
+                <Button
+                  key={hashtag}
+                  className={
+                    classes.hashtagButtons +
+                    " " +
+                    classes.button +
+                    " " +
+                    (selectedHashtags.includes(hashtag)
+                      ? classes.hashtagButtonsActive
+                      : "")
+                  }
+                  onClick={(e) => toggleHashtag(hashtag)}
+                >
+                  {hashtag}
+                </Button>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+      <Button
+        style={{ zIndex: "0" }}
+        className={`${classes.frosty} ${classes.shadowWeak}`}
+        onClick={() => setShowSidebar(!showSidebar)}
+      >
+        {showSidebar ? <ArrowBack /> : <ArrowForward />}
+      </Button>
+    </>
   );
 }

@@ -25,19 +25,25 @@ export default function Navbar() {
       <Toolbar>
         {state.user.id ? (
           <>
-            <Button className={classes.button}>
-              <Link to="/notes" style={{textDecoration: 'none', color: 'black'}}>Notes</Link>{" "}
-            </Button>
-            <Button className={classes.button}>
-              <Link to="/profile" style={{textDecoration: 'none', color: 'black'}}>Profile</Link>
-            </Button>
+            <Link
+              to="/notes"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <Button className={classes.button}>Notes</Button>
+            </Link>{" "}
+            <Link
+              to="/profile"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <Button className={classes.button}>Profile</Button>
+            </Link>
             <Button onClick={logout} className={classes.button}>
               Logout
             </Button>
             <div
               className="circle-pic profile-pic-small"
               style={{
-                position:"absolute",
+                position: "absolute",
                 right: "1rem",
                 backgroundImage: `url(${
                   state.user.image || "../profile-default.png"
@@ -48,10 +54,20 @@ export default function Navbar() {
         ) : (
           <>
             <Button className={classes.button}>
-              <Link to="/register" style={{textDecoration: 'none', color: 'black'}}>Sign up</Link>{" "}
+              <Link
+                to="/register"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                Sign up
+              </Link>{" "}
             </Button>
             <Button className={classes.button}>
-              <Link to="/login" style={{textDecoration: 'none', color: 'black'}}>Login</Link>
+              <Link
+                to="/login"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                Login
+              </Link>
             </Button>
           </>
         )}
