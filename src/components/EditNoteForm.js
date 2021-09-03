@@ -4,8 +4,10 @@ import { Context } from "../Store";
 import { FaPencilAlt } from "react-icons/fa";
 import { host } from "../utils";
 import NoteModal from "./ui/NoteModal";
+import useStyles from "../styles"
 
 export default function EditNoteForm({ handleOpen, variant, color }) {
+  const classes = useStyles();
   const [state, dispatch] = useContext(Context);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");

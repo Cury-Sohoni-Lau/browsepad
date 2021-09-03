@@ -7,9 +7,25 @@ const PERIWINKLE = "#c1c8e4";
 const PURPLE = "#8860d0";
 
 const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: "flex",
+    width: "80vw",
+    height: "80vh",
+    marginTop: "10vh",
+    backgroundColor: theme.palette.background.paper,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    margin: "auto",
+  },
+  formInput: {
+    width: "50vw"
+  },
   authForm: {
     backgroundColor: "rgba(255,250,250, 0.20)",
-    borderRadius: "10px",
   },
   frosty: {
     backgroundColor: "rgba(255,250,250, 0.50)",
@@ -28,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "500",
     textTransform: "none",
     fontFamily: "Rubik",
-    padding: "5px 30px",
+    padding: "5px 25px",
   },
   buttonPurple: {
     background: `linear-gradient(45deg, ${PURPLE}, ${CYAN})`,
@@ -45,6 +61,14 @@ const useStyles = makeStyles((theme) => ({
   },
   navbar: {
     backgroundColor: `${CYAN}`,
+  },
+  sidebar: {
+    paddingTop: "2vw",
+    paddingLeft: "2vw",
+  },
+  hashtagButtons: {
+    marginTop: "1vw",
+    marginRight: "0.5vw",
   },
 }));
 

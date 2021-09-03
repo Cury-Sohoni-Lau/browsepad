@@ -9,6 +9,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
+import TextField from '@material-ui/core/TextField';
+
 
 export default function NotesSidebar() {
   const classes = useStyles();
@@ -126,7 +128,7 @@ export default function NotesSidebar() {
   return (
     <div
       id="notes-sidebar"
-      className={`${classes.frosty} ${classes.shadowWeak}`}
+      className={`${classes.frosty} ${classes.shadowWeak} ${classes.sidebar}`}
     >
       <FormControl>
         <Select
@@ -146,28 +148,17 @@ export default function NotesSidebar() {
           <MenuItem value="4">{dropdownOptions[4]}</MenuItem>
         </Select>
       </FormControl>
-
-      {/* <select
-        name="dropdown-sort"
-        id="dropdown-sort"
-        value={selectedDropdown}
-        onChange={(e) => setSelectedDropdown(e.target.value)}
-      >
-        <option value="0">None</option>
-        <option value="1">{dropdownOptions[1]}</option>
-        <option value="2">{dropdownOptions[2]}</option>
-        <option value="3">{dropdownOptions[3]}</option>
-        <option value="4">{dropdownOptions[4]}</option>
-      </select> */}
-      <p>Search:</p>
-      <input type="text" value={searchText} onChange={handleChange}></input>
-      {/* DISPLAY HASHTAGS HERE YO */}
+      <p style={{marginTop: "2rem"}}></p>
+      {/* <input type="text" value={searchText} onChange={handleChange}></input> */}
+      <TextField id="outlined-search" label="Search field" type="search" value={searchText} onChange={handleChange}/>
+      <p style={{marginTop: "2rem"}}></p>
       <p>Hashtags:</p>
-      {/* list of hastags */}
       {hashtagWords.map((hashtag) => (
         <Button
           key={hashtag}
           className={
+            classes.hashtagButtons + 
+            " " +
             classes.button +
             " " +
             classes.buttonPurple +

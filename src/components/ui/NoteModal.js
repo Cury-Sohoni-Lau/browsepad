@@ -3,19 +3,8 @@ import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 import { Context } from "../../Store";
+import useStyles from "../../styles";
 
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    width: "80vw",
-    height: "80vh",
-    marginTop: "10vh",
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-    margin: "auto",
-  },
-}));
 
 export default function NoteModal({
   openModalButtonText,
@@ -58,10 +47,12 @@ export default function NoteModal({
       <Modal open={open} onClose={handleModalClose}>
         <div className={classes.modal}>
           {children}
-          <Button onClick={handleModalClose}>Close</Button>
-          {submitFormButtonText && (
-            <Button onClick={handleModalSubmit}>{submitFormButtonText}</Button>
-          )}
+          <div style={{marginTop: "2rem"}}>
+            <Button className={`${classes.button} ${classes.buttonPurple} ${classes.shadowWeak}`} style={{marginRight: "1rem"}} onClick={handleModalClose}>Close</Button>
+            {submitFormButtonText && (
+              <Button className={`${classes.button} ${classes.buttonPurple} ${classes.shadowWeak}`} onClick={handleModalSubmit}>{submitFormButtonText}</Button>
+            )}
+          </div>
         </div>
       </Modal>
     </>
