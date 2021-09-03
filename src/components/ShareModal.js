@@ -6,8 +6,12 @@ import Button from "@material-ui/core/Button";
 import { host } from "../utils";
 import NoteModal from "./ui/NoteModal";
 import ShareIcon from "@material-ui/icons/Share";
+import useStyle from "../styles"
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+
 
 export default function ShareModal({ note, setShowShareSuccess }) {
+  const classes = useStyle();
   const [state] = useContext(Context);
   const [recipient, setRecipient] = useState("");
   const [suggestedUsers, setSuggestedUsers] = useState([]);
@@ -73,15 +77,20 @@ export default function ShareModal({ note, setShowShareSuccess }) {
       handleSubmit={handleShare}
     >
       {generatedLink ? (
+        <>
         <p>
-          Link to this note: <a href={generatedLink}>{generatedLink}</a>
-        </p>
+          Link to this note:</p>
+          <input value={generatedLink}></input>
+          <Button className={`${classes.button} ${classes.buttonPurple} ${classes.shadowStrong}`} onClick={() => { navigator.clipboard.writeText(generatedLink) }}>Copy</Button>
+        </>
       ) : (
-        <div id="share-modal">
+        <div id="share-modal" className={classes.formInput} style={{display: "flex", alignItems: "center"}}>
           {showShareFailure ? <p>Unable to share with that account</p> : ""}
-          <input type="text" onChange={(e) => setRecipient(e.target.value)} />
-          <Button onClick={() => handleShare()}>Share with email</Button>
-          <Button onClick={generateShareableLink}>Get shareable link</Button>
+          <input className={classes.formInput} type="text" onChange={(e) => setRecipient(e.target.value)} />
+          <div style={{marginTop: "1rem"}}>
+          <Button className={`${classes.button} ${classes.buttonPurple} ${classes.shadowStrong}`} onClick={() => { navigator.clipboard.writeText(generatedLink) }} onClick={() => handleShare()}>Share with email</Button>
+          <Button className={`${classes.button} ${classes.buttonPurple} ${classes.shadowStrong}`} onClick={() => { navigator.clipboard.writeText(generatedLink) }} onClick={generateShareableLink}>Get shareable link</Button>
+          </div>
           {suggestedUsers.map((user) => (
             <SuggestedUser
               key={user.email}

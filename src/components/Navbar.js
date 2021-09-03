@@ -6,6 +6,7 @@ import Container from "@material-ui/core/Container";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import ToggleSharedNotesButton from "./ToggleSharedNotesButton";
+import { useHistory } from "react-router-dom";
 import TabButtons from "./ui/TabButtons";
 import useStyles from "../styles";
 
@@ -46,7 +47,12 @@ export default function Navbar() {
           </>
         ) : (
           <>
-            <Link to="/register">Sign up!</Link> <Link to="/login">Login</Link>
+            <Button className={classes.button}>
+              <Link to="/register" style={{textDecoration: 'none', color: 'black'}}>Sign up</Link>{" "}
+            </Button>
+            <Button className={classes.button}>
+              <Link to="/login" style={{textDecoration: 'none', color: 'black'}}>Login</Link>
+            </Button>
           </>
         )}
       </Toolbar>

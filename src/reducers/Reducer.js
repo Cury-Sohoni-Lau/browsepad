@@ -19,7 +19,7 @@ const Reducer = (state, action) => {
       return {
         ...state,
         token: "",
-        user: {},
+        user: null,
       };
     case "SET_SELECTED_NOTE":
       return {

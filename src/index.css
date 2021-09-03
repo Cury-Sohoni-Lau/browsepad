@@ -30,6 +30,10 @@ div#home {
   margin-top: 0;
 }
 
+body * {
+  font-family: "Inter", sans-serif;
+}
+
 body {
   font-family: "Inter", sans-serif;
   background-color: #f8f8ff;

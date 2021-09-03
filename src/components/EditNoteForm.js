@@ -5,6 +5,8 @@ import { FaPencilAlt } from "react-icons/fa";
 import { host } from "../utils";
 import NoteModal from "./ui/NoteModal";
 import useStyles from "../styles"
+import Button from "@material-ui/core/Button"
+import ReactMarkdown from "react-markdown";
 
 export default function EditNoteForm({ handleOpen, variant, color }) {
   const classes = useStyles();
@@ -13,6 +15,7 @@ export default function EditNoteForm({ handleOpen, variant, color }) {
   const [url, setUrl] = useState("");
   const [content, setContent] = useState("");
   const [open, setOpen] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
 
   const handleSubmit = async (e) => {
     const id = state.selectedNote.id;
@@ -48,17 +51,27 @@ export default function EditNoteForm({ handleOpen, variant, color }) {
       <>
         <h3>Title</h3>
         <input
+        className={classes.formInput}
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         ></input>
         <p>Content</p>
-        <textarea
+        <div style={{display: "flex"}}>
+          <Button className={`${classes.button} ${classes.buttonPurple} ${classes.shadowStrong}`} onClick={() => setShowPreview(false)}>Write</Button>
+          <Button className={`${classes.button} ${classes.buttonPurple} ${classes.shadowStrong}`} onClick={() => setShowPreview(true)}>Preview</Button>
+        </div>
+        <div className={classes.formInput} style={{height: "30vh"}}>
+        {showPreview ? <ReactMarkdown>{content}</ReactMarkdown> : <textarea
+        className={classes.formInput}
           value={content}
+          style={{height: "30vh"}}
           onChange={(e) => setContent(e.target.value)}
-        ></textarea>
+        ></textarea>}
+        </div>
         <p>URL</p>
         <input
+        className={classes.formInput}
           type="text"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
