@@ -8,8 +8,13 @@ import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
+import CardActions from "@material-ui/core/CardActions";
 import Container from "@material-ui/core/Container";
+import Hidden from '@material-ui/core/Hidden';
 import { init } from "ityped";
+import { host } from "../utils"
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 export default function HomePage() {
   const [state] = useContext(Context);
@@ -33,128 +38,161 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    console.log(state.user.id);
     if (state.user.id) {
       history.push("/notes");
     }
   }, [state, history]);
   return (
     <>
-      <div id="home">
+      <div id="home" style={{ paddingTop: "8vh" }}>
         <Typography
           style={{ fontFamily: "Rubik" }}
           className={classes.title}
-          variant="h3"
+          variant="h2"
         >
           Browsepad
         </Typography>
-        <Paper className={classes.homeBanner}>
-          <Typography className={classes.typewriter} variant="h5">
-            <span ref={textRef}></span>
-          </Typography>
-        </Paper>
-        <main>
-          <Grid
-            container
-            spacing={4}
-            className={classes.gridContainer}
-            justify="center"
-          >
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className={classes.root} variant="outlined">
+        <Typography className={classes.typewriter} variant="h5">
+          <span ref={textRef}></span>
+        </Typography>
+        {/* <Paper className={classes.homeBanner}>
+        </Paper> */}
+        <Grid
+          container
+          className={classes.gridContainer}
+          justify="center"
+        >
+          <Grid item xs={12} sm={12} md={6}>
+            <Card className={classes.card}>
+              <div className={classes.cardDetails}>
                 <CardContent>
-                  <Typography
-                    className={classes.title}
-                    color="textSecondary"
-                    gutterBottom
-                  >
-                    Word of the Day
-                  </Typography>
-                  <Typography variant="h5" component="h2">
-                    Test
-                  </Typography>
-                  <Typography className={classes.pos} color="textSecondary">
-                    adjective
-                  </Typography>
-                  <Typography variant="body2" component="p">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
+                  <Typography component="h2" variant="h5">
+                    Extension screenshot
+                    </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    Add a note using our Chrome extension
+                    </Typography>
+                  <Typography variant="subtitle1" paragraph>
+                    Look over here 👉🏼
+                    </Typography>
+                  <Typography variant="subtitle1" color="primary">
+                    <CardActions>
+                      <a href={`${host}/dist.crx`}>download</a>
+                    </CardActions>
                   </Typography>
                 </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Card className={classes.root} variant="outlined">
-                <CardContent>
-                  <Typography
-                    className={classes.title}
-                    color="textSecondary"
-                    gutterBottom
-                  >
-                    Word of the Day
-                  </Typography>
-                  <Typography variant="h5" component="h2">
-                    Test
-                  </Typography>
-                  <Typography className={classes.pos} color="textSecondary">
-                    adjective
-                  </Typography>
-                  <Typography variant="body2" component="p">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+              </div>
+              {/* <Hidden xsDown> */}
+              <CardMedia className={classes.cardMedia} image={'https://source.unsplash.com/random'} />
+              {/* </Hidden> */}
+            </Card>
           </Grid>
-          {/* <Container className={classes.cardGrid} maxWidth="md">
-            <Grid
-              container
-              spacing={2}
-              direction="row"
-              justify="flex-start"
-              alignItems="flex-start"
-            >
-              <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={12} md={6}>
+            <Card className={classes.card}>
+              <div className={classes.cardDetails}>
+                <CardContent>
+                  <Typography component="h2" variant="h5">
+                    Extension screenshot
+                    </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    Add a note using our Chrome extension
+                    </Typography>
+                  <Typography variant="subtitle1" paragraph>
+                    Look over here 👉🏼
+                    </Typography>
+                  <Typography variant="subtitle1" color="primary">
+                    <CardActions>
+                      <a href={`${host}/dist.crx`}>download</a>
+                    </CardActions>
+                  </Typography>
+                </CardContent>
+              </div>
+              <Hidden xsDown>
+                <CardMedia className={classes.cardMedia} image={'https://source.unsplash.com/random'} />
+              </Hidden>
+            </Card>
+          </Grid>
+        </Grid>
+        <Grid
+          container
+          className={classes.gridContainer}
+          justify="center"
+        >
+          <Grid item xs={12} sm={6} md={4}>
+            <Card className={classes.card}>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  Felipe Cury
+                  </Typography>
+                <Typography>
+                  Full stack web developer
+                  </Typography>
+                <div style={{ display: "flex", flexDirection: "row" }}>
+                  <a href="https://www.linkedin.com/in/flpcury/"><LinkedInIcon /></a>
+                  <a href="https://github.com/flpcury"><GitHubIcon /></a>
+                </div>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Card className={classes.card}>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  Rituraj Sohoni
+                  </Typography>
+                <Typography>
+                  Full stack web developer
+                  </Typography>
+                <div style={{ display: "flex", flexDirection: "row" }}>
+                  <a href="https://www.linkedin.com/in/rituraj-sohoni/"><LinkedInIcon /></a>
+                  <a href="https://github.com/rituraj8503"><GitHubIcon /></a>
+                </div>
+                </CardContent>
+              </Card>
+            </Grid>
+              <Grid item xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
-                  />
-                  <CardContent className={classes.cardContent}>
+                  <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Heading
-                    </Typography>
+                      Michelle Lau
+                  </Typography>
                     <Typography>
-                      This is a media card. You can use this section to describe
-                      the content.
-                    </Typography>
-                  </CardContent>
-                </Card>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Heading
-                    </Typography>
-                    <Typography>
-                      This is a media card. You can use this section to describe
-                      the content.
-                    </Typography>
+                      Full stack web developer
+                  </Typography>
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                      <a href="https://www.linkedin.com/in/michelledeniselau/"><LinkedInIcon /></a>
+                      <a href="https://github.com/mimzivvimzi"><GitHubIcon /></a>
+                    </div>
                   </CardContent>
                 </Card>
               </Grid>
-            </Grid>
-          </Container> */}
-        </main>
+          </Grid>
       </div>
     </>
   );
 }
+
+/*
+            <Grid item xs={12} sm={6} md={4}>
+          <Card className={classes.root} variant="outlined">
+            <CardContent>
+              <Typography
+                color="textSecondary"
+                gutterBottom
+              >
+                Extension screenshot
+                  </Typography>
+              <Typography variant="h5" component="h2">
+                Test
+                  </Typography>
+              <Typography className={classes.pos} color="textSecondary">
+                Add a note using our Chrome extension
+                  </Typography>
+              <Typography variant="body2" component="p">
+                It's really cool
+                    <br />
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+*/

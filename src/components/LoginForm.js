@@ -23,7 +23,7 @@ export default function LoginForm() {
       password,
     });
     localStorage.setItem("jwt_token", response.data.jwtToken);
-    storeUserAndToken(dispatch);
+    await storeUserAndToken(dispatch);
     history.push("/notes");
   };
 
