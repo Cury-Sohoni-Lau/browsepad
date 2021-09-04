@@ -13,6 +13,7 @@ import useStyles from "../styles";
 export default function Navbar() {
   const [state, dispatch] = useContext(Context);
   const classes = useStyles();
+  const history = useHistory();
 
   const logout = () => {
     localStorage.setItem("jwt_token", "");
@@ -27,22 +28,22 @@ export default function Navbar() {
           <>
             <Link
               to="/notes"
-              style={{ textDecoration: "none", color: "black" }}
             >
-              <Button className={classes.button}>Notes</Button>
+              <Button className={`${classes.button} ${classes.whiteTextButton}`}>Notes</Button>
             </Link>{" "}
             <Link
               to="/profile"
-              style={{ textDecoration: "none", color: "black" }}
             >
-              <Button className={classes.button}>Profile</Button>
+              <Button className={`${classes.button} ${classes.whiteTextButton}`}>Profile</Button>
             </Link>
-            <Button onClick={logout} className={classes.button}>
+            <Button onClick={logout} className={`${classes.button} ${classes.whiteTextButton}`}>
               Logout
             </Button>
-            <div
+            <div 
+              onClick={() => history.push("/profile")}
               className="circle-pic profile-pic-small"
               style={{
+                cursor: "pointer",
                 position: "absolute",
                 right: "1rem",
                 backgroundImage: `url(${
@@ -53,22 +54,20 @@ export default function Navbar() {
           </>
         ) : (
           <>
-            <Button className={classes.button}>
+            
               <Link
                 to="/register"
-                style={{ textDecoration: "none", color: "black" }}
               >
-                Sign up
+                <Button className={`${classes.button} ${classes.whiteTextButton}`}>Sign up </Button>
               </Link>{" "}
-            </Button>
-            <Button className={classes.button}>
+           
+            
               <Link
                 to="/login"
-                style={{ textDecoration: "none", color: "black" }}
               >
-                Login
+                <Button className={`${classes.button} ${classes.whiteTextButton}`}>Login</Button>
               </Link>
-            </Button>
+            
           </>
         )}
       </Toolbar>

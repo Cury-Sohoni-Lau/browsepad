@@ -6,6 +6,7 @@ const knex = require("knex")(require("../knexfile"));
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { isPasswordValid } = require("./utils.js");
+const { linkPreview } = require(`link-preview-node`);
 
 const app = express();
 const PORT = 3000;
@@ -294,6 +295,23 @@ app.patch("/api/notes/:id", checkAuth, async (req, res) => {
     res.sendStatus(204);
   } catch (err) {
     res.sendStatus(400);
+  }
+});
+
+app.post("/api/getmetadata", checkAuth, async (req, res) => {
+  try {
+    const url = req.body.url;
+    console.log(url)
+    const resp = await linkPreview(url)
+    console.log(resp);
+    res.send(resp)
+    /* { image: 'https://static.npmjs.com/338e4905a2684ca96e08c7780fc68412.png',
+        title: 'npm | build amazing things',
+        description: '',
+        link: 'http://npmjs.com' } */
+    // Note that '' is used when value of any detail of the link is not available
+  } catch (err) {
+    res.sendStatus(400)
   }
 });
 

@@ -10,6 +10,14 @@ const Reducer = (state, action) => {
         ...state,
         user: action.payload,
       };
+    case "SET_USER_PROFILE_PIC": 
+      return {
+        ...state,
+        user: {
+          ...(state.user),
+          image: action.payload
+        }
+      }
     case "SET_JWT_TOKEN":
       return {
         ...state,

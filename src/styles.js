@@ -91,12 +91,12 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
   },
   homeBanner: {
-    position: "absolute",
-    marginTop: "10vw",
-    minHeight: "20vh",
+    position: "relative",
     width: "100vw",
+    padding: "2rem",
     backgroundColor: "	rgba(249,249,249, 0.5)",
-    marginBottom: theme.spacing(4),
+    margin: "4vw 0",
+    // marginBottom: theme.spacing(4),
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
@@ -125,9 +125,29 @@ const useStyles = makeStyles((theme) => ({
     textShadow: "0px 0px 10px #fff, 0px 0px 15px #000",
   },
   gridContainer: {
-    marginTop: "30vw",
-    paddingLeft: "40px",
-    paddingRight: "40px",
+    // marginTop: "10vh",
+    // paddingLeft: "10vw",
+    // paddingRight: "10vw",
+  },
+  root: {
+    minWidth: 200
+  },
+  pos: {
+    marginBottom: 12
+  },
+  card: {
+    display: 'flex',
+    margin: "4vw",
+  },
+  cardDetails: {
+    flex: 1,
+  },
+  cardMedia: {
+    width: 180,
+  },
+  whiteTextButton: {
+    color: "white",
+    textDecoration: "none"
   },
 }));
 
