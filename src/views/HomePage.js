@@ -10,11 +10,11 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardActions from "@material-ui/core/CardActions";
 import Container from "@material-ui/core/Container";
-import Hidden from '@material-ui/core/Hidden';
+import Hidden from "@material-ui/core/Hidden";
 import { init } from "ityped";
-import { host } from "../utils"
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import GitHubIcon from '@material-ui/icons/GitHub';
+import { host } from "../utils";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import GitHubIcon from "@material-ui/icons/GitHub";
 
 export default function HomePage() {
   const [state] = useContext(Context);
@@ -57,24 +57,20 @@ export default function HomePage() {
         </Typography>
         {/* <Paper className={classes.homeBanner}>
         </Paper> */}
-        <Grid
-          container
-          className={classes.gridContainer}
-          justify="center"
-        >
+        <Grid container className={classes.gridContainer} justify="center">
           <Grid item xs={12} sm={12} md={6}>
             <Card className={classes.card}>
               <div className={classes.cardDetails}>
                 <CardContent>
                   <Typography component="h2" variant="h5">
                     Extension screenshot
-                    </Typography>
+                  </Typography>
                   <Typography variant="subtitle1" color="textSecondary">
                     Add a note using our Chrome extension
-                    </Typography>
+                  </Typography>
                   <Typography variant="subtitle1" paragraph>
                     Look over here 👉🏼
-                    </Typography>
+                  </Typography>
                   <Typography variant="subtitle1" color="primary">
                     <CardActions>
                       <a href={`${host}/dist.crx`}>download</a>
@@ -83,7 +79,10 @@ export default function HomePage() {
                 </CardContent>
               </div>
               {/* <Hidden xsDown> */}
-              <CardMedia className={classes.cardMedia} image={'https://source.unsplash.com/random'} />
+              <CardMedia
+                className={classes.cardMedia}
+                image={"https://source.unsplash.com/random"}
+              />
               {/* </Hidden> */}
             </Card>
           </Grid>
@@ -93,13 +92,13 @@ export default function HomePage() {
                 <CardContent>
                   <Typography component="h2" variant="h5">
                     Extension screenshot
-                    </Typography>
+                  </Typography>
                   <Typography variant="subtitle1" color="textSecondary">
                     Add a note using our Chrome extension
-                    </Typography>
+                  </Typography>
                   <Typography variant="subtitle1" paragraph>
                     Look over here 👉🏼
-                    </Typography>
+                  </Typography>
                   <Typography variant="subtitle1" color="primary">
                     <CardActions>
                       <a href={`${host}/dist.crx`}>download</a>
@@ -108,66 +107,117 @@ export default function HomePage() {
                 </CardContent>
               </div>
               <Hidden xsDown>
-                <CardMedia className={classes.cardMedia} image={'https://source.unsplash.com/random'} />
+                <CardMedia
+                  className={classes.cardMedia}
+                  image={"https://source.unsplash.com/random"}
+                />
               </Hidden>
             </Card>
           </Grid>
         </Grid>
-        <Grid
-          container
-          className={classes.gridContainer}
-          justify="center"
+        <Typography
+          style={{ fontFamily: "Rubik" }}
+          className={classes.title}
+          variant="h4"
         >
+          Meet Our Team
+        </Typography>
+        <Grid container className={classes.gridContainer} justify="center">
           <Grid item xs={12} sm={6} md={4}>
             <Card className={classes.card}>
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Felipe Cury
+              <CardContent
+                style={{ width: "100%" }}
+                className={classes.devContainer}
+              >
+                <div>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    Felipe Cury
                   </Typography>
-                <Typography>
-                  Full stack web developer
-                  </Typography>
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                  <a href="https://www.linkedin.com/in/flpcury/"><LinkedInIcon /></a>
-                  <a href="https://github.com/flpcury"><GitHubIcon /></a>
+                  <Typography>Full stack web developer</Typography>
+                </div>
+                <div className={classes.box}>
+                  <a
+                    href="https://www.linkedin.com/in/flpcury/"
+                    target="_blank"
+                  >
+                    <LinkedInIcon />
+                  </a>
+                  <a href="https://github.com/flpcury" target="_blank">
+                    <GitHubIcon />
+                  </a>
                 </div>
               </CardContent>
             </Card>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <Card className={classes.card}>
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Rituraj Sohoni
+              <CardContent
+                style={{ width: "100%" }}
+                className={classes.devContainer}
+              >
+                <div>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    Rituraj Sohoni
                   </Typography>
-                <Typography>
-                  Full stack web developer
-                  </Typography>
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                  <a href="https://www.linkedin.com/in/rituraj-sohoni/"><LinkedInIcon /></a>
-                  <a href="https://github.com/rituraj8503"><GitHubIcon /></a>
+                  <Typography>Full stack web developer</Typography>
                 </div>
-                </CardContent>
-              </Card>
-            </Grid>
-              <Grid item xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Michelle Lau
-                  </Typography>
-                    <Typography>
-                      Full stack web developer
-                  </Typography>
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                      <a href="https://www.linkedin.com/in/michelledeniselau/"><LinkedInIcon /></a>
-                      <a href="https://github.com/mimzivvimzi"><GitHubIcon /></a>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Grid>
+                <div className={classes.box}>
+                  <a
+                    href="https://www.linkedin.com/in/rituraj-sohoni/"
+                    target="_blank"
+                  >
+                    <LinkedInIcon />
+                  </a>
+                  <a href="https://github.com/rituraj8503" target="_blank">
+                    <GitHubIcon />
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
           </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Card className={classes.card}>
+              <CardContent
+                style={{ width: "100%" }}
+                className={classes.devContainer}
+              >
+                <div>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    Michelle Lau
+                  </Typography>
+                  <Typography>Full stack web developer</Typography>
+                </div>
+                <div className={classes.box}>
+                  <a
+                    href="https://www.linkedin.com/in/michelledeniselau/"
+                    target="_blank"
+                  >
+                    <LinkedInIcon />
+                  </a>
+                  <a href="https://github.com/mimzivvimzi" target="_blank">
+                    <GitHubIcon />
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
       </div>
+      <footer className={classes.footer}>
+        <Container maxWidth="lg">
+          <Typography variant="h6" align="center" gutterBottom>
+            Footer
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            align="center"
+            color="textSecondary"
+            component="p"
+          >
+            TBD
+          </Typography>
+        </Container>
+      </footer>
     </>
   );
 }

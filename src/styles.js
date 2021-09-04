@@ -44,12 +44,23 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "500",
     textTransform: "none",
     fontFamily: "Rubik",
-    padding: "5px 25px",
+    textDecoration: "none",
   },
   buttonPurple: {
     background: `linear-gradient(45deg, ${PURPLE}, ${CYAN})`,
     borderRadius: 100,
     color: "white",
+  },
+  buttonRed: {
+    background: `linear-gradient(45deg, #de1738 , #ff8c00)`,
+    color: "white",
+  },
+  buttonLightBlue: {
+    background: `linear-gradient(45deg, #23d5ab , ${DARK_BLUE})`,
+    color: "white",
+  },
+  purple: {
+    background: `linear-gradient(45deg, ${PURPLE}, ${DARK_BLUE})`,
   },
   shadowStrong: {
     boxShadow:
@@ -60,21 +71,23 @@ const useStyles = makeStyles((theme) => ({
       "0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)",
   },
   navbar: {
-    // backgroundColor: `${DARK_BLUE}`,
     background: `linear-gradient(45deg, ${PURPLE}, ${DARK_BLUE})`,
+    "& a": {
+      textDecoration: "none",
+    },
   },
   sidebar: {
-    paddingTop: "2vw",
-    paddingLeft: "2vw",
-    marginLeft: "2vw",
-    flexBasis: "30vw",
+    // paddingTop: "2vw",
+    padding: "1rem",
+    width: "20vw",
+    transition: "ease 0.25s",
   },
   hiddenSidebar: {
     width: "1px",
-    marginLeft: "2vw",
     "& *": {
       display: "none",
     },
+    transition: "ease 0.5s",
   },
   hashtagButtons: {
     marginTop: "1vw",
@@ -130,13 +143,13 @@ const useStyles = makeStyles((theme) => ({
     // paddingRight: "10vw",
   },
   root: {
-    minWidth: 200
+    minWidth: 200,
   },
   pos: {
-    marginBottom: 12
+    marginBottom: 12,
   },
   card: {
-    display: 'flex',
+    display: "flex",
     margin: "4vw",
   },
   cardDetails: {
@@ -147,7 +160,18 @@ const useStyles = makeStyles((theme) => ({
   },
   whiteTextButton: {
     color: "white",
-    textDecoration: "none"
+    fontSize: "16px",
+  },
+  devContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+    // flexDirection: "row",
+  },
+  box: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-around",
   },
 }));
 

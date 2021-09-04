@@ -17,7 +17,7 @@ export default function Profile() {
     if (!state.token) {
       history.push("/");
     }
-  }, [state.token])
+  }, [state.token]);
 
   const handleUpload = async (e) => {
     const maxAllowedSize = 5 * 1024 * 1024;
@@ -32,7 +32,7 @@ export default function Profile() {
         { image: imageB64 },
         { headers: { Authorization: `Bearer ${state.token}` } }
       );
-      dispatch({type: "SET_USER_PROFILE_PIC", payload: imageB64})
+      dispatch({ type: "SET_USER_PROFILE_PIC", payload: imageB64 });
     } catch {
       //display error
       return;
@@ -41,28 +41,39 @@ export default function Profile() {
 
   const openInput = () => {
     inputRef.current.click();
-  }
+  };
 
   const deleteImage = async () => {
     try {
-      await axios.patch(`${host}/api/users`, { image: null }, { headers: { Authorization: `Bearer ${state.token}` } });
-      dispatch({type: "SET_USER_PROFILE_PIC", payload: null})
+      await axios.patch(
+        `${host}/api/users`,
+        { image: null },
+        { headers: { Authorization: `Bearer ${state.token}` } }
+      );
+      dispatch({ type: "SET_USER_PROFILE_PIC", payload: null });
     } catch (error) {
       return;
     }
-  }
+  };
 
   return (
     <>
-    {
-      state.token ? (
-        <div style={{display: "flex", alignItems: "center", flexDirection: "column"}}>
-          <p>Username: {state.user.name}</p> 
+      {state.token ? (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
+          <p>Username: {state.user.name}</p>
           <p>Profile Picture:</p>
           <div
             className="profile-pic-big circle-pic"
             style={{
-              backgroundImage: `url(${state.user.image || defaultProfilePicture})`,
+              backgroundImage: `url(${
+                state.user.image || defaultProfilePicture
+              })`,
             }}
           ></div>
           {/* <button onClick={handleUpload}>Upload Photo</button> */}
@@ -70,21 +81,38 @@ export default function Profile() {
             style={{ display: "none" }}
             ref={inputRef}
             type="file"
-            accept="image/png, image/jpeg"
+            accept="image/png, image/jpeg, image/gif"
             name="myImage"
             onChange={handleUpload}
           />
-          <div style={{display: "flex"}}>
-            <Button onClick={openInput} className={`${classes.button} ${classes.buttonPurple} ${classes.shadowWeak}`} style={{ marginTop: "1rem", marginBottom: "1rem"}}>Change</Button>
-            <Button onClick={deleteImage} className={`${classes.button} ${classes.buttonPurple} ${classes.shadowWeak}`} style={{ marginTop: "1rem", marginBottom: "1rem" }}>Remove</Button>
+          <div style={{ display: "flex" }}>
+            <Button
+              onClick={openInput}
+              className={`${classes.button} ${classes.buttonPurple} ${classes.shadowWeak}`}
+              style={{
+                marginTop: "1rem",
+                marginBottom: "1rem",
+                padding: "5px 25px",
+              }}
+            >
+              Change
+            </Button>
+            <Button
+              onClick={deleteImage}
+              className={`${classes.button} ${classes.buttonPurple} ${classes.shadowWeak}`}
+              style={{
+                marginTop: "1rem",
+                marginBottom: "1rem",
+                padding: "5px 25px",
+              }}
+            >
+              Remove
+            </Button>
           </div>
         </div>
       ) : (
-        <div>
-          
-        </div>
-      )
-    }
+        <div></div>
+      )}
     </>
   );
 }
