@@ -119,13 +119,13 @@ code {
 }
 
 .profile-pic-small {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
 }
 
 .profile-pic-big {
-  width: 40vw;
-  height: 40vw;
+  width: 25vh;
+  height: 25vh;
 }
 
 .circle-pic {
@@ -146,4 +146,17 @@ code {
 
 .Secondary {
   display: none !important;
+}
+
+.exit {
+  position: absolute;
+  right: 10px;
+  padding: 0px;
+  top: -10px;
+  font-size: 4em;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
 }

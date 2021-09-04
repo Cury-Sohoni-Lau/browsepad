@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../Store";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
-import { FaTrash, FaPencilAlt } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import moment from "moment";
 import { LinkPreview } from "@dhaiwat10/react-link-preview";
 import ShareModal from "./ShareModal";
@@ -17,8 +17,8 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import Typography from "@material-ui/core/Typography";
 import useStyles from "../styles";
 import { Container } from "@material-ui/core";
-import {linkPreview} from "link-preview-node"
-
+import { linkPreview } from "link-preview-node";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 export default function Note({
   passedNote,
@@ -42,7 +42,7 @@ export default function Note({
     await axios.delete(`${host}/api/notes/${id}`, {
       headers: { Authorization: `Bearer ${state.token}` },
     });
-    dispatch({type: "REFRESH"})
+    dispatch({ type: "REFRESH" });
   };
 
   const getPublicNote = async (noteID) => {
@@ -73,12 +73,16 @@ export default function Note({
 
   useEffect(() => {
     const getMetadata = async () => {
-      const response = await axios.post(`${host}/api/getmetadata`, {url: note.url}, { headers: { Authorization: `Bearer ${state.token}` } })
-      console.log(response)
-      setMetadata(response.data)
-    }
+      const response = await axios.post(
+        `${host}/api/getmetadata`,
+        { url: note.url },
+        { headers: { Authorization: `Bearer ${state.token}` } }
+      );
+      console.log(response);
+      setMetadata(response.data);
+    };
     getMetadata();
-  }, [note])
+  }, [note]);
 
   return (
     <Card
@@ -102,27 +106,37 @@ export default function Note({
             <p>{note.name}</p>
           </div>
         )}
-        <Container style={{ marginTop: "1rem" }}>
+        <Container
+          style={{
+            margin: "1rem auto",
+            padding: "1.5rem",
+            borderRadius: "10px",
+            backgroundColor: "white",
+          }}
+          className={classes.shadowWeak}
+        >
           <ReactMarkdown>{note.content}</ReactMarkdown>
-        </Container>
 
-        {note.url && (
-          <Container style={{ margin: "auto"}}>
-            <Card style={{width: "40vw", margin: "auto"}}>
-            <a href={metadata.link} style={{textDecoration: "none", color: "black"}}>
-              <CardMedia> <img style={{width: "40vw"}} src={metadata.image} /></CardMedia>
-              <CardContent>
-                <Typography variant="h6">
-                  {metadata.title}
-                </Typography>  
-                <Typography>
-                  {metadata.description}
-                </Typography>
-              </CardContent>      
-            </a>
-            </Card>
-          </Container>
-        )}
+          {note.url && (
+            <Container style={{ margin: "auto" }}>
+              <Card>
+                <a
+                  href={metadata.link}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <CardMedia>
+                    {" "}
+                    <img style={{ width: "100%" }} src={metadata.image} />
+                  </CardMedia>
+                  <CardContent>
+                    <Typography variant="h6">{metadata.title}</Typography>
+                    <Typography>{metadata.description}</Typography>
+                  </CardContent>
+                </a>
+              </Card>
+            </Container>
+          )}
+        </Container>
         <Container style={{ display: "flex", flexDirection: "column" }}>
           <Typography
             style={{ marginTop: "1rem" }}
@@ -138,14 +152,15 @@ export default function Note({
       </CardContent>
       {!state.showingSharedNotes && !isPublicLink && (
         <CardActions>
-          <Button onClick={handleDelete} variant="contained" color="secondary">
-            <FaTrash />
-          </Button>
-          <EditNoteForm
+          <Button
+            onClick={handleDelete}
             variant="contained"
-            color="primary"
-            handleOpen={handleShow}
-          />
+            color="secondary"
+            className={`${classes.button} ${classes.buttonRed} ${classes.whiteTextButton}`}
+          >
+            <DeleteIcon />
+          </Button>
+          <EditNoteForm handleOpen={handleShow} />
           <ShareModal note={note} setShowShareSuccess={setShowShareSuccess} />
         </CardActions>
       )}

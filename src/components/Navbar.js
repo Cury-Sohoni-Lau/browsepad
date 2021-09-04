@@ -26,20 +26,27 @@ export default function Navbar() {
       <Toolbar>
         {state.user.id ? (
           <>
-            <Link
-              to="/notes"
-            >
-              <Button className={`${classes.button} ${classes.whiteTextButton}`}>Notes</Button>
+            <Link to="/notes">
+              <Button
+                className={`${classes.button} ${classes.whiteTextButton}`}
+              >
+                Notes
+              </Button>
             </Link>{" "}
-            <Link
-              to="/profile"
-            >
-              <Button className={`${classes.button} ${classes.whiteTextButton}`}>Profile</Button>
+            <Link to="/profile">
+              <Button
+                className={`${classes.button} ${classes.whiteTextButton}`}
+              >
+                Profile
+              </Button>
             </Link>
-            <Button onClick={logout} className={`${classes.button} ${classes.whiteTextButton}`}>
+            <Button
+              onClick={logout}
+              className={`${classes.button} ${classes.whiteTextButton}`}
+            >
               Logout
             </Button>
-            <div 
+            <div
               onClick={() => history.push("/profile")}
               className="circle-pic profile-pic-small"
               style={{
@@ -54,20 +61,20 @@ export default function Navbar() {
           </>
         ) : (
           <>
-            
-              <Link
-                to="/register"
+            <Link to="/register">
+              <Button
+                className={`${classes.button} ${classes.whiteTextButton}`}
               >
-                <Button className={`${classes.button} ${classes.whiteTextButton}`}>Sign up </Button>
-              </Link>{" "}
-           
-            
-              <Link
-                to="/login"
+                Sign up{" "}
+              </Button>
+            </Link>{" "}
+            <Link to="/login">
+              <Button
+                className={`${classes.button} ${classes.whiteTextButton}`}
               >
-                <Button className={`${classes.button} ${classes.whiteTextButton}`}>Login</Button>
-              </Link>
-            
+                Login
+              </Button>
+            </Link>
           </>
         )}
       </Toolbar>

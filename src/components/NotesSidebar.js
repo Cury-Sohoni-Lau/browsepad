@@ -46,8 +46,7 @@ export default function NotesSidebar() {
       const text = searchText.toLowerCase();
       return (
         note.title.toLowerCase().includes(text) ||
-        note.content.toLowerCase().includes(text) ||
-        note.url.toLowerCase().includes(text)
+        note.content.toLowerCase().includes(text)
       );
     });
     if (selectedHashtags.length > 0) {
@@ -136,73 +135,88 @@ export default function NotesSidebar() {
   return (
     <>
       <div
-        id="notes-sidebar"
-        className={
-          `${classes.frosty} ${classes.shadowWeak}` +
-          " " +
-          (showSidebar ? classes.sidebar : classes.hiddenSidebar)
-        }
+        className={classes.shadowWeak}
+        style={{
+          display: "flex",
+          marginLeft: "2vw",
+          borderTopRightRadius: "10px",
+          borderBottomRightRadius: "10px",
+        }}
       >
-        {showSidebar && (
-          <>
-            <FormControl>
-              <Select
-                displayEmpty
-                open={open}
-                onClose={handleClose}
-                onOpen={handleOpen}
-                value={selectedDropdown}
-                onChange={(e) => setSelectedDropdown(e.target.value)}
-              >
-                <MenuItem value="">
-                  <p>Filter by date</p>
-                </MenuItem>
-                <MenuItem value="1">{dropdownOptions[1]}</MenuItem>
-                <MenuItem value="2">{dropdownOptions[2]}</MenuItem>
-                <MenuItem value="3">{dropdownOptions[3]}</MenuItem>
-                <MenuItem value="4">{dropdownOptions[4]}</MenuItem>
-              </Select>
-            </FormControl>
-            <p style={{ marginTop: "2rem" }}></p>
-            {/* <input type="text" value={searchText} onChange={handleChange}></input> */}
-            <TextField
-              id="outlined-search"
-              label="Search field"
-              type="search"
-              value={searchText}
-              onChange={handleChange}
-            />
-            <p style={{ marginTop: "2rem" }}></p>
-            <p>Hashtags:</p>
-            <div style={{ minHeight: "10rem" }}>
-              {hashtagWords.map((hashtag) => (
-                <Button
-                  key={hashtag}
-                  className={
-                    classes.hashtagButtons +
-                    " " +
-                    classes.button +
-                    " " +
-                    (selectedHashtags.includes(hashtag)
-                      ? classes.hashtagButtonsActive
-                      : "")
-                  }
-                  onClick={(e) => toggleHashtag(hashtag)}
+        <div
+          id="notes-sidebar"
+          className={
+            `${classes.frosty}` +
+            " " +
+            (showSidebar ? classes.sidebar : classes.hiddenSidebar)
+          }
+        >
+          {showSidebar && (
+            <>
+              <FormControl>
+                <Select
+                  displayEmpty
+                  open={open}
+                  onClose={handleClose}
+                  onOpen={handleOpen}
+                  value={selectedDropdown}
+                  onChange={(e) => setSelectedDropdown(e.target.value)}
                 >
-                  {hashtag}
-                </Button>
-              ))}
-            </div>
-          </>
-        )}
+                  <MenuItem value="">
+                    <p>Filter by date</p>
+                  </MenuItem>
+                  <MenuItem value="1">{dropdownOptions[1]}</MenuItem>
+                  <MenuItem value="2">{dropdownOptions[2]}</MenuItem>
+                  <MenuItem value="3">{dropdownOptions[3]}</MenuItem>
+                  <MenuItem value="4">{dropdownOptions[4]}</MenuItem>
+                </Select>
+              </FormControl>
+              <p style={{ marginTop: "2rem" }}></p>
+              {/* <input type="text" value={searchText} onChange={handleChange}></input> */}
+              <TextField
+                id="outlined-search"
+                label="Search field"
+                type="search"
+                value={searchText}
+                onChange={handleChange}
+              />
+              <h1>{searchText}</h1>
+              <p style={{ marginTop: "2rem" }}></p>
+              <p>Hashtags:</p>
+              <div style={{ minHeight: "10rem" }}>
+                {hashtagWords.map((hashtag) => (
+                  <Button
+                    key={hashtag}
+                    className={`${classes.hashtagButtons} ${classes.button} ${
+                      selectedHashtags.includes(hashtag)
+                        ? classes.hashtagButtonsActive
+                        : ""
+                    }`}
+                    onClick={(e) => toggleHashtag(hashtag)}
+                  >
+                    {hashtag}
+                  </Button>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+        <button
+          style={{
+            cursor: "pointer",
+            border: "none",
+            width: "2rem",
+            fontSize: "1.5rem",
+            padding: "0",
+            backgroundColor: "rgb(200,200,255)",
+            borderTopRightRadius: "10px",
+            borderBottomRightRadius: "10px",
+          }}
+          onClick={() => setShowSidebar(!showSidebar)}
+        >
+          {showSidebar ? "<" : ">"}
+        </button>
       </div>
-      <Button
-        style={{ zIndex: "0" }}
-        className={`${classes.frosty} ${classes.shadowWeak}`}
-        onClick={() => setShowSidebar(!showSidebar)}
-      >
-        {showSidebar ? <ArrowBack /> : <ArrowForward />}
-      </Button>
     </>
   );
 }

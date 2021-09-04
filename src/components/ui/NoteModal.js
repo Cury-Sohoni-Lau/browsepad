@@ -5,7 +5,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Context } from "../../Store";
 import useStyles from "../../styles";
 
-
 export default function NoteModal({
   openModalButtonText,
   submitFormButtonText,
@@ -37,7 +36,7 @@ export default function NoteModal({
   return (
     <>
       <Button
-        className={className || ""}
+        className={classes.button + " " + (className || "")}
         variant={variant}
         color={color}
         onClick={handleModalOpen}
@@ -47,10 +46,21 @@ export default function NoteModal({
       <Modal open={open} onClose={handleModalClose}>
         <div className={classes.modal}>
           {children}
-          <div style={{marginTop: "2rem"}}>
-            <Button className={`${classes.button} ${classes.buttonPurple} ${classes.shadowWeak}`} style={{marginRight: "1rem"}} onClick={handleModalClose}>Close</Button>
+          <div style={{ marginTop: "2rem" }}>
+            <Button
+              className={`${classes.button} ${classes.buttonPurple} ${classes.shadowWeak}`}
+              style={{ marginRight: "1rem" }}
+              onClick={handleModalClose}
+            >
+              Close
+            </Button>
             {submitFormButtonText && (
-              <Button className={`${classes.button} ${classes.buttonPurple} ${classes.shadowWeak}`} onClick={handleModalSubmit}>{submitFormButtonText}</Button>
+              <Button
+                className={`${classes.button} ${classes.buttonPurple} ${classes.shadowWeak}`}
+                onClick={handleModalSubmit}
+              >
+                {submitFormButtonText}
+              </Button>
             )}
           </div>
         </div>
