@@ -7,6 +7,7 @@ import useStyles from "../styles";
 import Button from "@material-ui/core/Button";
 import ReactMarkdown from "react-markdown";
 import EditIcon from "@material-ui/icons/Edit";
+import TextField from "@material-ui/core/TextField";
 
 export default function EditNoteForm({ handleOpen, variant, color }) {
   const classes = useStyles();
@@ -16,6 +17,8 @@ export default function EditNoteForm({ handleOpen, variant, color }) {
   const [content, setContent] = useState("");
   const [open, setOpen] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+
+  const selectedColor = "#5ab9ea";
 
   const handleSubmit = async (e) => {
     const id = state.selectedNote.id;
@@ -50,21 +53,27 @@ export default function EditNoteForm({ handleOpen, variant, color }) {
       className={`${classes.buttonLightBlue} ${classes.whiteTextButton}`}
     >
       <>
-        <h3>Title</h3>
-        <input
+        <TextField
           className={classes.formInput}
+          label="Title"
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-        ></input>
-        <p>Content</p>
+        />
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex" }}>
+          <div
+            style={{
+              display: "flex",
+              marginTop: "2rem",
+              marginBottom: "0.4rem",
+            }}
+          >
             <Button
               className={`${classes.button}`}
               style={{
-                border: "1px solid black",
-                backgroundColor: showPreview ? "white" : "pink",
+                borderWidth: "3px",
+                borderStyle: "solid",
+                borderColor: showPreview ? "#eee" : selectedColor,
               }}
               onClick={() => setShowPreview(false)}
             >
@@ -73,8 +82,9 @@ export default function EditNoteForm({ handleOpen, variant, color }) {
             <Button
               className={`${classes.button}`}
               style={{
-                border: "1px solid black",
-                backgroundColor: showPreview ? "pink" : "white",
+                borderWidth: "3px",
+                borderStyle: "solid",
+                borderColor: showPreview ? selectedColor : "#eee",
               }}
               onClick={() => setShowPreview(true)}
             >
@@ -87,28 +97,35 @@ export default function EditNoteForm({ handleOpen, variant, color }) {
                 style={{
                   border: "1px solid black",
                   height: "30vh",
+                  padding: "1rem",
                   overflowY: "scroll",
                 }}
               >
                 <ReactMarkdown>{content}</ReactMarkdown>{" "}
               </div>
             ) : (
-              <textarea
+              <TextField
                 className={classes.formInput}
                 value={content}
                 style={{ height: "30vh" }}
                 onChange={(e) => setContent(e.target.value)}
-              ></textarea>
+                id="outlined-multiline-static"
+                label="Memo"
+                multiline
+                rows={8}
+                variant="outlined"
+              />
             )}
           </div>
         </div>
-        <p>URL</p>
-        <input
+        <TextField
+          className={classes.formInput}
+          label="URL"
           className={classes.formInput}
           type="text"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
-        ></input>
+        />
       </>
     </NoteModal>
   );

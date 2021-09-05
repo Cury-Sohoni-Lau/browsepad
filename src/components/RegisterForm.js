@@ -78,7 +78,11 @@ export default function RegisterForm() {
           />
           <Button
             className={`${classes.button} ${classes.buttonPurple} ${classes.shadowWeak}`}
-            style={{ marginTop: "1rem", marginBottom: "1rem"}}
+            style={{
+              marginTop: "1rem",
+              marginBottom: "1rem",
+              padding: "5px 25px",
+            }}
             type="submit"
             onClick={handleSubmit}
           >

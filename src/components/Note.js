@@ -19,6 +19,7 @@ import useStyles from "../styles";
 import { Container } from "@material-ui/core";
 import { linkPreview } from "link-preview-node";
 import DeleteIcon from "@material-ui/icons/Delete";
+import Grid from "@material-ui/core/Grid";
 
 export default function Note({
   passedNote,
@@ -32,12 +33,20 @@ export default function Note({
     content: "",
   });
   const [metadata, setMetadata] = useState({});
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [deleteTimeout, setDeleteTimeout] = useState();
 
   const handleShow = () => {
     dispatch({ type: "SET_SELECTED_NOTE", payload: note });
   };
 
   const handleDelete = async (e) => {
+    if (!confirmDelete) {
+      setConfirmDelete(true);
+      setDeleteTimeout(setTimeout(() => setConfirmDelete(false), 5000));
+      return;
+    }
+    clearTimeout(deleteTimeout);
     const id = note.id;
     await axios.delete(`${host}/api/notes/${id}`, {
       headers: { Authorization: `Bearer ${state.token}` },
@@ -89,7 +98,7 @@ export default function Note({
       className={`${classes.frosty} ${classes.shadowWeak}`}
       style={{ margin: "1rem 0" }}
     >
-      <CardContent>
+      <CardContent style={{ padding: "3rem" }}>
         <Typography gutterBottom variant="h5" component="h2">
           {note.title}
         </Typography>
@@ -118,23 +127,39 @@ export default function Note({
           <ReactMarkdown>{note.content}</ReactMarkdown>
 
           {note.url && (
-            <Container style={{ margin: "auto" }}>
-              <Card>
-                <a
-                  href={metadata.link}
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  <CardMedia>
-                    {" "}
-                    <img style={{ width: "100%" }} src={metadata.image} />
-                  </CardMedia>
-                  <CardContent>
-                    <Typography variant="h6">{metadata.title}</Typography>
-                    <Typography>{metadata.description}</Typography>
+            <Grid container>
+              <Grid item xs={12} sm={8} md={4} style={{ margin: "auto" }}>
+                <Card>
+                  {/* <a
+                    href={metadata.link}
+                    style={{ textDecoration: "none", color: "black" }}
+                  > */}
+                  {metadata.image && (
+                    <CardMedia>
+                      <div
+                        style={{
+                          margin: "auto",
+                          backgroundImage: `url(${metadata.image})`,
+                          backgroundPosition: "center",
+                          backgroundSize: "cover",
+                          height: "18vh",
+                        }}
+                      ></div>
+                    </CardMedia>
+                  )}
+                  <CardContent style={{ padding: "1rem" }}>
+                    <p style={{ fontSize: "1.2rem" }}>{metadata.title}</p>
+                    <p style={{ fontSize: "0.8rem", margin: "0" }}>
+                      {metadata.description && metadata.description.length > 50
+                        ? metadata.description.substring(0, 50) + "..."
+                        : metadata.description}
+                    </p>
+                    <Typography></Typography>
                   </CardContent>
-                </a>
-              </Card>
-            </Container>
+                  {/* </a> */}
+                </Card>
+              </Grid>
+            </Grid>
           )}
         </Container>
         <Container style={{ display: "flex", flexDirection: "column" }}>
@@ -156,9 +181,13 @@ export default function Note({
             onClick={handleDelete}
             variant="contained"
             color="secondary"
-            className={`${classes.button} ${classes.buttonRed} ${classes.whiteTextButton}`}
+            className={`${classes.button} ${
+              confirmDelete
+                ? classes.borderRed + " "
+                : classes.buttonRed + " " + classes.whiteTextButton
+            }`}
           >
-            <DeleteIcon />
+            {confirmDelete ? "Delete?" : <DeleteIcon />}
           </Button>
           <EditNoteForm handleOpen={handleShow} />
           <ShareModal note={note} setShowShareSuccess={setShowShareSuccess} />

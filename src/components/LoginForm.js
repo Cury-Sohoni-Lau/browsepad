@@ -58,7 +58,11 @@ export default function LoginForm() {
           />
           <Button
             className={`${classes.button} ${classes.buttonPurple} ${classes.shadowWeak}`}
-            style={{ marginTop: "1rem", marginBottom: "1rem"}}
+            style={{
+              marginTop: "1rem",
+              marginBottom: "1rem",
+              padding: "5px 25px",
+            }}
             type="submit"
             onClick={handleSubmit}
           >
@@ -66,7 +70,7 @@ export default function LoginForm() {
           </Button>
           <p>
             New user?{" "}
-            <Link to="/register" style={{ textDecoration: "none"}}>
+            <Link to="/register" style={{ textDecoration: "none" }}>
               Create an account
             </Link>
           </p>

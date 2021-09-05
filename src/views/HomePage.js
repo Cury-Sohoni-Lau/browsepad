@@ -47,7 +47,7 @@ export default function HomePage() {
       <div id="home" style={{ paddingTop: "8vh" }}>
         <Typography
           style={{ fontFamily: "Rubik" }}
-          className={classes.title}
+          className={`${classes.title} ${classes.titleMargin}`}
           variant="h2"
         >
           Browsepad
@@ -55,15 +55,14 @@ export default function HomePage() {
         <Typography className={classes.typewriter} variant="h5">
           <span ref={textRef}></span>
         </Typography>
-        {/* <Paper className={classes.homeBanner}>
-        </Paper> */}
+        <div className={classes.parallax}></div>
         <Grid container className={classes.gridContainer} justify="center">
           <Grid item xs={12} sm={12} md={6}>
             <Card className={classes.card}>
               <div className={classes.cardDetails}>
                 <CardContent>
                   <Typography component="h2" variant="h5">
-                    Extension screenshot
+                    Browsepad lets you write memos on web pages
                   </Typography>
                   <Typography variant="subtitle1" color="textSecondary">
                     Add a note using our Chrome extension
@@ -73,7 +72,7 @@ export default function HomePage() {
                   </Typography>
                   <Typography variant="subtitle1" color="primary">
                     <CardActions>
-                      <a href={`${host}/dist.crx`}>download</a>
+                      <a href={`${host}/dist.crx`}>Download</a>
                     </CardActions>
                   </Typography>
                 </CardContent>
@@ -90,19 +89,22 @@ export default function HomePage() {
             <Card className={classes.card}>
               <div className={classes.cardDetails}>
                 <CardContent>
-                  <Typography component="h2" variant="h5">
-                    Extension screenshot
+                  <Typography
+                    component="h2"
+                    variant="h5"
+                    // style={{ fontWeight: "bold" }}
+                  >
+                    Add, edit, and delete memos directly with our Chrome
+                    extension or through our web app. Share memos with friends
+                    and family.
                   </Typography>
-                  <Typography variant="subtitle1" color="textSecondary">
-                    Add a note using our Chrome extension
-                  </Typography>
-                  <Typography variant="subtitle1" paragraph>
-                    Look over here 👉🏼
-                  </Typography>
+                  <Typography
+                    variant="subtitle1"
+                    color="textSecondary"
+                  ></Typography>
+                  <Typography variant="subtitle1" paragraph></Typography>
                   <Typography variant="subtitle1" color="primary">
-                    <CardActions>
-                      <a href={`${host}/dist.crx`}>download</a>
-                    </CardActions>
+                    <CardActions></CardActions>
                   </Typography>
                 </CardContent>
               </div>
@@ -117,12 +119,17 @@ export default function HomePage() {
         </Grid>
         <Typography
           style={{ fontFamily: "Rubik" }}
-          className={classes.title}
+          className={`${classes.teamTitle} ${classes.title}`}
           variant="h4"
         >
           Meet Our Team
         </Typography>
-        <Grid container className={classes.gridContainer} justify="center">
+        <Grid
+          container
+          className={classes.gridContainer}
+          style={{ paddingBottom: "20vh" }}
+          justify="center"
+        >
           <Grid item xs={12} sm={6} md={4}>
             <Card className={classes.card}>
               <CardContent
@@ -160,6 +167,7 @@ export default function HomePage() {
                     Rituraj Sohoni
                   </Typography>
                   <Typography>Full stack web developer</Typography>
+                  {/* <Typography>Rubik's cube national champion</Typography> */}
                 </div>
                 <div className={classes.box}>
                   <a
@@ -202,22 +210,22 @@ export default function HomePage() {
             </Card>
           </Grid>
         </Grid>
+        <footer className={classes.footer}>
+          <Container maxWidth="lg">
+            <Typography variant="h6" align="center" gutterBottom>
+              Browsepad
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              align="center"
+              color="textSecondary"
+              component="p"
+            >
+              📍Made in Japan
+            </Typography>
+          </Container>
+        </footer>
       </div>
-      <footer className={classes.footer}>
-        <Container maxWidth="lg">
-          <Typography variant="h6" align="center" gutterBottom>
-            Footer
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            align="center"
-            color="textSecondary"
-            component="p"
-          >
-            TBD
-          </Typography>
-        </Container>
-      </footer>
     </>
   );
 }
