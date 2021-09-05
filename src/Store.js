@@ -12,6 +12,7 @@ const initialState = {
   filteredNotes: [],
   selectedNote: {},
   showEditForm: false,
+  showingSidebar: true,
 };
 
 const Store = ({ children }) => {

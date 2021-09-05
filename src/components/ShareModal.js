@@ -7,6 +7,7 @@ import { host } from "../utils";
 import NoteModal from "./ui/NoteModal";
 import ShareIcon from "@material-ui/icons/Share";
 import useStyle from "../styles";
+import TextField from "@material-ui/core/TextField";
 
 export default function ShareModal({ note, setShowShareSuccess }) {
   const classes = useStyle();
@@ -17,6 +18,7 @@ export default function ShareModal({ note, setShowShareSuccess }) {
   const [generatedLink, setGeneratedLink] = useState("");
   const [showShareFailure, setShowShareFailure] = useState(false);
   const [open, setOpen] = useState(false);
+  const [showEmailInput, setShowEmailInput] = useState(false);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -49,6 +51,10 @@ export default function ShareModal({ note, setShowShareSuccess }) {
   };
 
   const handleShare = async (user) => {
+    if (!showEmailInput) {
+      setShowEmailInput(true);
+      return;
+    }
     const email = user ? user.email : recipient;
     try {
       await axios.post(
@@ -59,6 +65,7 @@ export default function ShareModal({ note, setShowShareSuccess }) {
       setShowShareSuccess(true);
       setTimeout(() => setShowShareSuccess(false), 3000);
       setOpen(false);
+      setShowEmailInput(false);
     } catch {
       // TODO - show red box with error text
       // DISPLAY TEXT ABOVE THE EMAIL INPUT BOX
@@ -78,7 +85,12 @@ export default function ShareModal({ note, setShowShareSuccess }) {
       {generatedLink ? (
         <>
           <p>Link to this note:</p>
-          <input value={generatedLink}></input>
+          <TextField
+            className={classes.formInput}
+            label="Your link"
+            type="text"
+            value={generatedLink}
+          />
           <Button
             className={`${classes.button} ${classes.buttonPurple} ${classes.shadowStrong}`}
             onClick={() => {
@@ -95,11 +107,15 @@ export default function ShareModal({ note, setShowShareSuccess }) {
           style={{ display: "flex", alignItems: "center" }}
         >
           {showShareFailure ? <p>Unable to share with that account</p> : ""}
-          <input
-            className={classes.formInput}
-            type="text"
-            onChange={(e) => setRecipient(e.target.value)}
-          />
+          {showEmailInput && (
+            <TextField
+              className={classes.formInput}
+              label="User's email"
+              type="text"
+              value={recipient}
+              onChange={(e) => setRecipient(e.target.value)}
+            />
+          )}
           <div style={{ marginTop: "1rem" }}>
             <Button
               className={`${classes.button} ${classes.buttonPurple} ${classes.shadowStrong}`}
@@ -108,17 +124,19 @@ export default function ShareModal({ note, setShowShareSuccess }) {
               }}
               onClick={() => handleShare()}
             >
-              Share with email
+              {showEmailInput ? "Share" : "Share with a user"}
             </Button>
-            <Button
-              className={`${classes.button} ${classes.buttonPurple} ${classes.shadowStrong}`}
-              onClick={() => {
-                navigator.clipboard.writeText(generatedLink);
-              }}
-              onClick={generateShareableLink}
-            >
-              Get shareable link
-            </Button>
+            {!showEmailInput && (
+              <Button
+                className={`${classes.button} ${classes.buttonPurple} ${classes.shadowStrong}`}
+                onClick={() => {
+                  navigator.clipboard.writeText(generatedLink);
+                }}
+                onClick={generateShareableLink}
+              >
+                Get shareable link
+              </Button>
+            )}
           </div>
           {suggestedUsers.map((user) => (
             <SuggestedUser

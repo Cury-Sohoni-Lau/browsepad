@@ -19,6 +19,14 @@ const CYAN = "#5ab9ea";
 const PERIWINKLE = "#c1c8e4";
 const PURPLE = "#8860d0";
 
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height,
+  };
+}
+
 export default function NotesSidebar() {
   const [showSidebar, setShowSidebar] = useState(true);
   const classes = useStyles();
@@ -28,6 +36,7 @@ export default function NotesSidebar() {
   const [selectedHashtags, setSelectedHashtags] = useState([]);
   const [selectedDropdown, setSelectedDropdown] = useState("");
   const [open, setOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
@@ -104,6 +113,13 @@ export default function NotesSidebar() {
     dispatch({ type: "SET_FILTERED_NOTES", payload: filteredNotes });
   }, [selectedDropdown, dispatch]);
 
+  useEffect(() => {
+    const dimensions = getWindowDimensions();
+    if (dimensions.width < 570) {
+      setIsMobile(true);
+    }
+  }, []);
+
   const toggleHashtag = (hashtag) => {
     if (!selectedHashtags.includes(hashtag)) {
       setSelectedHashtags((oldArray) => [...oldArray, hashtag]);
@@ -135,87 +151,58 @@ export default function NotesSidebar() {
   return (
     <>
       <div
-        className={classes.shadowWeak}
-        style={{
-          display: "flex",
-          marginLeft: "2vw",
-          borderTopRightRadius: "10px",
-          borderBottomRightRadius: "10px",
-        }}
+        id="notes-sidebar"
+        className={
+          `${classes.frosty} ${classes.shadowWeak}` +
+          " " +
+          (state.showingSidebar ? classes.sidebar : classes.hiddenSidebar)
+        }
       >
-        <div
-          id="notes-sidebar"
-          className={
-            `${classes.frosty}` +
-            " " +
-            (showSidebar ? classes.sidebar : classes.hiddenSidebar)
-          }
-        >
-          {showSidebar && (
-            <>
-              <FormControl>
-                <Select
-                  displayEmpty
-                  open={open}
-                  onClose={handleClose}
-                  onOpen={handleOpen}
-                  value={selectedDropdown}
-                  onChange={(e) => setSelectedDropdown(e.target.value)}
-                >
-                  <MenuItem value="">
-                    <p>Filter by date</p>
-                  </MenuItem>
-                  <MenuItem value="1">{dropdownOptions[1]}</MenuItem>
-                  <MenuItem value="2">{dropdownOptions[2]}</MenuItem>
-                  <MenuItem value="3">{dropdownOptions[3]}</MenuItem>
-                  <MenuItem value="4">{dropdownOptions[4]}</MenuItem>
-                </Select>
-              </FormControl>
-              <p style={{ marginTop: "2rem" }}></p>
-              {/* <input type="text" value={searchText} onChange={handleChange}></input> */}
-              <TextField
-                id="outlined-search"
-                label="Search field"
-                type="search"
-                value={searchText}
-                onChange={handleChange}
-              />
-              <h1>{searchText}</h1>
-              <p style={{ marginTop: "2rem" }}></p>
-              <p>Hashtags:</p>
-              <div style={{ minHeight: "10rem" }}>
-                {hashtagWords.map((hashtag) => (
-                  <Button
-                    key={hashtag}
-                    className={`${classes.hashtagButtons} ${classes.button} ${
-                      selectedHashtags.includes(hashtag)
-                        ? classes.hashtagButtonsActive
-                        : ""
-                    }`}
-                    onClick={(e) => toggleHashtag(hashtag)}
-                  >
-                    {hashtag}
-                  </Button>
-                ))}
-              </div>
-            </>
-          )}
+        <FormControl style={{ display: !state.showingSidebar && "none" }}>
+          <Select
+            displayEmpty
+            open={open}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            value={selectedDropdown}
+            onChange={(e) => setSelectedDropdown(e.target.value)}
+          >
+            <MenuItem value="">
+              <p>Filter by date</p>
+            </MenuItem>
+            <MenuItem value="1">{dropdownOptions[1]}</MenuItem>
+            <MenuItem value="2">{dropdownOptions[2]}</MenuItem>
+            <MenuItem value="3">{dropdownOptions[3]}</MenuItem>
+            <MenuItem value="4">{dropdownOptions[4]}</MenuItem>
+          </Select>
+        </FormControl>
+        <p style={{ marginTop: "2rem" }}></p>
+        {/* <input type="text" value={searchText} onChange={handleChange}></input> */}
+        <TextField
+          style={{ display: !state.showingSidebar && "none" }}
+          id="outlined-search"
+          label="Search field"
+          type="search"
+          value={searchText}
+          onChange={handleChange}
+        />
+        <p style={{ marginTop: "2rem" }}></p>
+        <p>Hashtags:</p>
+        <div style={{ minHeight: "10rem" }}>
+          {hashtagWords.map((hashtag) => (
+            <Button
+              key={hashtag}
+              className={`${classes.hashtagButtons} ${classes.button} ${
+                selectedHashtags.includes(hashtag)
+                  ? classes.hashtagButtonsActive
+                  : ""
+              }`}
+              onClick={(e) => toggleHashtag(hashtag)}
+            >
+              {hashtag}
+            </Button>
+          ))}
         </div>
-        <button
-          style={{
-            cursor: "pointer",
-            border: "none",
-            width: "2rem",
-            fontSize: "1.5rem",
-            padding: "0",
-            backgroundColor: "rgb(200,200,255)",
-            borderTopRightRadius: "10px",
-            borderBottomRightRadius: "10px",
-          }}
-          onClick={() => setShowSidebar(!showSidebar)}
-        >
-          {showSidebar ? "<" : ">"}
-        </button>
       </div>
     </>
   );

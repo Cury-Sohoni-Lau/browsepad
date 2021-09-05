@@ -8,6 +8,7 @@ import AddBoxIcon from "@material-ui/icons/AddBox";
 import Button from "@material-ui/core/Button";
 import useStyles from "../styles";
 import ReactMarkdown from "react-markdown";
+import TextField from "@material-ui/core/TextField";
 
 export default function AddNoteForm({ className }) {
   const [state, dispatch] = useContext(Context);
@@ -17,6 +18,8 @@ export default function AddNoteForm({ className }) {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   const [showPreview, setShowPreview] = useState(false);
+
+  const selectedColor = "#5ab9ea";
 
   const handleSubmit = async () => {
     await axios.post(
@@ -28,6 +31,9 @@ export default function AddNoteForm({ className }) {
       },
       { headers: { Authorization: `Bearer ${state.token}` } }
     );
+    setTitle("");
+    setContent("");
+    setUrl("");
   };
 
   return (
@@ -40,35 +46,92 @@ export default function AddNoteForm({ className }) {
       className={className}
     >
       <>
-        <h3>Title</h3>
-        <input
-        className={classes.formInput}
+        <TextField
+          className={classes.formInput}
+          label="Title"
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-        ></input>
-        <p>Content</p>
-        <div style={{display: "flex", flexDirection: "column"}}>
-          <div style={{display: "flex"}}>
-            <Button className={`${classes.button}`} style={{border: "1px solid black", backgroundColor: showPreview ? "white" : "pink"}} onClick={() => setShowPreview(false)}>Write</Button>
-            <Button className={`${classes.button}`} style={{border: "1px solid black", backgroundColor: showPreview ? "pink" : "white"}} onClick={() => setShowPreview(true)}>Preview</Button>
-          </div>
-          <div className={classes.formInput} style={{height: "30vh"}}>
-          {showPreview ? <div style={{border: "1px solid black", height: "30vh", overflowY: "scroll"}}><ReactMarkdown>{content}</ReactMarkdown></div> : <textarea
+        />
+        {/* <input
           className={classes.formInput}
-            value={content}
-            style={{height: "30vh"}}
-            onChange={(e) => setContent(e.target.value)}
-          ></textarea>}
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        ></input> */}
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{
+              display: "flex",
+              marginTop: "2rem",
+              marginBottom: "0.4rem",
+            }}
+          >
+            <Button
+              className={`${classes.button}`}
+              style={{
+                borderWidth: "3px",
+                borderStyle: "solid",
+                borderColor: showPreview ? "#eee" : selectedColor,
+              }}
+              onClick={() => setShowPreview(false)}
+            >
+              Write
+            </Button>
+            <Button
+              className={`${classes.button}`}
+              style={{
+                borderWidth: "3px",
+                borderStyle: "solid",
+                borderColor: showPreview ? selectedColor : "#eee",
+              }}
+              onClick={() => setShowPreview(true)}
+            >
+              Preview
+            </Button>
+          </div>
+          <div className={classes.formInput} style={{ height: "30vh" }}>
+            {showPreview ? (
+              <div
+                style={{
+                  border: "1px solid black",
+                  height: "30vh",
+                  padding: "1rem",
+                  overflowY: "scroll",
+                }}
+              >
+                <ReactMarkdown>{content}</ReactMarkdown>
+              </div>
+            ) : (
+              <>
+                {/* <textarea
+                  className={classes.formInput}
+                  value={content}
+                  style={{ height: "30vh" }}
+                  onChange={(e) => setContent(e.target.value)}
+                ></textarea> */}
+                <TextField
+                  className={classes.formInput}
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  id="outlined-multiline-static"
+                  label="Memo"
+                  multiline
+                  rows={8}
+                  variant="outlined"
+                />
+              </>
+            )}
           </div>
         </div>
-        <p>URL</p>
-        <input
-        className={classes.formInput}
+        <TextField
+          className={classes.formInput}
+          label="URL"
+          className={classes.formInput}
           type="text"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
-        ></input>
+        />
       </>
     </NoteModal>
   );

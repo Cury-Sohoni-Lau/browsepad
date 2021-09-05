@@ -8,7 +8,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import ToggleSharedNotesButton from "./ToggleSharedNotesButton";
 import { useHistory } from "react-router-dom";
 import TabButtons from "./ui/TabButtons";
+import MenuIcon from "@material-ui/icons/Menu";
 import useStyles from "../styles";
+import { host } from "../utils";
 
 export default function Navbar() {
   const [state, dispatch] = useContext(Context);
@@ -24,8 +26,26 @@ export default function Navbar() {
   return (
     <AppBar position="static" className={classes.navbar}>
       <Toolbar>
+        <img
+          src={`${host}/B.png`}
+          style={{
+            width: "2rem",
+            marginRight: "1rem",
+          }}
+        ></img>
         {state.user.id ? (
           <>
+            <Button
+              className={`${classes.button} ${classes.whiteTextButton}`}
+              onClick={() =>
+                dispatch({
+                  type: "SET_SHOWING_SIDEBAR",
+                  payload: !state.showingSidebar,
+                })
+              }
+            >
+              <MenuIcon />
+            </Button>
             <Link to="/notes">
               <Button
                 className={`${classes.button} ${classes.whiteTextButton}`}

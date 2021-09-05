@@ -12,7 +12,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(cors());
-app.use(express.json({limit: '5mb'}));
+app.use(express.json({ limit: "5mb" }));
 
 app.use(express.static(path.resolve(__dirname, "../build")));
 
@@ -298,20 +298,20 @@ app.patch("/api/notes/:id", checkAuth, async (req, res) => {
   }
 });
 
-app.post("/api/getmetadata", checkAuth, async (req, res) => {
+app.post("/api/getmetadata", async (req, res) => {
   try {
     const url = req.body.url;
-    console.log(url)
-    const resp = await linkPreview(url)
+    console.log(url);
+    const resp = await linkPreview(url);
     console.log(resp);
-    res.send(resp)
+    res.send(resp);
     /* { image: 'https://static.npmjs.com/338e4905a2684ca96e08c7780fc68412.png',
         title: 'npm | build amazing things',
         description: '',
         link: 'http://npmjs.com' } */
     // Note that '' is used when value of any detail of the link is not available
   } catch (err) {
-    res.sendStatus(400)
+    res.sendStatus(400);
   }
 });
 

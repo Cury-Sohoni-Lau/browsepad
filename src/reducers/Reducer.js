@@ -10,14 +10,14 @@ const Reducer = (state, action) => {
         ...state,
         user: action.payload,
       };
-    case "SET_USER_PROFILE_PIC": 
+    case "SET_USER_PROFILE_PIC":
       return {
         ...state,
         user: {
-          ...(state.user),
-          image: action.payload
-        }
-      }
+          ...state.user,
+          image: action.payload,
+        },
+      };
     case "SET_JWT_TOKEN":
       return {
         ...state,
@@ -64,6 +64,11 @@ const Reducer = (state, action) => {
       return {
         ...state,
         showingSharedNotes: action.payload,
+      };
+    case "SET_SHOWING_SIDEBAR":
+      return {
+        ...state,
+        showingSidebar: action.payload,
       };
     default:
       return state;

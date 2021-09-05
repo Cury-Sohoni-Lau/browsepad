@@ -79,7 +79,6 @@ code {
   display: flex;
   flex-grow: 999;
 }
-
 #notes-wrapper {
   margin: 0 2vw;
   flex-basis: 60vw;

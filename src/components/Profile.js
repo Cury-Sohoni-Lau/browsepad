@@ -93,6 +93,7 @@ export default function Profile() {
                 marginTop: "1rem",
                 marginBottom: "1rem",
                 padding: "5px 25px",
+                marginRight: "1rem",
               }}
             >
               Change

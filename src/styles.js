@@ -9,14 +9,11 @@ const PURPLE = "#8860d0";
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: "flex",
-    width: "80vw",
-    height: "80vh",
-    marginTop: "10vh",
-    backgroundColor: theme.palette.background.paper,
+    height: "100vh",
+    backgroundColor: "#f8f8ff",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     margin: "auto",
@@ -53,11 +50,9 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonRed: {
     background: `linear-gradient(45deg, #de1738 , #ff8c00)`,
-    color: "white",
   },
   buttonLightBlue: {
     background: `linear-gradient(45deg, #23d5ab , ${DARK_BLUE})`,
-    color: "white",
   },
   purple: {
     background: `linear-gradient(45deg, ${PURPLE}, ${DARK_BLUE})`,
@@ -81,11 +76,19 @@ const useStyles = makeStyles((theme) => ({
     padding: "1rem",
     width: "20vw",
     transition: "ease 0.25s",
+    display: "flex",
+    flexDirection: "column",
+    marginLeft: "2vw",
+    borderTopRightRadius: "10px",
+    borderBottomRightRadius: "10px",
   },
   hiddenSidebar: {
-    width: "1px",
+    width: "0",
     "& *": {
       display: "none",
+      "& *": {
+        display: "none",
+      },
     },
     transition: "ease 0.5s",
   },
@@ -130,6 +133,15 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     textShadow: "0px 0px 10px #fff, 0px 0px 15px #000",
   },
+  titleMargin: {
+    marginTop: "20vh",
+  },
+  teamTitle: {
+    // marginTop: "20vh",
+    // marginBottom: "10vh",
+    paddingTop: "10vh",
+    paddingBottom: "5vh",
+  },
   typewriter: {
     fontFamily: "Inter",
     textAlign: "center",
@@ -140,7 +152,8 @@ const useStyles = makeStyles((theme) => ({
   gridContainer: {
     // marginTop: "10vh",
     // paddingLeft: "10vw",
-    // paddingRight: "10vw",
+    // paddingBottom: "20vh",
+    // marginBottom: "20vh",
   },
   root: {
     minWidth: 200,
@@ -172,6 +185,20 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-around",
+  },
+  footer: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(6, 0),
+  },
+  parallax: {
+    marginTop: "10vh",
+    // marginBottom: "10vh",
+    backgroundImage: `url("https://source.unsplash.com/random")`,
+    minHeight: "500px",
+    backgroundAttachment: "fixed",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
   },
 }));
 

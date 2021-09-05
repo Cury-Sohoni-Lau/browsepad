@@ -50,7 +50,7 @@ export default function Notes() {
 
   return (
     <div>
-      <div id="notes-main">
+      <div id="notes-main" style={{ display: "flex" }}>
         <NotesSidebar />
         <div id="notes-wrapper">
           <ToggleSharedNotesButton />
