@@ -103,16 +103,17 @@ export default function Note({
           {note.title}
         </Typography>
         {typeof note.image != "undefined" && (
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", alignItems: "center" }}>
             <div
               className="circle-pic profile-pic-small"
               style={{
+                marginRight: "0.5rem",
                 backgroundImage: `url(${
                   note.image || "../profile-default.png"
                 })`,
               }}
             ></div>
-            <p>{note.name}</p>
+            <p style={{ margin: "0" }}>By {note.name}</p>
           </div>
         )}
         <Container
@@ -130,33 +131,35 @@ export default function Note({
             <Grid container>
               <Grid item xs={12} sm={8} md={4} style={{ margin: "auto" }}>
                 <Card>
-                  {/* <a
+                  <a
+                    target="_blank"
                     href={metadata.link}
                     style={{ textDecoration: "none", color: "black" }}
-                  > */}
-                  {metadata.image && (
-                    <CardMedia>
-                      <div
-                        style={{
-                          margin: "auto",
-                          backgroundImage: `url(${metadata.image})`,
-                          backgroundPosition: "center",
-                          backgroundSize: "cover",
-                          height: "18vh",
-                        }}
-                      ></div>
-                    </CardMedia>
-                  )}
-                  <CardContent style={{ padding: "1rem" }}>
-                    <p style={{ fontSize: "1.2rem" }}>{metadata.title}</p>
-                    <p style={{ fontSize: "0.8rem", margin: "0" }}>
-                      {metadata.description && metadata.description.length > 50
-                        ? metadata.description.substring(0, 50) + "..."
-                        : metadata.description}
-                    </p>
-                    <Typography></Typography>
-                  </CardContent>
-                  {/* </a> */}
+                  >
+                    {metadata.image && (
+                      <CardMedia>
+                        <div
+                          style={{
+                            margin: "auto",
+                            backgroundImage: `url(${metadata.image})`,
+                            backgroundPosition: "center",
+                            backgroundSize: "cover",
+                            height: "18vh",
+                          }}
+                        ></div>
+                      </CardMedia>
+                    )}
+                    <CardContent style={{ padding: "1rem" }}>
+                      <p style={{ fontSize: "1.2rem" }}>{metadata.title}</p>
+                      <p style={{ fontSize: "0.8rem", margin: "0" }}>
+                        {metadata.description &&
+                        metadata.description.length > 50
+                          ? metadata.description.substring(0, 50) + "..."
+                          : metadata.description}
+                      </p>
+                      <Typography></Typography>
+                    </CardContent>
+                  </a>
                 </Card>
               </Grid>
             </Grid>
