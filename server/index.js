@@ -315,6 +315,11 @@ app.post("/api/getmetadata", async (req, res) => {
   }
 });
 
+// Serve logo
+app.get("/B.png", (_, res) => {
+  res.sendFile(path.resolve(__dirname, "../build/B.png"));
+});
+
 // Serve index.html for all other routes
 app.use((_, res) => {
   res.sendFile(path.resolve(__dirname, "../build/index.html"));

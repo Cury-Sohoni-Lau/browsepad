@@ -9,7 +9,7 @@ import ShareIcon from "@material-ui/icons/Share";
 import useStyle from "../styles";
 import TextField from "@material-ui/core/TextField";
 
-export default function ShareModal({ note, setShowShareSuccess }) {
+export default function ShareModal({ note }) {
   const classes = useStyle();
   const [state] = useContext(Context);
   const [recipient, setRecipient] = useState("");
@@ -19,6 +19,7 @@ export default function ShareModal({ note, setShowShareSuccess }) {
   const [showShareFailure, setShowShareFailure] = useState(false);
   const [open, setOpen] = useState(false);
   const [showEmailInput, setShowEmailInput] = useState(false);
+  const [showShareSuccess, setShowShareSuccess] = useState(false);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -51,7 +52,7 @@ export default function ShareModal({ note, setShowShareSuccess }) {
   };
 
   const handleShare = async (user) => {
-    if (!showEmailInput) {
+    if (!showEmailInput && !user) {
       setShowEmailInput(true);
       return;
     }
@@ -62,16 +63,22 @@ export default function ShareModal({ note, setShowShareSuccess }) {
         { email },
         { headers: { Authorization: `Bearer ${state.token}` } }
       );
-      setShowShareSuccess(true);
-      setTimeout(() => setShowShareSuccess(false), 3000);
-      setOpen(false);
-      setShowEmailInput(false);
+      shareSuccess();
     } catch {
       // TODO - show red box with error text
       // DISPLAY TEXT ABOVE THE EMAIL INPUT BOX
       setShowShareFailure(true);
       console.log("User does not exist.");
     }
+  };
+
+  const shareSuccess = () => {
+    setShowShareSuccess(true);
+    setTimeout(() => {
+      setShowShareSuccess(false);
+      setOpen(false);
+      setShowEmailInput(false);
+    }, 2000);
   };
 
   return (
@@ -82,6 +89,7 @@ export default function ShareModal({ note, setShowShareSuccess }) {
       handleSubmit={handleShare}
       className={`${classes.purple} ${classes.whiteTextButton}`}
     >
+      {showShareSuccess && <p>You shared a note!</p>}
       {generatedLink ? (
         <>
           <p>Link to this note:</p>
