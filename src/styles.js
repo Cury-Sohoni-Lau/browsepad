@@ -193,7 +193,7 @@ const useStyles = makeStyles((theme) => ({
   parallax: {
     marginTop: "10vh",
     // marginBottom: "10vh",
-    backgroundImage: `url("https://source.unsplash.com/random")`,
+    backgroundImage: `url("/banner.png")`,
     minHeight: "500px",
     backgroundAttachment: "fixed",
     backgroundPosition: "center",
