@@ -2,33 +2,13 @@ import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../Store";
 import Button from "@material-ui/core/Button";
 import { includesAll } from "../utils";
-import { FaFolderOpen } from "react-icons/fa";
 import useStyles from "../styles";
-import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
-import ArrowBack from "@material-ui/icons/ArrowBackIos";
-import ArrowForward from "@material-ui/icons/ArrowForwardIos";
-
-const DARK_BLUE = "#5680e9";
-const SKY_BLUE = "#84ceeb";
-const CYAN = "#5ab9ea";
-const PERIWINKLE = "#c1c8e4";
-const PURPLE = "#8860d0";
-
-function getWindowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window;
-  return {
-    width,
-    height,
-  };
-}
 
 export default function NotesSidebar() {
-  const [showSidebar, setShowSidebar] = useState(true);
   const classes = useStyles();
   const [state, dispatch] = useContext(Context);
   const [searchText, setSearchText] = useState("");
@@ -36,7 +16,6 @@ export default function NotesSidebar() {
   const [selectedHashtags, setSelectedHashtags] = useState([]);
   const [selectedDropdown, setSelectedDropdown] = useState("");
   const [open, setOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
@@ -113,13 +92,6 @@ export default function NotesSidebar() {
     dispatch({ type: "SET_FILTERED_NOTES", payload: filteredNotes });
   }, [selectedDropdown, dispatch]);
 
-  useEffect(() => {
-    const dimensions = getWindowDimensions();
-    if (dimensions.width < 570) {
-      setIsMobile(true);
-    }
-  }, []);
-
   const toggleHashtag = (hashtag) => {
     if (!selectedHashtags.includes(hashtag)) {
       setSelectedHashtags((oldArray) => [...oldArray, hashtag]);
@@ -168,7 +140,7 @@ export default function NotesSidebar() {
             onChange={(e) => setSelectedDropdown(e.target.value)}
           >
             <MenuItem value="">
-              <p>Filter by date</p>
+              <p>Sort by date</p>
             </MenuItem>
             <MenuItem value="1">{dropdownOptions[1]}</MenuItem>
             <MenuItem value="2">{dropdownOptions[2]}</MenuItem>

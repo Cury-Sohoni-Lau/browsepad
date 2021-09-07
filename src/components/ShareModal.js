@@ -14,7 +14,6 @@ export default function ShareModal({ note }) {
   const [state] = useContext(Context);
   const [recipient, setRecipient] = useState("");
   const [suggestedUsers, setSuggestedUsers] = useState([]);
-  const [showShareModal, setShowShareModal] = useState(false);
   const [generatedLink, setGeneratedLink] = useState("");
   const [showShareFailure, setShowShareFailure] = useState(false);
   const [open, setOpen] = useState(false);
@@ -30,12 +29,6 @@ export default function ShareModal({ note }) {
     };
     getUsers();
   }, [state.token]);
-
-  const handleClose = () => {
-    setShowShareModal(false);
-    setGeneratedLink("");
-    setShowShareFailure(false);
-  };
 
   const generateShareableLink = async () => {
     try {
@@ -127,9 +120,6 @@ export default function ShareModal({ note }) {
           <div style={{ marginTop: "1rem" }}>
             <Button
               className={`${classes.button} ${classes.buttonPurple} ${classes.shadowStrong}`}
-              onClick={() => {
-                navigator.clipboard.writeText(generatedLink);
-              }}
               onClick={() => handleShare()}
             >
               {showEmailInput ? "Share" : "Share with a user"}
@@ -137,9 +127,6 @@ export default function ShareModal({ note }) {
             {!showEmailInput && (
               <Button
                 className={`${classes.button} ${classes.buttonPurple} ${classes.shadowStrong}`}
-                onClick={() => {
-                  navigator.clipboard.writeText(generatedLink);
-                }}
                 onClick={generateShareableLink}
               >
                 Get shareable link
@@ -156,36 +143,5 @@ export default function ShareModal({ note }) {
         </div>
       )}
     </NoteModal>
-    // <>
-    //   <Button onClick={() => setShowShareModal(true)}>Share</Button>
-    //   <Modal show={showShareModal} onHide={handleClose}>
-    //     <Modal.Header closeButton>
-    //       <Modal.Title>Share</Modal.Title>
-    //     </Modal.Header>
-    //     <Modal.Body>
-    //       {generatedLink ? (
-    //         <p>
-    //           Link to this note: <a href={generatedLink}>{generatedLink}</a>
-    //         </p>
-    //       ) : (
-    //         <div id="share-modal">
-    //           {showShareFailure ? <p>Unable to share with that account</p> : ""}
-    //           <input
-    //             type="text"
-    //             onChange={(e) => setRecipient(e.target.value)}
-    //           />
-    //           <Button onClick={() => handleShare()}>Share with email</Button>
-    //           <Button onClick={generateShareableLink}>
-    //             Get shareable link
-    //           </Button>
-    //           {suggestedUsers.map((user) => (
-    //             <SuggestedUser user={user} handleShare={handleShare} />
-    //           ))}
-    //         </div>
-    //       )}
-    //     </Modal.Body>
-    //     <Modal.Footer></Modal.Footer>
-    //   </Modal>
-    // </>
   );
 }

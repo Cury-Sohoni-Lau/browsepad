@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Context } from "../Store";
 import Button from "@material-ui/core/Button";
 import useStyles from "../styles";
@@ -28,7 +28,7 @@ export default function ToggleSharedNotesButton() {
         style={{ margin: "0 0.5rem" }}
         className={`${classes.frosty} ${classes.button} ${classes.shadowWeak}`}
       >
-        <FolderIcon /> My Notes
+        <FolderIcon /> My Memos
       </Button>
       <Button
         onClick={showSharedNotes}

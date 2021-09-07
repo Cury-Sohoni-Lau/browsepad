@@ -66,8 +66,7 @@ export default function Profile() {
             flexDirection: "column",
           }}
         >
-          <p>Username: {state.user.name}</p>
-          <p>Profile Picture:</p>
+          <p style={{ fontSize: "1.5rem" }}>Hello, {state.user.name}!</p>
           <div
             className="profile-pic-big circle-pic"
             style={{

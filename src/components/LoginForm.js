@@ -3,7 +3,6 @@ import axios from "axios";
 import { storeUserAndToken, host } from "../utils";
 import { Context } from "../Store";
 import { useHistory, Link } from "react-router-dom";
-import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
@@ -77,25 +76,5 @@ export default function LoginForm() {
         </Container>
       </form>
     </Container>
-
-    // <Grid
-    //   container
-    //   spacing={0}
-    //   direction="column"
-    //   alignItems="center"
-    //   justify="center"
-    //   style={{ minHeight: "100vh" }}
-    // >
-    //   <form onSubmit={handleSubmit}>
-    //     <Grid item xs>
-
-    //     </Grid>
-    //     <Grid item xs>
-
-    //     </Grid>
-
-    //   </form>
-
-    // </Grid>
   );
 }

@@ -2,16 +2,11 @@ import React, { useEffect, useContext, useState } from "react";
 import { Context } from "../Store";
 import axios from "axios";
 import Note from "./Note";
-import AddNoteForm from "./AddNoteForm";
 import NotesSidebar from "./NotesSidebar";
 import { extractHashtags, host } from "../utils";
-import { Switch, Route, useRouteMatch } from "react-router-dom";
 import ToggleSharedNotesButton from "./ToggleSharedNotesButton";
-import useStyles from "../styles";
 
 export default function Notes() {
-  const classes = useStyles();
-  let parentMatch = useRouteMatch();
   const [state, dispatch] = useContext(Context);
   const [showShareSuccess, setShowShareSuccess] = useState(false);
 
