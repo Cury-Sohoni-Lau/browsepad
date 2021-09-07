@@ -57,18 +57,15 @@ export default function HomePage() {
         </Typography>
         <div className={classes.parallax}></div>
         <Grid container className={classes.gridContainer} justify="center">
-          <Grid item xs={12} sm={12} md={6}>
-            <Card className={classes.card}>
+          <Grid item xs={12} sm={6} md={6}>
+            <Card className={classes.card} style={{ minHeight: "60vh"}}>
               <div className={classes.cardDetails}>
                 <CardContent>
-                  <Typography component="h2" variant="h5">
+                  <Typography component="h2" variant="h5" style={{ fontFamily: "Rubik"}}>
                     Browsepad lets you write memos on web pages
                   </Typography>
-                  <Typography variant="subtitle1" color="textSecondary">
+                  <Typography variant="subtitle1" color="textSecondary" style={{ fontFamily: "Rubik"}}>
                     Add a note using our Chrome extension
-                  </Typography>
-                  <Typography variant="subtitle1" paragraph>
-                    Look over here 👉🏼
                   </Typography>
                   <Typography variant="subtitle1" color="primary">
                     <CardActions>
@@ -82,15 +79,15 @@ export default function HomePage() {
                   </Typography>
                 </CardContent>
               </div>
-              {/* <Hidden xsDown> */}
+              <Hidden smDown>
               <CardMedia
-                className={classes.cardMedia}
-                image={"https://source.unsplash.com/random"}
+                className={`${classes.cardMedia}`}
+                image={"./extension-1.png"}
               />
-              {/* </Hidden> */}
+              </Hidden>
             </Card>
           </Grid>
-          <Grid item xs={12} sm={12} md={6}>
+          {/* <Grid item xs={12} sm={12} md={6}>
             <Card className={classes.card}>
               <div className={classes.cardDetails}>
                 <CardContent>
@@ -99,9 +96,7 @@ export default function HomePage() {
                     variant="h5"
                     // style={{ fontWeight: "bold" }}
                   >
-                    Add, edit, and delete memos directly with our Chrome
-                    extension or through our web app. Share memos with friends
-                    and family.
+                    Test
                   </Typography>
                   <Typography
                     variant="subtitle1"
@@ -116,11 +111,11 @@ export default function HomePage() {
               <Hidden xsDown>
                 <CardMedia
                   className={classes.cardMedia}
-                  image={"https://source.unsplash.com/random"}
+                  image={"./extension-1.png"}
                 />
               </Hidden>
             </Card>
-          </Grid>
+          </Grid> */}
         </Grid>
         <Typography
           style={{ fontFamily: "Rubik" }}

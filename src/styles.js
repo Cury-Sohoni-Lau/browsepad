@@ -150,7 +150,7 @@ const useStyles = makeStyles((theme) => ({
     textShadow: "0px 0px 10px #fff, 0px 0px 15px #000",
   },
   gridContainer: {
-    // marginTop: "10vh",
+    marginTop: "10vh",
     // paddingLeft: "10vw",
     // paddingBottom: "20vh",
     // marginBottom: "20vh",
@@ -163,13 +163,16 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     display: "flex",
-    margin: "4vw",
+    margin: "2vw",
+    // minHeight: "60vh",
   },
   cardDetails: {
-    flex: 1,
+    flex: 0,
   },
   cardMedia: {
-    width: 180,
+    flex: 1,
+    width: 200,
+    backgroundPosition: "right",
   },
   whiteTextButton: {
     color: "white",
