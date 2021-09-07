@@ -25,10 +25,10 @@ export default function HomePage() {
   useEffect(() => {
     init(textRef.current, {
       strings: [
-        "Make the web your canvas",
-        "Save that thought",
-        "One-click memos with our Chrome extension",
-        "Share with others",
+        "Save that thought.",
+        "Share with others.",
+        "Make the web your canvas.",
+        ,
       ],
       typeSpeed: 50,
       backDelay: 1000,
@@ -69,7 +69,12 @@ export default function HomePage() {
                   </Typography>
                   <Typography variant="subtitle1" color="primary">
                     <CardActions>
-                      <a href={`${host}/dist.crx`} style={{ fontFamily: "Rubik"}}>Download</a>
+                      <a
+                        target="_blank"
+                        href={`https://chrome.google.com/webstore/detail/browsepad-extension/efeaahemcgmapoodfaniiginekegkllj`}
+                      >
+                        Download
+                      </a>
                     </CardActions>
                   </Typography>
                 </CardContent>
