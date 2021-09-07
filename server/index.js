@@ -124,7 +124,6 @@ app.get("/api/user/:email", async (req, res) => {
   try {
     const email = req.params.email;
     const user = await knex("users").first().where({ email });
-    console.log("Got the email and user", user);
     res.send(user);
   } catch (err) {
     res.send(418);
@@ -301,9 +300,7 @@ app.patch("/api/notes/:id", checkAuth, async (req, res) => {
 app.post("/api/getmetadata", async (req, res) => {
   try {
     const url = req.body.url;
-    console.log(url);
     const resp = await linkPreview(url);
-    console.log(resp);
     res.send(resp);
     /* { image: 'https://static.npmjs.com/338e4905a2684ca96e08c7780fc68412.png',
         title: 'npm | build amazing things',

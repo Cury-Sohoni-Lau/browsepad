@@ -11,7 +11,7 @@ import TextField from "@material-ui/core/TextField";
 
 export default function EditNoteForm({ handleOpen, variant, color }) {
   const classes = useStyles();
-  const [state, dispatch] = useContext(Context);
+  const [state] = useContext(Context);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [content, setContent] = useState("");
@@ -121,7 +121,6 @@ export default function EditNoteForm({ handleOpen, variant, color }) {
         <TextField
           className={classes.formInput}
           label="URL"
-          className={classes.formInput}
           type="text"
           value={url}
           onChange={(e) => setUrl(e.target.value)}

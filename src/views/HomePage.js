@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { Context } from "../Store";
-import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import useStyles from "../styles";
 import Grid from "@material-ui/core/Grid";
@@ -12,7 +11,6 @@ import CardActions from "@material-ui/core/CardActions";
 import Container from "@material-ui/core/Container";
 import Hidden from "@material-ui/core/Hidden";
 import { init } from "ityped";
-import { host } from "../utils";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import GitHubIcon from "@material-ui/icons/GitHub";
 
@@ -28,7 +26,6 @@ export default function HomePage() {
         "Save that thought.",
         "Share with others.",
         "Make the web your canvas.",
-        ,
       ],
       typeSpeed: 50,
       backDelay: 1000,
@@ -58,19 +55,28 @@ export default function HomePage() {
         <div className={classes.parallax}></div>
         <Grid container className={classes.gridContainer} justify="center">
           <Grid item xs={12} sm={6} md={6}>
-            <Card className={classes.card} style={{ minHeight: "60vh"}}>
+            <Card className={classes.card} style={{ minHeight: "60vh" }}>
               <div className={classes.cardDetails}>
                 <CardContent>
-                  <Typography component="h2" variant="h5" style={{ fontFamily: "Rubik"}}>
+                  <Typography
+                    component="h2"
+                    variant="h5"
+                    style={{ fontFamily: "Rubik" }}
+                  >
                     Browsepad lets you write memos on web pages
                   </Typography>
-                  <Typography variant="subtitle1" color="textSecondary" style={{ fontFamily: "Rubik"}}>
+                  <Typography
+                    variant="subtitle1"
+                    color="textSecondary"
+                    style={{ fontFamily: "Rubik" }}
+                  >
                     Add a note using our Chrome extension
                   </Typography>
                   <Typography variant="subtitle1" color="primary">
                     <CardActions>
                       <a
                         target="_blank"
+                        rel="noreferrer"
                         href={`https://chrome.google.com/webstore/detail/browsepad-extension/efeaahemcgmapoodfaniiginekegkllj`}
                       >
                         Download
@@ -80,10 +86,10 @@ export default function HomePage() {
                 </CardContent>
               </div>
               <Hidden smDown>
-              <CardMedia
-                className={`${classes.cardMedia}`}
-                image={"./extension-1.png"}
-              />
+                <CardMedia
+                  className={`${classes.cardMedia}`}
+                  image={"./extension-1.png"}
+                />
               </Hidden>
             </Card>
           </Grid>
@@ -146,10 +152,15 @@ export default function HomePage() {
                   <a
                     href="https://www.linkedin.com/in/flpcury/"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <LinkedInIcon />
                   </a>
-                  <a href="https://github.com/flpcury" target="_blank">
+                  <a
+                    href="https://github.com/flpcury"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <GitHubIcon />
                   </a>
                 </div>
@@ -173,10 +184,15 @@ export default function HomePage() {
                   <a
                     href="https://www.linkedin.com/in/rituraj-sohoni/"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <LinkedInIcon />
                   </a>
-                  <a href="https://github.com/rituraj8503" target="_blank">
+                  <a
+                    href="https://github.com/rituraj8503"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <GitHubIcon />
                   </a>
                 </div>
@@ -199,10 +215,15 @@ export default function HomePage() {
                   <a
                     href="https://www.linkedin.com/in/michelledeniselau/"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <LinkedInIcon />
                   </a>
-                  <a href="https://github.com/mimzivvimzi" target="_blank">
+                  <a
+                    href="https://github.com/mimzivvimzi"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <GitHubIcon />
                   </a>
                 </div>

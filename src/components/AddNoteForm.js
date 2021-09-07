@@ -1,7 +1,6 @@
 import { useState, useContext } from "react";
 import { Context } from "../Store";
 import axios from "axios";
-import { FaPlus } from "react-icons/fa";
 import { host } from "../utils";
 import NoteModal from "./ui/NoteModal";
 import AddBoxIcon from "@material-ui/icons/AddBox";
@@ -11,7 +10,7 @@ import ReactMarkdown from "react-markdown";
 import TextField from "@material-ui/core/TextField";
 
 export default function AddNoteForm({ className }) {
-  const [state, dispatch] = useContext(Context);
+  const [state] = useContext(Context);
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
@@ -127,7 +126,6 @@ export default function AddNoteForm({ className }) {
         <TextField
           className={classes.formInput}
           label="URL"
-          className={classes.formInput}
           type="text"
           value={url}
           onChange={(e) => setUrl(e.target.value)}

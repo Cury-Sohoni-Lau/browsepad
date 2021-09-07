@@ -2,9 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../Store";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
-import { FaTrash } from "react-icons/fa";
 import moment from "moment";
-import { LinkPreview } from "@dhaiwat10/react-link-preview";
 import ShareModal from "./ShareModal";
 import ReactMarkdown from "react-markdown";
 import EditNoteForm from "./EditNoteForm";
@@ -13,11 +11,9 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardActions from "@material-ui/core/CardActions";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import Typography from "@material-ui/core/Typography";
 import useStyles from "../styles";
 import { Container } from "@material-ui/core";
-import { linkPreview } from "link-preview-node";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Grid from "@material-ui/core/Grid";
 
@@ -133,6 +129,7 @@ export default function Note({
                 <Card>
                   <a
                     target="_blank"
+                    rel="noreferrer"
                     href={metadata.link}
                     style={{ textDecoration: "none", color: "black" }}
                   >

@@ -1,7 +1,6 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
-import { makeStyles } from "@material-ui/core/styles";
 import { Context } from "../../Store";
 import useStyles from "../../styles";
 import Backdrop from "@material-ui/core/Backdrop";

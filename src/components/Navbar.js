@@ -2,12 +2,9 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../Store";
 import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import ToggleSharedNotesButton from "./ToggleSharedNotesButton";
 import { useHistory } from "react-router-dom";
-import TabButtons from "./ui/TabButtons";
 import MenuIcon from "@material-ui/icons/Menu";
 import useStyles from "../styles";
 import { host } from "../utils";
@@ -27,6 +24,7 @@ export default function Navbar() {
     <AppBar position="static" className={classes.navbar}>
       <Toolbar>
         <img
+          alt="logo"
           src={`${host}/B.png`}
           style={{
             width: "2rem",
@@ -50,7 +48,7 @@ export default function Navbar() {
               <Button
                 className={`${classes.button} ${classes.whiteTextButton}`}
               >
-                Notes
+                Memos
               </Button>
             </Link>{" "}
             <Link to="/profile">
