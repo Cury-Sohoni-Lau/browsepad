@@ -29,8 +29,6 @@ Does this sound like you?
 ### What is it, exactly?
 A web app and Chrome extension that allows you to write memos about specific web pages. Jot down your thoughts so that when you come back later, you know where you left off. 
 
-![Web App Walkthrough](https://media.giphy.com/media/QI3Yam40Y8iJuf58tD/source.gif)
-
 ### Where can I append memos? 
 You can add memos to most sites, but we're still ironing out the kinks for some of the trickier ones. 
 
