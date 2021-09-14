@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+## Browsepad Web App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Demo Video
 
-## Available Scripts
+[![Browsepad](https://i.imgur.com/AVBMYfl.png)](https://youtu.be/Gh2YLf-1mgM?t=338)
 
-In the project directory, you can run:
+<a href="https://github.com/Cury-Sohoni-Lau/browsepad-extension">Browsepad Chrome Extension Repo</a>
 
-### `yarn start`
+### Getting started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+`npm i` Install dependencies <br />
+`npm run build` <br />
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Serve up the client and server <br />
+`npm run server:dev` <br />
+`npm run client:dev` 
 
-### `yarn test`
+### Who can use this app?
+Anyone and everyone can use our app.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Does this sound like you?
 
-### `yarn build`
+- You're online shopping and you come across similar looking items.  You skim through the reviews and realize that the quality is not up to par. Some time later, you end up clicking on it again, only to realize that you already saw it. 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- You see a job description that looks amazing. Now, you have a list of several postings that you want to apply to, but forgot to write down your pros/cons and notes for each one. You end up spending more time reading through each one again. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- You're hunting for an apartment, but can't remember what parts you liked/disliked from a certain listing. You accidentally click on an apartment that you already ruled out.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### What is it, exactly?
+A web app and Chrome extension that allows you to write memos about specific web pages. Jot down your thoughts so that when you come back later, you know where you left off. 
 
-### `yarn eject`
+### Where can I append memos? 
+You can add memos to most sites, but we're still ironing out the kinks for some of the trickier ones. 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### When can I start using it?!
+The web app is up and running (although, not on the final URL). Our initial release of the Chrome extension is on the <a href="https://chrome.google.com/webstore/detail/browsepad-extension/efeaahemcgmapoodfaniiginekegkllj">Chrome Web Store</a> (updated version to be released ASAP).
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Why is this open source?
+This project is maintained by three software developers in Japan who are on their journeys to becoming working fullstack engineers. We believe in our product and the convenience it brings, so we want to share it with the world.   
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![Web App Walkthrough](https://media.giphy.com/media/QI3Yam40Y8iJuf58tD/source.gif?cid=790b76115618aee812d5578a424da5fad77e7790657980a9&rid=source.gif&ct=g)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
