@@ -26,10 +26,10 @@ Does this sound like you?
 
 - You're hunting for an apartment, but can't remember what parts you liked/disliked from a certain listing. You accidentally click on an apartment that you already ruled out.
 
-![Web App Walkthrough](app-walkthrough.gif)
-
 ### What is it, exactly?
 A web app and Chrome extension that allows you to write memos about specific web pages. Jot down your thoughts so that when you come back later, you know where you left off. 
+
+![Web App Walkthrough](https://media.giphy.com/media/QI3Yam40Y8iJuf58tD/source.gif)
 
 ### Where can I append memos? 
 You can add memos to most sites, but we're still ironing out the kinks for some of the trickier ones. 
